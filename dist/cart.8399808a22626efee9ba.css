@@ -1,0 +1,14 @@
+.wx-cart-list .am-list-item .am-list-line .am-list-content {
+  font-size: .24rem;
+}
+.wx-cart-list .am-stepper.showNumber {
+  width: 2rem;
+}
+.wx-cart-list-bar {
+  width: 100%;
+  position: fixed;
+  bottom: 0.9rem;
+  left: 0;
+  font-size: .28rem;
+  background-color: white;
+}
