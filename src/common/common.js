@@ -3,13 +3,13 @@ const domain = location.host;
 //图片服务url
 export const IMAGE_DOMAIN = 'http://testbbc.leimingtech.com';
 //API服务url
-export const SERVER_DOMAIN = 'http://222.128.107.235:8989/leimingtech-front';
-
+//export const SERVER_DOMAIN = 'http://222.128.107.235:8989/leimingtech-front';
+export const SERVER_DOMAIN = 'http://localhost:8086/leimingtech-front';
 export function getFullUrl(requestUrl) {
   //相对路径url   本地开发调试用这个！！！！！
-  //let url = location.protocol + '//' + domain;
+  let url = location.protocol + '//' + domain;
   //绝对路径url   服务器上线部署方式用这个！！！！
-  let url = SERVER_DOMAIN;
+  //let url = SERVER_DOMAIN;
   if (requestUrl.startsWith("/")) {
     url = url + requestUrl;
   } else {

@@ -4,6 +4,7 @@ import { withRouter, Link } from 'react-router'
 import { List, InputItem, Button, Toast, Flex } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import { common } from 'common';
+import { getFullUrl } from '../../../common/common';
 import * as loginApi from '../api/login';
 
 import './login.less';
@@ -48,22 +49,13 @@ class Login extends Component {
   render() {
     const { getFieldProps, getFieldError } = this.props.form;
 
-    return (<form>
+    return (<form id = 'loginForm'>
       <List
         renderFooter={() => getFieldError('username') && getFieldError('username').join(',')}
         style = {{border:'none'}}
       >
-        {/*<InputItem*/}
-          {/*{...getFieldProps('username', {*/}
-            {/*rules: [*/}
-              {/*{ required: true, message: '请输入用户名／邮箱／已验证邮箱' },*/}
-              {/*{ validator: this.validateusername },*/}
-            {/*],*/}
-          {/*})}*/}
-          {/*clear*/}
-          {/*placeholder="用户名/邮箱/手机号"*/}
-        {/*>帐号</InputItem>*/}
         <List renderHeader={() => <div  style={{ backgroundImage: 'url(https://zos.alipayobjects.com/rmsportal/DfkJHaJGgMghpXdqNaKF.png)', backgroundSize: '0.44rem 0.44rem', backgroundRepeat:'no-repeat', paddingLeft:'0.44rem'}} >请登录检测服务平台账号</div>}>
+          <Item>
           <InputItem
               {...getFieldProps('username', {
                 rules: [
@@ -76,10 +68,8 @@ class Login extends Component {
           >
             <div style={{ backgroundImage: 'url(https://zos.alipayobjects.com/rmsportal/DfkJHaJGgMghpXdqNaKF.png)', backgroundSize: 'cover', height: '0.44rem', width: '0.44rem' }} />
           </InputItem>
-        </List>
-        {/*<InputItem {...getFieldProps('password')} placeholder="请输入密码" type="password">*/}
-          {/*密码*/}
-        {/*</InputItem>*/}
+        </Item>
+          <Item>
         <InputItem
             {...getFieldProps('password')}
             placeholder="请输入密码"
@@ -87,20 +77,21 @@ class Login extends Component {
         >
           <div style={{ backgroundImage: 'url(https://zos.alipayobjects.com/rmsportal/DfkJHaJGgMghpXdqNaKF.png)', backgroundSize: 'cover', height: '0.44rem', width: '0.44rem' }} />
         </InputItem>
-        {/*<Item>*/}
-          {/*<div style={{position:''}}></div>*/}
-          {/*<div></div>*/}
-        {/*</Item>*/}
-        <List>
+          </Item>
           <Item>
             <Flex>
-              <Flex.Item>a</Flex.Item>
-              <Flex.Item>b</Flex.Item>
+              <Flex.Item>
+                <InputItem
+                    {...getFieldProps('captcha')}
+                    placeholder="请输入验证码"
+                />
+              </Flex.Item>
+              <div style = {{width:'1rem'}}><img style = {{width:'1rem'}} src={getFullUrl('loginapi/generateImage')}/></div>
             </Flex>
           </Item>
         </List>
 
-        <Flex style={{backgroundColor:'#F3F3F3',padding:'0.1rem 0.3rem'}}>
+        <Flex style={{backgroundColor:'#F3F3F3',padding:'0.3rem 0.5rem'}}>
           <Flex.Item>
             <Button type="primary" onClick={this.onSubmit} >登录</Button>
           </Flex.Item>

@@ -80,9 +80,7 @@ export function post(requestUrl, params) {
     ...params,
     ...baseParams
   }
-  let headers = {
-    "Content-Type": "application/x-www-form-urlencoded"
-  }
+  let headers = {}
   if (token) {
     headers['token'] = token;
   }
