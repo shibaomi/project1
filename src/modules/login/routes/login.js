@@ -54,7 +54,7 @@ class Login extends Component {
         renderFooter={() => getFieldError('username') && getFieldError('username').join(',')}
         style = {{border:'none'}}
       >
-        <List renderHeader={() => <div  style={{ backgroundImage: 'url(https://zos.alipayobjects.com/rmsportal/DfkJHaJGgMghpXdqNaKF.png)', backgroundSize: '0.44rem 0.44rem', backgroundRepeat:'no-repeat', paddingLeft:'0.44rem'}} >请登录检测服务平台账号</div>}>
+        <List renderHeader={() => <div  style={{ backgroundImage: 'url(./assets/img/notice.png)', backgroundSize: '0.3rem 0.3rem', backgroundRepeat:'no-repeat', paddingLeft:'0.44rem'}} >请登录检测服务平台账号</div>}>
           <Item>
           <InputItem
               {...getFieldProps('username', {
@@ -66,7 +66,7 @@ class Login extends Component {
               clear
               placeholder="用户名/邮箱/手机号"
           >
-            <div style={{ backgroundImage: 'url(https://zos.alipayobjects.com/rmsportal/DfkJHaJGgMghpXdqNaKF.png)', backgroundSize: 'cover', height: '0.44rem', width: '0.44rem' }} />
+            <div style={{ backgroundImage: 'url(./assets/img/people.png)', backgroundSize: 'cover', height: '0.4rem', width: '0.35rem' }} />
           </InputItem>
         </Item>
           <Item>
@@ -75,7 +75,7 @@ class Login extends Component {
             placeholder="请输入密码"
             type="password"
         >
-          <div style={{ backgroundImage: 'url(https://zos.alipayobjects.com/rmsportal/DfkJHaJGgMghpXdqNaKF.png)', backgroundSize: 'cover', height: '0.44rem', width: '0.44rem' }} />
+          <div style={{ backgroundImage: 'url(./assets/img/pwd.png)', backgroundSize: 'cover', height: '0.4rem', width: '0.35rem' }} />
         </InputItem>
           </Item>
           <Item>
