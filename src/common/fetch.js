@@ -80,7 +80,9 @@ export function post(requestUrl, params) {
     ...params,
     ...baseParams,
   }
-  let headers = {}
+  let headers = {
+    'Content-Type': 'application/x-www-form-urlencoded',
+  }
   if (token) {
     headers['token'] = token;
   }
@@ -88,7 +90,7 @@ export function post(requestUrl, params) {
   return fetch(url, {
     method: "POST",
     headers,
-    // credentials: 'include',
+    credentials: 'include',
     body: qs.stringify(params),
   }).then(checkStatus).then(parseJSON);
 }
