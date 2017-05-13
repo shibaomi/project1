@@ -106,6 +106,7 @@ class Reg extends Component {
         <InputItem
           {...getFieldProps('mobile') }
           clear
+          type="phone"
           placeholder="手机号码">
           <div style={{ backgroundImage: 'url(../../../assets/img/phone.bmp)', backgroundSize: 'cover', height: '0.6rem', width: '0.5rem' }} />
         </InputItem>
