@@ -38,8 +38,10 @@ import recharge from './account/recharge';
 import balance from './account/balance';
 import lockBalance from './account/lockBalance';
 import updateNickName from './account/updateNickName';
-import updatePassword from './account/updatePassword';
-import updatePasswordPhone from './account/updatePasswordPhone';
+import updatePassword from './passwordandphone/updatePassword';
+import updatePasswordPhone from './passwordandphone/updatePasswordPhone';
+import updatePhone1 from './passwordandphone/updatePhone1';
+import updatePhone2 from './passwordandphone/updatePhone2';
 import createPayword from './account/createPayword';
 
 import address from './address/address';
@@ -85,6 +87,8 @@ const routesConfig = (<Route path="/" component={App}>
   <Route path='/updateNickName' component={updateNickName} title='账户管理'/>
   <Route path='/updatePassword' component={updatePassword} title='修改密码'/>
   <Route path='/updatePasswordPhone' component={updatePasswordPhone} title='修改密码'/>
+  <Route path='/updatePhone1' component={updatePhone1} title='修改绑定手机'/>
+  <Route path='/updatePhone2' component={updatePhone2} title='修改绑定手机'/>
 
   <Route path='/createPayword' component={createPayword} title='设置支付密码'/>
 
