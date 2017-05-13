@@ -9,7 +9,7 @@ export function login({ username, password, captcha }) {
 }
 
 export function verifyCode({ mobile }) {
-  return fetch.get('/floor/api/verifyCode', {
+  return fetch.get('/memberapi/findCode', {
     mobile
   });
 }
@@ -18,7 +18,8 @@ export function register({ name, password, mobile }) {
   return fetch.get('/memberapi/register', {
     name,
     password,
-    mobile
+    mobile,
+    code
   });
 }
 

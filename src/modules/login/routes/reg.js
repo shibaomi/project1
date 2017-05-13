@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router'
+import { withRouter , Link} from 'react-router'
 import { List, InputItem, Button, Toast } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import { common } from 'common';
@@ -22,10 +22,7 @@ class Reg extends Component {
       Toast.info('请输入手机号！');
       return;
     }
-    if (!getFieldsValue.code || getFieldsValue.code == '') {
-      Toast.info('请输入验证码！');
-      return;
-    }
+
     if (!getFieldsValue.password || getFieldsValue.password == '') {
       Toast.info('请输入密码！');
       return;
@@ -40,14 +37,16 @@ class Reg extends Component {
       return;
     }
 
-    if (!this.code || (this.code && this.code != getFieldsValue.code)) {
-      Toast.info('验证码不正确！');
+    if (!getFieldsValue.code || getFieldsValue.code == '') {
+      Toast.info('请输入验证码！');
       return;
     }
+
     api.register({
       mobile: getFieldsValue.mobile,
       name: getFieldsValue.mobile,
-      password: getFieldsValue.password
+      password: getFieldsValue.password,
+      code:getFieldsValue.code
     }).then(result => {
       // 注册处理
       if (result.result == 0) {
@@ -107,19 +106,25 @@ class Reg extends Component {
         <InputItem
           {...getFieldProps('mobile') }
           clear
-          placeholder="请输入手机号"></InputItem>
-        <InputItem
-          {...getFieldProps('code') }
-          clear
-          onExtraClick={this.getCode}
-          placeholder="请输入验证码" extra={this.state.showCountDown?`${this.state.countDown}秒后重新获取`:'获取验证码'}></InputItem>
-        <InputItem {...getFieldProps('password') } placeholder="请输入密码" type="password">
+          placeholder="手机号码">
+          <div style={{ backgroundImage: 'url(../../../assets/img/phone.bmp)', backgroundSize: 'cover', height: '0.6rem', width: '0.5rem' }} />
         </InputItem>
-        <InputItem {...getFieldProps('password2') } placeholder="请确认密码" type="password">
+        <InputItem {...getFieldProps('password') } placeholder="设置登录密码" type="password">
+          <div style={{ backgroundImage: 'url(../../../assets/img/pwd.png)', backgroundSize: 'cover', height: '0.6rem', width: '0.5rem' }} />
+        </InputItem>
+        <InputItem {...getFieldProps('password2') } placeholder="再次输入密码" type="password">
+          <div style={{ backgroundImage: 'url(../../../assets/img/pwd.png)', backgroundSize: 'cover', height: '0.6rem', width: '0.5rem' }} />
+        </InputItem>
+        <InputItem
+            {...getFieldProps('code') }
+            clear
+            onExtraClick={this.getCode}
+            placeholder="请输入验证码" extra={this.state.showCountDown?`${this.state.countDown}秒后重新获取`:'获取验证码'}>
         </InputItem>
         <Item>
           <Button type="primary" onClick={this.onSubmit}>注册</Button>
         </Item>
+        <Item style={{backgroundColor:'#F3F3F3',textAlign: 'right'}} extra={<Link to='/' style={{color:'#777'}}>已有平台账号</Link>}></Item>
       </List>
     </form>);
   }

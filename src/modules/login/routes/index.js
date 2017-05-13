@@ -9,7 +9,7 @@ import forgetPassword from './forgetPassword';
 
 const routesConfig = (<Route path="/" component={App}>
   <IndexRoute component={login} title='登录'/>
-  <Route path="reg" component={reg} title='手机快速注册'/>
+  <Route path="reg" component={reg} title='注册'/>
   <Route path="forgetPassword" component={forgetPassword} title='获取验证码'/>
 </Route>)
 
