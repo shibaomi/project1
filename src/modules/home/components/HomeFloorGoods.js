@@ -32,35 +32,35 @@ class HomeFloorGoods extends React.PureComponent {
     let sencondBlock = null;
 
     if (data.floorType == '2*8') {
-      firstBlock = <Grid data={data.goodsList.slice(0,2)} columnNum={2}
+      firstBlock = <Grid data={data.goodsList.slice(0,2)} columnNum={2} hasLine={false}
         onClick={this.onClick}
           renderItem={(dataItem,index)=>(
           <ImgGoodsInfo dataItem={dataItem} columnNum={2}></ImgGoodsInfo>
           )}>
       </Grid>
 
-      sencondBlock = <Grid data={data.goodsList.slice(2,10)} columnNum={4}
+      sencondBlock = <Grid data={data.goodsList.slice(2,10)} columnNum={4} hasLine={false}
         onClick={this.onClick}
           renderItem={(dataItem,index)=>(
             <ImgGoodsInfo dataItem={dataItem} columnNum={4}></ImgGoodsInfo>
           )}>
       </Grid>
     } else if (data.floorType == '9') {
-      firstBlock = <Grid data={data.goodsList} columnNum={3}
+      firstBlock = <Grid data={data.goodsList} columnNum={3} hasLine={false}
         onClick={this.onClick}
           renderItem={(dataItem,index)=>(
             <GoodsImgInfo dataItem={dataItem} columnNum={3}></GoodsImgInfo>
           )}>
       </Grid>
     } else {
-      firstBlock = <Grid data={data.goodsList.slice(0,4)} columnNum={2}
+      firstBlock = <Grid data={data.goodsList.slice(0,4)} columnNum={2} hasLine={false}
         onClick={this.onClick}
           renderItem={(dataItem,index)=>(
             <ImgGoodsInfo dataItem={dataItem} columnNum={2}></ImgGoodsInfo>
           )}>
       </Grid>
 
-      sencondBlock = data.goodsList.length > 4 && <Grid data={data.goodsList.slice(4,10)} columnNum={4}
+      sencondBlock = data.goodsList.length > 4 && <Grid data={data.goodsList.slice(4,10)} columnNum={4} hasLine={false}
         onClick={this.onClick}
           renderItem={(dataItem,index)=>(
             <ImgGoodsInfo dataItem={dataItem} columnNum={4}></ImgGoodsInfo>
@@ -73,13 +73,16 @@ class HomeFloorGoods extends React.PureComponent {
       advContent = <a href={data.advPosition.advList[0].advUrl}><Img src={Common.imgtest + data.advPosition.advList[0].resUrl} style={{width:'100%',marginBottom:'-8px'}}/></a>
     }
 
-    return <List renderHeader={() => this.renderHeader(data) } style = {{backgroundColor:'#FFFFFF'}}>
+    return <div>
+    <List renderHeader={() => this.renderHeader(data) } style = {{backgroundColor:'#FFFFFF'}}>
       <List.Item>
         {firstBlock}
       </List.Item>
       { sencondBlock && <List.Item>{sencondBlock}</List.Item> }
       {advContent}
     </List>
+      <div style={{height:'0.3rem', width:'100%', backgroundColor:'#F3F3F3'}}></div>
+    </div>
   }
 }
 

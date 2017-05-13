@@ -20,7 +20,7 @@ class Home extends Component {
       activityBeenList: [], //
       advList: [], // 轮播
       navigationList: [],
-      recommendGoodslist: []
+        storeList: []
     }
   }
 
@@ -29,12 +29,11 @@ class Home extends Component {
     queryIndexData().then(result => {
       Toast.hide();
       let data = result.data[0];
-        debugger;
       this.setState({
         advList: data.advPosition.advList,
-        // activityBeenList: data.activityBeenList,
-        // recommendGoodslist: data.recommendGoodslist,
-        // relGoodsRecommedlist: data.relGoodsRecommedlist,
+        //activityBeenList: data.storeList,
+          storeList: data.storeList,
+        //relGoodsRecommedlist: data.storeList,
         floorList: data.floorList
       });
     });
@@ -50,14 +49,14 @@ class Home extends Component {
       relGoodsRecommedlist,
       activityBeenList,
       advPosition,
-      recommendGoodslist
+        storeList
     } = this.state;
     return (
       <div className='wx-index fix-scroll'>
         <div onClick={this.onSearch} className='index-search'>
             <Flex>
                 <Flex.Item>
-                    <SearchBar placeholder="服饰产品" disabled ></SearchBar>
+                    <SearchBar placeholder="服饰产品" disabled style = {{backgroundColor:'#1786CD'}}></SearchBar>
                 </Flex.Item>
                 <div className='indexLoginLabel'>登录</div>
             </Flex>
@@ -65,18 +64,17 @@ class Home extends Component {
 
         </div>
         <HomeCarouselBlock data={this.state.advList}></HomeCarouselBlock>
-        {/*<HomeFunctionBlock></HomeFunctionBlock>*/}
-        {/*{*/}
-          {/*this.state.activityBeenList && this.state.activityBeenList.map(activityBeen=>{*/}
-            {/*return <HomePromotionBlock key={activityBeen.activityTypeValue} data={activityBeen}></HomePromotionBlock>*/}
-          {/*})*/}
-        {/*} */}
-        {/*<HomeNewGoodsBlock data={this.state.recommendGoodslist}></HomeNewGoodsBlock>*/}
+        <div style={{height:'0.3rem', width:'100%', backgroundColor:'#F3F3F3'}}></div>
         {
           this.state.floorList && this.state.floorList.map((floor,index)=>{
             return <HomeFloorGoods key={index} data={floor}></HomeFloorGoods>
           })
-        } 
+        }
+        {
+              this.state.storeList && this.state.storeList.map((store,index)=>{
+                 return <HomeNewGoodsBlock key = {index} data={store}></HomeNewGoodsBlock>
+              })
+          }
         {/*<HomeRecommendGoods data={this.state.relGoodsRecommedlist}></HomeRecommendGoods>*/}
       </div>
     )
