@@ -13,10 +13,10 @@ export function ImgGoodsInfo({ dataItem, columnNum }) {
     fontSize: '.24rem',
     color: 'gray',
       paddingLeft:'20px',
-      paddingRight:'20px'
+      paddingRight:'20px',
   }
-  return <Flex direction='column' onClick={() => onClick(dataItem)} style={{
-      textAlign: 'center',paddingBottom:'20px'
+  return <Flex id = 'indexfrisr' direction='column' onClick={() => onClick(dataItem)} style={{
+      textAlign: 'center',paddingBottom:'0px',
     }}>
     <Flex.Item>
       <Img src={Common.imgtest + dataItem.goodsImage} style={{width:'100%',height:'100%' }} />

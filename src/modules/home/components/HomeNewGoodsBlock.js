@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Grid, Flex, WhiteSpace, List } from 'antd-mobile';
 import { Img } from 'commonComponent';
 import { common } from 'common';
-
+import * as Common from '../../../common/common';
 const IconClass = ({ url }) => {
   return <div style={{
     width: '0.50rem',
@@ -13,38 +13,55 @@ const IconClass = ({ url }) => {
   }}
   />
 }
+let self;
 class HomeNewGoodsBlock extends React.PureComponent {
 
   onClick = (el, index) => {
     // console.log(el);
     common.gotoGoodsDetail({ specId: el.specId });
   }
+constructor(props){
+  super(props);
+  self = this;
+}
 
-  renderItem = (dataItem) => {
-    return<Flex direction='column' style={{fontSize:'.24rem'}}>
-      <div><Flex.Item>
-        <div style={{fontSize:'.28rem'}}>{dataItem.gcName}</div>
-      </Flex.Item></div>
-      <Flex.Item style={{width:'90%'}}>
-        <div style={{
-            color: 'gray',textAlign:'center',paddingLeft:'10px',paddingRight:'10px'
-        }} className='text-overflow-hidden'>{dataItem.goodsName}</div>
-      </Flex.Item>
-      <Flex.Item>
-        <Img src={dataItem.goodsImage} style={{width:'2rem', height:'2rem' }} />
-      </Flex.Item>
-    </Flex>
 
-  }
 
+  // renderItem = (dataItem) => {
+  //   return
+  //
+  // }
+  createMarkup(data) {
+  return {__html: data};
+}
+
+  MyComponent(data) {
+  return <div dangerouslySetInnerHTML={self.createMarkup(data)} />;
+}
   render() {
     const { data } = this.props;
-    return <List renderHeader={() => <div><IconClass url={'./assets/img/floor.png'}></IconClass><div style={{float:'left',marginTop:'0.10rem'}}>新品上市</div></div>}>
+    // let storeList = data.map((store,index)=>{
+    //   return
+    // });
+    return <List renderHeader={() => <div><IconClass url={'./assets/img/floor.png'}></IconClass><div style={{float:'left',marginTop:'0.10rem'}}>发现好店</div></div>}>
       <List.Item>
-        <Grid data={data.slice(0,6)} columnNum={3}
-        onClick={this.onClick}
-          renderItem={(dataItem,index)=>(this.renderItem(dataItem))}>
-        </Grid>
+        {/*<Grid data={data.slice(0,6)} columnNum={3}*/}
+        {/*onClick={this.onClick}*/}
+          {/*renderItem={(dataItem,index)=>(this.renderItem(dataItem))}>*/}
+        {/*</Grid>*/}
+        {/*{storeList}*/}
+        <Flex direction='row' style={{fontSize:'.24rem',borderTop:'1px solid #ddd',borderBottom:'1px solid #ddd',padding:'0.2rem',height:'2rem'}}>
+          <div style={{height:'1.6rem',width:'1.6rem'}}>
+            <Img src={Common.imgtest + data.storeLogo} style={{width:'1.6rem', height:'1.6rem' }} />
+          </div>
+          <Flex.Item>
+            <List>
+              <List.Item style={{fontSize:'.22rem',height:'0.3rem',width:'4rem'}}>{data.storeName}</List.Item>
+              <List.Item wrap >{self.MyComponent(data.description)}</List.Item>
+            </List>
+          </Flex.Item>
+
+        </Flex>
       </List.Item>  
     </List>
   }
