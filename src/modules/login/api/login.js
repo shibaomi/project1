@@ -14,7 +14,7 @@ export function verifyCode({ mobile }) {
   });
 }
 
-export function register({ name, password, mobile }) {
+export function register({ name, password, mobile,code }) {
   return fetch.get('/memberapi/register', {
     name,
     password,

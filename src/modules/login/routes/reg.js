@@ -18,8 +18,8 @@ class Reg extends Component {
 
   onSubmit = () => {
     const getFieldsValue = this.props.form.getFieldsValue();
-    if (!getFieldsValue.mobile || getFieldsValue.mobile == '') {
-      Toast.info('请输入手机号！');
+    if (!getFieldsValue.mobile || getFieldsValue.mobile == ''||getFieldsValue.mobile.length<11) {
+      Toast.info('请输入11位手机号！');
       return;
     }
 
@@ -108,13 +108,13 @@ class Reg extends Component {
           clear
           type="phone"
           placeholder="手机号码">
-          <div style={{ backgroundImage: 'url(../../../assets/img/phone.bmp)', backgroundSize: 'cover', height: '0.6rem', width: '0.5rem' }} />
+          <div style={{ backgroundImage: 'url(../../../assets/img/phone.bmp)', backgroundSize: 'cover', height: '0.4rem', width: '0.35rem' }} />
         </InputItem>
         <InputItem {...getFieldProps('password') } placeholder="设置登录密码" type="password">
-          <div style={{ backgroundImage: 'url(../../../assets/img/pwd.png)', backgroundSize: 'cover', height: '0.6rem', width: '0.5rem' }} />
+          <div style={{ backgroundImage: 'url(../../../assets/img/pwd.png)', backgroundSize: 'cover', height: '0.4rem', width: '0.35rem' }} />
         </InputItem>
         <InputItem {...getFieldProps('password2') } placeholder="再次输入密码" type="password">
-          <div style={{ backgroundImage: 'url(../../../assets/img/pwd.png)', backgroundSize: 'cover', height: '0.6rem', width: '0.5rem' }} />
+          <div style={{ backgroundImage: 'url(../../../assets/img/pwd.png)', backgroundSize: 'cover', height: '0.4rem', width: '0.35rem' }} />
         </InputItem>
         <InputItem
             {...getFieldProps('code') }
@@ -125,7 +125,7 @@ class Reg extends Component {
         <Item>
           <Button type="primary" onClick={this.onSubmit}>注册</Button>
         </Item>
-        <div style={{backgroundColor:'#F3F3F3',textAlign: 'right',width:'100%'}}>
+        <div style={{backgroundColor:'#F3F3F3',textAlign: 'right',width:'100%',paddingTop: '0.3rem'}}>
           <Link to='/' style={{color:'#777'}}>已有平台账号</Link>
         </div>
       </List>
