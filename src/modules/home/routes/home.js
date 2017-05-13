@@ -24,11 +24,19 @@ class Home extends Component {
     }
   }
 
+
+    MyComponent(data) {
+        return <div dangerouslySetInnerHTML={{__html: data}} />;
+    }
   componentWillMount() {
     Toast.loading();
     queryIndexData().then(result => {
       Toast.hide();
-      let data = result.data[0];
+        let data = result.data[0];
+        for(let i = 0;i<data.storeList.length;i++){
+            data.storeList[i].description = this.MyComponent(data.storeList[i].description);
+        }
+        debugger;
       this.setState({
         advList: data.advPosition.advList,
         //activityBeenList: data.storeList,
@@ -70,11 +78,11 @@ class Home extends Component {
             return <HomeFloorGoods key={index} data={floor}></HomeFloorGoods>
           })
         }
-        {
-              this.state.storeList && this.state.storeList.map((store,index)=>{
-                 return <HomeNewGoodsBlock key = {index} data={store}></HomeNewGoodsBlock>
-              })
-          }
+        {/*{*/}
+              {/*this.state.storeList && this.state.storeList.map((store,index)=>{*/}
+                 <HomeNewGoodsBlock data={this.state.storeList}></HomeNewGoodsBlock>
+              {/*})*/}
+          {/*}*/}
         {/*<HomeRecommendGoods data={this.state.relGoodsRecommedlist}></HomeRecommendGoods>*/}
       </div>
     )

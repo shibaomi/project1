@@ -40,28 +40,27 @@ constructor(props){
 }
   render() {
     const { data } = this.props;
-    // let storeList = data.map((store,index)=>{
-    //   return
-    // });
+    let storeList = data.map((store,index)=>{
+      return <Flex direction='row' style={{fontSize:'.24rem',borderTop:'1px solid #ddd',borderBottom:'1px solid #ddd',padding:'0.2rem',height:'2rem'}}>
+        <div style={{height:'1.6rem',width:'1.6rem'}}>
+          <Img src={Common.imgtest + store.storeLogo} style={{width:'1.6rem', height:'1.6rem' }} />
+        </div>
+        <Flex.Item>
+          <List>
+            <List.Item style={{fontSize:'.22rem',height:'0.3rem',width:'4rem'}}>{store.storeName}</List.Item>
+            <List.Item wrap >{store.description}</List.Item>
+          </List>
+        </Flex.Item>
+
+      </Flex>
+    });
     return <List renderHeader={() => <div><IconClass url={'./assets/img/floor.png'}></IconClass><div style={{float:'left',marginTop:'0.10rem'}}>发现好店</div></div>}>
       <List.Item>
         {/*<Grid data={data.slice(0,6)} columnNum={3}*/}
         {/*onClick={this.onClick}*/}
           {/*renderItem={(dataItem,index)=>(this.renderItem(dataItem))}>*/}
         {/*</Grid>*/}
-        {/*{storeList}*/}
-        <Flex direction='row' style={{fontSize:'.24rem',borderTop:'1px solid #ddd',borderBottom:'1px solid #ddd',padding:'0.2rem',height:'2rem'}}>
-          <div style={{height:'1.6rem',width:'1.6rem'}}>
-            <Img src={Common.imgtest + data.storeLogo} style={{width:'1.6rem', height:'1.6rem' }} />
-          </div>
-          <Flex.Item>
-            <List>
-              <List.Item style={{fontSize:'.22rem',height:'0.3rem',width:'4rem'}}>{data.storeName}</List.Item>
-              <List.Item wrap >{self.MyComponent(data.description)}</List.Item>
-            </List>
-          </Flex.Item>
-
-        </Flex>
+        {storeList}
       </List.Item>  
     </List>
   }
