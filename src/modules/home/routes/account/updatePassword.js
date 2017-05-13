@@ -23,7 +23,7 @@ class UpdatePassword extends Component {
   update = () => {
     const getFieldsValue = this.props.form.getFieldsValue();
     if (!getFieldsValue.password || getFieldsValue.password == '') {
-      Toast.info('请输入密码！');
+      Toast.info('请输入原登录密码！');
       return;
     }
     if (!getFieldsValue.newpassword || getFieldsValue.newpassword == '') {
@@ -31,7 +31,7 @@ class UpdatePassword extends Component {
       return;
     }
     if (!getFieldsValue.newpassword1 || getFieldsValue.newpassword1 == '') {
-      Toast.info('请确认新密码！');
+      Toast.info('请确认确认密码！');
       return;
     }
 
@@ -64,24 +64,24 @@ class UpdatePassword extends Component {
         <InputItem
           {...getFieldProps('password')}  
             clear
-            placeholder="请输入原密码"
+            placeholder="请输入原登录密码"
             autoFocus
           type='password'
-        >旧密码</InputItem>
+        ></InputItem>
         <InputItem
            {...getFieldProps('newpassword')}  
             clear
             placeholder="请输入新密码"
             type='password'
-        >新密码</InputItem>
+        ></InputItem>
         <InputItem
             {...getFieldProps('newpassword1')}  
             clear
              type='password'
-            placeholder="请输入确认密码"
-        >确认密码</InputItem>
+            placeholder="请再次输入新密码"
+        ></InputItem>
 
-        <Button onClick={this.update} type='primary'>修改</Button>
+        <Button onClick={this.update} type='primary'>确认修改</Button>
       </List>
     );
   }

@@ -101,6 +101,24 @@ export function filesUpload({
   });
 }
 
+// 修改密码-获取验证码
+export function findCode({
+    mobile
+}) {
+  return fetch.post('/memberapi/findCode', {
+    mobile
+  });
+}
+
+// 修改密码--验证验证码
+export function checkCode({ bound ,boundcode,pattern}) {
+  return fetch.get('/memberapi/checkCode', {
+    bound,
+    boundcode,
+    pattern
+  });
+}
+
 // 修改密码
 export function updatePassword({
   newpassword,
