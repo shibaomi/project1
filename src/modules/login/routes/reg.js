@@ -106,6 +106,7 @@ class Reg extends Component {
         <InputItem
           {...getFieldProps('mobile') }
           clear
+          type="phone"
           placeholder="手机号码">
           <div style={{ backgroundImage: 'url(../../../assets/img/phone.bmp)', backgroundSize: 'cover', height: '0.6rem', width: '0.5rem' }} />
         </InputItem>
@@ -124,7 +125,7 @@ class Reg extends Component {
         <Item>
           <Button type="primary" onClick={this.onSubmit}>注册</Button>
         </Item>
-        <Item style={{backgroundColor:'#F3F3F3',textAlign: 'right'}} extra={<Link to='/' style={{color:'#777'}}>已有平台账号</Link>}></Item>
+        <Item style={{backgroundColor:'#F3F3F3'}} extra={<Link to='/' style={{color:'#777'}}>已有平台账号</Link>}></Item>
       </List>
     </form>);
   }
