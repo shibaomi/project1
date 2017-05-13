@@ -1,7 +1,7 @@
 import { fetch, common } from 'common';
 
 export function login({ username, password, captcha }) {
-  return fetch.get('/loginapi/login', {
+  return fetch.post('/loginapi/login', {
     username,
     password,
     captcha
