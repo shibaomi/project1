@@ -84,6 +84,7 @@ export function post(requestUrl, params) {
   if (token) {
     headers['token'] = token;
   }
+  debugger;
   return fetch(url, {
     method: "POST",
     headers,

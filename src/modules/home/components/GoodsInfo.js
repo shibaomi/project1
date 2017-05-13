@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Carousel, Flex } from 'antd-mobile';
 import { Img } from 'commonComponent';
 import { common } from 'common';
-
+import * as Common from '../../../common/common';
 const onClick = (el) => {
   common.gotoGoodsDetail({ specId: el.specId });
 }
@@ -19,7 +19,7 @@ export function ImgGoodsInfo({ dataItem, columnNum }) {
       textAlign: 'center',paddingBottom:'20px'
     }}>
     <Flex.Item>
-      <Img src={dataItem.goodsImage} style={{width:'100%',height:'100%' }} />
+      <Img src={Common.imgtest + dataItem.goodsImage} style={{width:'100%',height:'100%' }} />
     </Flex.Item>
     <Flex.Item style={{width:'100%'}}>
       <div style={styles} className='text-overflow-hidden'>{dataItem.goodsName}</div> 
@@ -46,7 +46,7 @@ export function GoodsImgInfo({ dataItem, columnNum }) {
       <div style={styles} className='text-overflow-hidden'>{dataItem.goodsName}</div>
     </Flex.Item>
     <Flex.Item>
-      <Img src={dataItem.goodsImage} style={{width:'100%',height:'100%' }} />
+      <Img src={Common.imgtest + dataItem.goodsImage} style={{width:'100%',height:'100%' }} />
     </Flex.Item>
   </Flex>
 }

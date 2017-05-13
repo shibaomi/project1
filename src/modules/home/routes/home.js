@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router'
-import { Carousel, Modal, SearchBar, WhiteSpace, WingBlank, Toast } from 'antd-mobile';
+import { Carousel, Modal, SearchBar, WhiteSpace, WingBlank, Toast, Flex } from 'antd-mobile';
 import { queryIndexData } from '../api';
 import HomeCarouselBlock from '../components/HomeCarouselBlock'
 import HomeFunctionBlock from '../components/HomeFunctionBlock'
@@ -29,11 +29,12 @@ class Home extends Component {
     queryIndexData().then(result => {
       Toast.hide();
       let data = result.data[0];
+        debugger;
       this.setState({
         advList: data.advPosition.advList,
-        activityBeenList: data.activityBeenList,
-        recommendGoodslist: data.recommendGoodslist,
-        relGoodsRecommedlist: data.relGoodsRecommedlist,
+        // activityBeenList: data.activityBeenList,
+        // recommendGoodslist: data.recommendGoodslist,
+        // relGoodsRecommedlist: data.relGoodsRecommedlist,
         floorList: data.floorList
       });
     });
@@ -53,21 +54,30 @@ class Home extends Component {
     } = this.state;
     return (
       <div className='wx-index fix-scroll'>
-        <div onClick={this.onSearch} className='index-search'><SearchBar placeholder="搜索你想要的商品" disabled ></SearchBar></div>
+        <div onClick={this.onSearch} className='index-search'>
+            <Flex>
+                <Flex.Item>
+                    <SearchBar placeholder="服饰产品" disabled ></SearchBar>
+                </Flex.Item>
+                <div className='indexLoginLabel'>登录</div>
+            </Flex>
+
+
+        </div>
         <HomeCarouselBlock data={this.state.advList}></HomeCarouselBlock>
-        <HomeFunctionBlock></HomeFunctionBlock>
-        {
-          this.state.activityBeenList && this.state.activityBeenList.map(activityBeen=>{
-            return <HomePromotionBlock key={activityBeen.activityTypeValue} data={activityBeen}></HomePromotionBlock>
-          })
-        } 
-        <HomeNewGoodsBlock data={this.state.recommendGoodslist}></HomeNewGoodsBlock>
+        {/*<HomeFunctionBlock></HomeFunctionBlock>*/}
+        {/*{*/}
+          {/*this.state.activityBeenList && this.state.activityBeenList.map(activityBeen=>{*/}
+            {/*return <HomePromotionBlock key={activityBeen.activityTypeValue} data={activityBeen}></HomePromotionBlock>*/}
+          {/*})*/}
+        {/*} */}
+        {/*<HomeNewGoodsBlock data={this.state.recommendGoodslist}></HomeNewGoodsBlock>*/}
         {
           this.state.floorList && this.state.floorList.map((floor,index)=>{
             return <HomeFloorGoods key={index} data={floor}></HomeFloorGoods>
           })
         } 
-        <HomeRecommendGoods data={this.state.relGoodsRecommedlist}></HomeRecommendGoods>
+        {/*<HomeRecommendGoods data={this.state.relGoodsRecommedlist}></HomeRecommendGoods>*/}
       </div>
     )
   }

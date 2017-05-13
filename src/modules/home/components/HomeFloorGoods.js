@@ -3,6 +3,7 @@ import { Grid, List, Flex, Icon } from 'antd-mobile';
 import { Img } from 'commonComponent';
 import { ImgGoodsInfo, GoodsImgInfo } from './GoodsInfo';
 import { withRouter } from 'react-router'
+import * as Common from '../../../common/common';
 const IconClass = ({ url }) => {
   return <div style={{
     width: '0.50rem',
@@ -69,10 +70,10 @@ class HomeFloorGoods extends React.PureComponent {
 
     let advContent = null
     if (data.advPosition && data.advPosition.advList && data.advPosition.advList.length > 0) {
-      advContent = <a href={data.advPosition.advList[0].advUrl}><Img src={data.advPosition.advList[0].resUrl} style={{width:'100%',marginBottom:'-8px'}}/></a>
+      advContent = <a href={data.advPosition.advList[0].advUrl}><Img src={Common.imgtest + data.advPosition.advList[0].resUrl} style={{width:'100%',marginBottom:'-8px'}}/></a>
     }
 
-    return <List renderHeader={() => this.renderHeader(data) }>
+    return <List renderHeader={() => this.renderHeader(data) } style = {{backgroundColor:'#FFFFFF'}}>
       <List.Item>
         {firstBlock}
       </List.Item>

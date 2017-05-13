@@ -40,7 +40,7 @@ class BottomBar extends React.Component {
   render() {
     return (
       <TabBar
-      	tintColor='#E43F47'
+      	tintColor='#1686CE'
         className="wx-tab-bar"   
         hidden={this.state.hidden}
       >
@@ -91,8 +91,8 @@ class BottomBar extends React.Component {
             <IconClass url={'./assets/img/my-selected.png'}></IconClass>
           }
           selected={this.state.selectedTab === 'my'}
-          title="我的"
-          key="我的"
+          title="订单中心"
+          key="订单中心"
           onPress={()=>this.changeTab('my')}
         >
         </TabBar.Item>
