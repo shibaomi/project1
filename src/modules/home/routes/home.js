@@ -36,7 +36,6 @@ class Home extends Component {
         for(let i = 0;i<data.storeList.length;i++){
             data.storeList[i].description = this.MyComponent(data.storeList[i].description);
         }
-        debugger;
       this.setState({
         advList: data.advPosition.advList,
         //activityBeenList: data.storeList,
@@ -50,7 +49,9 @@ class Home extends Component {
   onSearch = () => {
     this.props.router.push('/gotoSearch');
   }
-
+    onLogin = () => {
+        this.props.router.push('/login');
+    }
   render() {
     const {
       floorList,
@@ -61,12 +62,12 @@ class Home extends Component {
     } = this.state;
     return (
       <div className='wx-index fix-scroll'>
-        <div onClick={this.onSearch} className='index-search'>
+        <div className='index-search'>
             <Flex>
-                <Flex.Item>
+                <Flex.Item  onClick={this.onSearch}>
                     <SearchBar placeholder="服饰产品" disabled style = {{backgroundColor:'#1786CD'}}></SearchBar>
                 </Flex.Item>
-                <div className='indexLoginLabel'>登录</div>
+                <div className='indexLoginLabel' onClick={this.onLogin}>登录</div>
             </Flex>
 
 

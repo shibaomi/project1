@@ -46,6 +46,8 @@ import address from './address/address';
 import addressAdd from './address/addressAdd';
 import addressEdit from './address/addressEdit';
 
+import login from '../../login/routes/login';
+
 const routesConfig = (<Route path="/" component={App}>
   <IndexRoute component={home} showBottomBar={true} showTitle={false} selectedTab='home'/>
   <Route path='store/:storeId/'>
@@ -94,7 +96,8 @@ const routesConfig = (<Route path="/" component={App}>
   <Route path='/address' component={address} title='地址管理' />
   <Route path='/addressAdd' component={addressAdd} title='添加地址' />
   <Route path='/addressEdit' component={addressEdit} title='编辑地址'/>
-  
+
+  <Route path='/login' component={login} title='登录'/>
 </Route>)
 
 function Routes({ history }) {
