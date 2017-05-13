@@ -18,7 +18,7 @@ class Reg extends Component {
 
   onSubmit = () => {
     const getFieldsValue = this.props.form.getFieldsValue();
-    if (!getFieldsValue.mobile || getFieldsValue.mobile == ''||getFieldsValue.mobile.length<11) {
+    if (!getFieldsValue.mobile || getFieldsValue.mobile == ''||getFieldsValue.mobile.replace(/\s/g, "").length<11) {
       Toast.info('请输入11位手机号！');
       return;
     }
@@ -43,8 +43,8 @@ class Reg extends Component {
     }
 
     api.register({
-      mobile: getFieldsValue.mobile,
-      name: getFieldsValue.mobile,
+      mobile: getFieldsValue.mobile.replace(/\s/g, ""),
+      name: getFieldsValue.mobile.replace(/\s/g, ""),
       password: getFieldsValue.password,
       code:getFieldsValue.code
     }).then(result => {
@@ -81,11 +81,11 @@ class Reg extends Component {
     }
     const getFieldsValue = this.props.form.getFieldsValue();
     console.log(getFieldsValue);
-    if (!getFieldsValue.mobile || getFieldsValue.mobile == ''||getFieldsValue.mobile.length<11) {
+    if (!getFieldsValue.mobile || getFieldsValue.mobile == ''||getFieldsValue.mobile.replace(/\s/g, "").length<11) {
       Toast.info('请先输入11手机号！');
       return;
     }
-    api.findCode({ mobile: getFieldsValue.mobile }).then(result => {
+    api.findCode({ mobile: getFieldsValue.mobile.replace(/\s/g, "") }).then(result => {
       if (result.result == 0) {
         Toast.fail(result.msg);
         return;

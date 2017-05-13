@@ -40,9 +40,12 @@ export function findCode({ mobile }) {
 }
 
 // 重置密码
-export function updatePassword({ newpassword, memberId }) {
-  return fetch.get('/memberapi/updatePassword', {
+export function updatePassword({
     newpassword,
-    memberId
+    password
+}) {
+  return fetch.post('/memberapi/updatePassword', {
+    newpassword,
+    password
   });
 }

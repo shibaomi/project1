@@ -66,18 +66,21 @@ class UpdatePassword extends Component {
             clear
             placeholder="请输入原登录密码"
             autoFocus
+            maxLength="20"
           type='password'
         ></InputItem>
         <InputItem
            {...getFieldProps('newpassword')}  
             clear
             placeholder="请输入新密码"
+            maxLength="20"
             type='password'
         ></InputItem>
         <InputItem
             {...getFieldProps('newpassword1')}  
             clear
-             type='password'
+            type='password'
+            maxLength="20"
             placeholder="请再次输入新密码"
         ></InputItem>
 

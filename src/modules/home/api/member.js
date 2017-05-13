@@ -112,7 +112,7 @@ export function findCode({
 
 // 修改密码--验证验证码
 export function checkCode({ bound ,boundcode,pattern}) {
-  return fetch.get('/memberapi/checkCode', {
+  return fetch.post('/memberapi/checkCode', {
     bound,
     boundcode,
     pattern

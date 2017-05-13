@@ -96,7 +96,7 @@ class Login extends Component {
             <Button type="primary" onClick={this.onSubmit} >登录</Button>
           </Flex.Item>
         </Flex>
-        <Item style={{backgroundColor:'#F3F3F3',}} extra={<Link to='/forgetPassword' style={{color:'#777'}}>忘记密码?</Link>}><Link to='/reg' style={{color:'#777'}}>手机号快速注册</Link></Item>
+        <Item style={{backgroundColor:'#F3F3F3',}} extra={<Link to='/forgetPasswordPhone' style={{color:'#777'}}>忘记密码?</Link>}><Link to='/reg' style={{color:'#777'}}>手机号快速注册</Link></Item>
       </List>
     </form>);
   }
