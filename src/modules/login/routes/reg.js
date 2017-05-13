@@ -125,7 +125,9 @@ class Reg extends Component {
         <Item>
           <Button type="primary" onClick={this.onSubmit}>注册</Button>
         </Item>
-        <Item style={{backgroundColor:'#F3F3F3'}} extra={<Link to='/' style={{color:'#777'}}>已有平台账号</Link>}></Item>
+        <div style={{backgroundColor:'#F3F3F3',textAlign: 'right',width:'100%'}}>
+          <Link to='/' style={{color:'#777'}}>已有平台账号</Link>
+        </div>
       </List>
     </form>);
   }
