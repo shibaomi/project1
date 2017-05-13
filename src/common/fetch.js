@@ -78,7 +78,7 @@ export function post(requestUrl, params) {
   const token = localStorage.getItem('token');
   params = {
     ...params,
-    ...baseParams
+    ...baseParams,
   }
   let headers = {}
   if (token) {

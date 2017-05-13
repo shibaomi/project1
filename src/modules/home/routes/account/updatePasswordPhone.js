@@ -93,10 +93,13 @@ class UpdatePasswordPhone extends Component {
     return (<form className='wx-reg'>
       <List>
         <InputItem
-          {...getFieldProps('mobile') }
+          {...getFieldProps('mobile',{
+            initialValue: localStorage.getItem('phone')
+          }) }
           clear
           type="phone"
           disabled
+
           placeholder="手机号码">
           <div style={{ backgroundImage: 'url(../../../assets/img/phone.bmp)', backgroundSize: 'cover', height: '0.4rem', width: '0.35rem' }} />
         </InputItem>
