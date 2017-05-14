@@ -8,8 +8,8 @@ export function memberDetail() {
   return fetch.get('/memberapi/memberDetail');
 }
 
-export function goodsdetail({ specId }) {
-  return fetch.get('goods/api/goodsdetail', { specId });
+export function goodsdetail({ goodsId }) {
+  return fetch.post('goods/api/goodsdetail', { goodsId });
 }
 
 export function goodsInfo({ specId }) {
