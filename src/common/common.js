@@ -52,9 +52,9 @@ export function gotoCart() {
   window.location.href = 'cart.html';
 }
 
-export function gotoGoodsDetail({ specId }) {
+export function gotoGoodsDetail({ goodsId }) {
   // window.location.href = `goodsDetail.html#/?specId=${specId}`;
-  window.location.href = `goodsDetail.html#/${specId}`;
+  window.location.href = `goodsDetail.html#/${goodsId}`;
 }
 
 export function gotoStore({ storeId }) {
@@ -113,4 +113,12 @@ export function setCartNum(num) {
 
 export function getCartNum() {
   return localStorage.getItem('_cartnum') || 0;
+}
+
+export function phoneDesensitization(phone) {
+  if(phone&&phone.length==11){
+    return phone.substring(0,3)+"****"+phone.substring(7,11);
+  }else{
+    return phone;
+  }
 }
