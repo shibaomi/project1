@@ -1,6 +1,7 @@
 import { fetch, common } from 'common';
 
 export function login({ username, password, captcha }) {
+  localStorage.removeItem('token');
   return fetch.post('/loginapi/login', {
     username,
     password,
