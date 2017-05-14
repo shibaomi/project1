@@ -4,7 +4,7 @@ import { Img } from 'commonComponent';
 import { common } from 'common';
 import * as Common from '../../../common/common';
 const onClick = (el) => {
-  common.gotoGoodsDetail({ specId: el.specId });
+  common.gotoGoodsDetail({ goodsId: el.goodsId });
 }
 
 /**图片在上面，文字在下面的布局 */
