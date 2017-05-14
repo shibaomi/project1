@@ -76,7 +76,7 @@ class GoodsDetail extends Component {
 
     // 获取商品详情
     goodsDetailApi.goodsdetail({
-      specId: this.props.params.specId
+      goodsId: this.props.params.goodsId
     }).then(result => {
       Toast.hide();
       if (result.result != 1) {
