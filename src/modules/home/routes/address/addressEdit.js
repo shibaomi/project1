@@ -57,6 +57,7 @@ class AddressEdit extends Component {
       Toast.info('详细地址不能为空');
       return;
     }
+    fieldsValue.mobPhone=fieldsValue.mobPhone.replace(/\s/g, "");
     const provinceId = fieldsValue.areaIds[0];
     const cityId = fieldsValue.areaIds[1];
     const areaId = fieldsValue.areaIds[2];
@@ -111,7 +112,7 @@ class AddressEdit extends Component {
             {...getFieldProps('address')}
             clear
             maxLength="50"
-            placeholder="详细地址">详细地址</InputItem>
+            placeholder="街道、门牌号等">详细地址</InputItem>
         <Item>
           <Button onClick={this.onSubmit} type='primary'>保存</Button>
         </Item>

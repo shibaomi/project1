@@ -98,8 +98,8 @@ const routesConfig = (<Route path="/" component={App}>
   <Route path='/lockBalance' component={lockBalance} title='锁定余额' />
   
   <Route path='/address' component={address} title='报告接收人' />
-  <Route path='/addressAdd' component={addressAdd} title='添加地址' />
-  <Route path='/addressEdit' component={addressEdit} title='编辑地址'/>
+  <Route path='/addressAdd' component={addressAdd} title='添加收货地址' />
+  <Route path='/addressEdit' component={addressEdit} title='编辑收货地址'/>
 
   <Route path='/login' component={login} title='登录'/>
 </Route>)
