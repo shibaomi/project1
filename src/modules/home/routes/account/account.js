@@ -160,7 +160,7 @@ class Account extends Component {
         <Item arrow="horizontal" onClick={()=>this.props.router.push('/updatePhone1')} extra={memberDetail.memberName}>修改绑定手机号</Item>
         <Item arrow="horizontal" onClick={()=>this.props.router.push('/updatePasswordPhone')}>修改登录密码</Item>
         <Item arrow="horizontal" onClick={()=>this.props.router.push('/address')}>收货地址管理</Item>
-        <Item arrow="horizontal" onClick={()=>this.props.router.push('/recharge')}>发票信息管理</Item>
+        <Item arrow="horizontal" onClick={()=>this.props.router.push('/invoice')}>发票信息管理</Item>
       </List>
       <WhiteSpace></WhiteSpace>
       <WingBlank>

@@ -42,6 +42,7 @@ import updatePassword from './passwordandphone/updatePassword';
 import updatePasswordPhone from './passwordandphone/updatePasswordPhone';
 import updatePhone1 from './passwordandphone/updatePhone1';
 import updatePhone2 from './passwordandphone/updatePhone2';
+import invoice from './invoice/invoice';
 import createPayword from './account/createPayword';
 
 import address from './address/address';
@@ -87,10 +88,6 @@ const routesConfig = (<Route path="/" component={App}>
   <Route path='/accountSafe' component={accountSafe} title='账户安全'/>
   <Route path='/recharge' component={recharge} title='余额充值' />
   <Route path='/updateNickName' component={updateNickName} title='账户管理'/>
-  <Route path='/updatePassword' component={updatePassword} title='修改密码'/>
-  <Route path='/updatePasswordPhone' component={updatePasswordPhone} title='修改密码'/>
-  <Route path='/updatePhone1' component={updatePhone1} title='修改绑定手机'/>
-  <Route path='/updatePhone2' component={updatePhone2} title='修改绑定手机'/>
 
   <Route path='/createPayword' component={createPayword} title='设置支付密码'/>
 
@@ -100,6 +97,11 @@ const routesConfig = (<Route path="/" component={App}>
   <Route path='/address' component={address} title='报告接收人' />
   <Route path='/addressAdd' component={addressAdd} title='添加收货地址' />
   <Route path='/addressEdit' component={addressEdit} title='编辑收货地址'/>
+  <Route path='/updatePassword' component={updatePassword} title='修改密码'/>
+  <Route path='/updatePasswordPhone' component={updatePasswordPhone} title='修改密码'/>
+  <Route path='/updatePhone1' component={updatePhone1} title='修改绑定手机'/>
+  <Route path='/updatePhone2' component={updatePhone2} title='修改绑定手机'/>
+  <Route path='/invoice' component={invoice} title='发票信息'/>
 
   <Route path='/login' component={login} title='登录'/>
 </Route>)
