@@ -33,7 +33,7 @@ class BottomBar extends React.Component {
     } else if (type == 'cart') {
       window.location.href = 'cart.html';
     } else if (type == 'my') {
-      window.location.href = 'home.html#/my';
+      window.location.href = 'home.html#/orderList/0';
     }
   }
 
