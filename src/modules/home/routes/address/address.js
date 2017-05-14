@@ -14,7 +14,7 @@ import { Img } from 'commonComponent';
 import * as addressApi from '../../api/address';
 import { common } from 'common';
 import { createForm } from 'rc-form';
-
+const CheckboxItem = Checkbox.CheckboxItem;
 import './address.less';
 
 const Item = List.Item;
@@ -80,7 +80,9 @@ class Address extends Component {
       }
     })
   }
-
+  onChange = (val) => {
+    console.log(val);
+  }
   render() {
     const { addressList } = this.state;
     return <div className='wx-addresslist fix-scroll hastitle'>
@@ -88,10 +90,33 @@ class Address extends Component {
           {
               addressList.map(address => {
                   return <List key={address.addressId}>
-                    <Item multipleLine>
-                        {address.trueName} &nbsp;&nbsp; {common.phoneDesensitization(address.mobPhone)}
-                        { address.isDefault==1 ?  <label style={{backgroundColor:'#1786CD',marginLeft:'0.3rem',color: '#fff' }}>&nbsp;&nbsp;默认&nbsp;&nbsp;</label> : <label ></label> }
-                        <Brief>{address.areaInfo} {address.address}</Brief>
+                    <Item multipleLine style = {{padding:'0.2rem 0.3rem 0rem 0.3rem', border:'none'}}>
+                      <Flex>
+                        <div>
+                          <Checkbox key={address.memberId} onChange={() => this.onChange(address.addressId)}>
+                          </Checkbox>
+                        </div>
+                        <Flex.Item>
+
+
+                          <div style = {{position:'relative'}}>
+                            <div style = {{width:'4.3rem', position:'relative',height:'0.5rem'}}>
+                                <div style = {{width:'1rem', position:'absolute',left:'0rem',}}>{address.trueName}</div>
+                                <div style = {{width:'2rem', position:'absolute',left:'1rem',}}>{common.phoneDesensitization(address.mobPhone)}</div>
+                                <div style = {{width:'1rem', position:'absolute',left:'3rem',}}>
+                                  { address.isDefault==1 ?  <div style={{backgroundColor:'#1786CD',color: '#fff', textAlign:'center' }}>默认</div> : <label ></label> }
+                                </div>
+                            </div>
+
+                            <Item wrap>
+                              {address.areaInfo} {address.address}
+                            </Item>
+                          </div>
+
+
+                        </Flex.Item>
+                      </Flex>
+
                     </Item>
                     <Item>
                       <Flex>
@@ -105,7 +130,7 @@ class Address extends Component {
                         </Flex.Item>
                       </Flex>
                     </Item>
-                    <WhiteSpace style={{ backgroundColor: '#ebebef' }}></WhiteSpace>
+
                   </List>
               })
           }
