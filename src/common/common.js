@@ -114,3 +114,11 @@ export function setCartNum(num) {
 export function getCartNum() {
   return localStorage.getItem('_cartnum') || 0;
 }
+
+export function phoneDesensitization(phone) {
+  if(phone&&phone.length==11){
+    return phone.substring(0,3)+"****"+phone.substring(7,11);
+  }else{
+    return phone;
+  }
+}

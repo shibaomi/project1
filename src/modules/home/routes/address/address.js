@@ -89,7 +89,7 @@ class Address extends Component {
               addressList.map(address => {
                   return <List key={address.addressId}>
                     <Item multipleLine>
-                        {address.trueName} &nbsp;&nbsp; {address.mobPhone}
+                        {address.trueName} &nbsp;&nbsp; {common.phoneDesensitization(address.mobPhone)}
                         { address.isDefault==1 ?  <label style={{backgroundColor:'#1786CD',marginLeft:'0.3rem',color: '#fff' }}>&nbsp;&nbsp;默认&nbsp;&nbsp;</label> : <label ></label> }
                         <Brief>{address.areaInfo} {address.address}</Brief>
                     </Item>
