@@ -14,11 +14,9 @@ export function saveAddress({
   trueName,
   mobPhone,
   areaInfo,
-  zipCode,
   areaId,
   provinceId,
-  addressId = null,
-  telPhone,
+  addressId ,
   cityId,
 }) {
   return fetch.get('/address/api/saveAddress', {
@@ -26,11 +24,9 @@ export function saveAddress({
     trueName,
     mobPhone,
     areaInfo,
-    zipCode,
     areaId,
     provinceId,
     addressId,
-    telPhone,
     cityId,
   });
 }

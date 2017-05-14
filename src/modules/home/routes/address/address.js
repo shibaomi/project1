@@ -89,18 +89,19 @@ class Address extends Component {
               addressList.map(address => {
                   return <List key={address.addressId}>
                     <Item multipleLine>
-                        {address.trueName} &nbsp;&nbsp; {address.mobPhone}  <Brief>{address.areaInfo} {address.address}</Brief>
+                        {address.trueName} &nbsp;&nbsp; {common.phoneDesensitization(address.mobPhone)}
+                        { address.isDefault==1 ?  <label style={{backgroundColor:'#1786CD',marginLeft:'0.3rem',color: '#fff' }}>&nbsp;&nbsp;默认&nbsp;&nbsp;</label> : <label ></label> }
+                        <Brief>{address.areaInfo} {address.address}</Brief>
                     </Item>
                     <Item>
                       <Flex>
-                        <Flex.Item>
-                          <AgreeItem checked={address.isDefault==1} onChange={() => this.setDefault(address)}>
-                            设置默认
-                          </AgreeItem>
-                        </Flex.Item>
                         <Flex.Item style={{textAlign:'right'}}>
-                          <Button type='primary' size='small' onClick={()=>this.gotoEdit(address)} inline>编辑</Button>&nbsp;
-                          <Button type='primary' size='small' onClick={()=>this.gotoDel(address)} inline>删除</Button>
+                          <span size='small' onClick={()=>this.gotoEdit(address)} inline style={{marginRight:'0.4rem'}}>
+                            <img src="../../../assets/img/edit.png" style={{height:'0.5rem',paddingBottom:'0.1rem',marginRight:'0.1rem' }}/>
+                            编辑</span>&nbsp;
+                          <span size='small' onClick={()=>this.gotoDel(address)} inline>
+                            <img src="../../../assets/img/delete.png" style={{height:'0.5rem',paddingBottom:'0.1rem',marginRight:'0.1rem' }}/>
+                            删除</span>
                         </Flex.Item>
                       </Flex>
                     </Item>

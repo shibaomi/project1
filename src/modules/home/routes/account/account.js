@@ -154,34 +154,13 @@ class Account extends Component {
     const maxDate = moment().utcOffset(8);
     return <div className="wx-account">
       <List>
-        <Item arrow="horizontal" extra={userIcon} onClick={this.changeIcon}>头像</Item>
-        <Item arrow="horizontal"
-          onClick={() => {
-            this.props.router.push({
-              pathname: '/updateNickName',
-              state: {
-                nickname:memberDetail.memberTruename
-              }
-            })
-          }}
-          extra={memberDetail.memberTruename}>昵称</Item>
-        <Item style={{paddingRight:'10px'}} extra={memberDetail.memberName}>用户名</Item>
-        <Item arrow="horizontal" onClick={this.showSexSheet} extra={sexs[memberDetail.memberSex]}>性别</Item>
-        <DatePicker
-          mode="date"
-          title="选择日期"
-          {...getFieldProps('memberBirthday', {
-            initialValue: memberBirthday
-          }) }
-          onChange={(date)=>this.onChangeBirthday(date)}
-          maxDate={maxDate}>
-          <Item arrow="horizontal">出生日期</Item>
-        </DatePicker>
-        <Item arrow="horizontal" onClick={() => {
-          this.gotoAddress()
-        }}>地址管理</Item>
-        <Item arrow="horizontal" onClick={()=>this.props.router.push('/accountSafe')}>账户安全</Item>
-        <Item arrow="horizontal" onClick={()=>this.props.router.push('/recharge')}>余额充值</Item>
+        <Item
+          extra={memberDetail.memberTruename}>当前登录账号</Item>
+        <Item style={{paddingRight:'10px'}} extra={memberDetail.memberEmail}>邮箱</Item>
+        <Item arrow="horizontal" onClick={()=>this.props.router.push('/updatePhone1')} extra={memberDetail.memberName}>修改绑定手机号</Item>
+        <Item arrow="horizontal" onClick={()=>this.props.router.push('/updatePasswordPhone')}>修改登录密码</Item>
+        <Item arrow="horizontal" onClick={()=>this.props.router.push('/address')}>收货地址管理</Item>
+        <Item arrow="horizontal" onClick={()=>this.props.router.push('/invoice')}>发票信息管理</Item>
       </List>
       <WhiteSpace></WhiteSpace>
       <WingBlank>

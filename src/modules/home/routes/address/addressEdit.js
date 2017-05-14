@@ -23,10 +23,7 @@ const district = addressApi.getAreaData();
 class AddressEdit extends Component {
   constructor(props) {
     super(props);
-    this.state={
-    	sty:false,
-    	sty1:false
-    }
+    this.state={ }
   }
 
   componentDidMount() {
@@ -45,22 +42,11 @@ class AddressEdit extends Component {
     const fieldsValue = this.props.form.getFieldsValue()
     // check
     if (!fieldsValue.trueName || fieldsValue.trueName == '') {
-      Toast.info('收货人姓名不能为空');
+      Toast.info('请输入收货人姓名');
       return;
     }
-    if (!fieldsValue.mobPhone || fieldsValue.mobPhone.trim() == '') {
-      Toast.info('手机号不能为空');
-      return;
-    }
-    if (fieldsValue.mobPhone.length!=13||fieldsValue.mobPhone[0]==0) {
-      Toast.info('手机号格式不正确');
-      return;
-    }
-    if (!fieldsValue.zipCode || fieldsValue.zipCode == '') {
-      Toast.info('邮政编码不能为空');
-    }
-     if (String(fieldsValue.zipCode).length!=6||String(fieldsValue.zipCode)[0]==0) {
-      Toast.info('邮政编码格式不正确');
+    if (!fieldsValue.mobPhone || fieldsValue.mobPhone.trim() == ''||fieldsValue.mobPhone.replace(/\s/g, "").length<11) {
+      Toast.info('请输入11位手机号');
       return;
     }
     if (!fieldsValue.areaIds || fieldsValue.areaIds.length == 0) {
@@ -71,10 +57,7 @@ class AddressEdit extends Component {
       Toast.info('详细地址不能为空');
       return;
     }
-		if (fieldsValue.telPhone.length!=7) {
-      Toast.info('座机电话格式不正确');
-      return;
-    }
+    fieldsValue.mobPhone=fieldsValue.mobPhone.replace(/\s/g, "");
     const provinceId = fieldsValue.areaIds[0];
     const cityId = fieldsValue.areaIds[1];
     const areaId = fieldsValue.areaIds[2];
@@ -100,57 +83,17 @@ class AddressEdit extends Component {
     })
 
   }
-	onBlur=()=>{
-		this.setState({
-      sty:false
-    })
-	}
-	onFocus=()=>{
-		this.setState({
-      sty:true
-    })
-	}
-	onBlur1=()=>{
-		this.setState({
-      sty1:false
-    })
-	}
-	onFocus1=()=>{
-		this.setState({
-      sty1:true
-    })
-	}
 
   render() {
     const { getFieldProps, getFieldError } = this.props.form;
-    // const {
-    //   provinceId,
-    //   cityId,
-    //   areaId
-    // } = this.props.location.state;
 
-    // const areaIds = [provinceId, cityId, areaId]
-
-
-
-    // componentDidMount() {
-    //   this.props.form.setFieldsValue({
-    //     ...this.props.location.state,
-    //     areaIds: [
-    //       this.props.location.state.provinceId,
-    //       this.props.location.state.cityId,
-    //       this.props.location.state.areaId
-    //     ]
-    //   });
-    // }
-
-    // const { getFieldProps } = this.props.form;
     return <div className='wx-address-add'>
       <List className="picker-list">
          <InputItem
             {...getFieldProps('trueName')}
             clear
             placeholder="请输入收货人"
+            maxLength="50"
           >收货人</InputItem>
         <InputItem
             {...getFieldProps('mobPhone')}
@@ -158,11 +101,6 @@ class AddressEdit extends Component {
             type='phone'
             placeholder="请输入手机号"
         >手机号</InputItem>
-        <InputItem
-            {...getFieldProps('zipCode')}
-            clear
-            type='number'
-            placeholder="请输入邮政编码">邮政编码</InputItem>
         <Picker   
           data={district}
           title="选择地区"
@@ -170,19 +108,11 @@ class AddressEdit extends Component {
         >
           <List.Item arrow="horizontal">所在地区</List.Item>
         </Picker>
-        <InputItem style={this.state.sty1==true?{position:'absolute',top:'10%',borderRadius:'30px',zIndex:'99999',width:'91%',padding:'0.2rem 0.3rem',border:'1px solid #000',borderBottom:'2px solid #000',background:'rgb(235, 235, 239)'}:{}}
+        <InputItem
             {...getFieldProps('address')}
             clear
-            onFocus={this.onFocus1}
-						onBlur={this.onBlur1}
-            placeholder="详细地址">详细地址</InputItem>
-        <InputItem style={this.state.sty==true?{position:'absolute',top:'15%',borderRadius:'30px',zIndex:'99999',width:'91%',padding:'0.2rem 0.3rem',border:'1px solid #000',borderBottom:'2px solid #000',background:'rgb(235, 235, 239)'}:{}}
-            {...getFieldProps('telPhone')}
-            clear
-            onFocus={this.onFocus}
-						onBlur={this.onBlur}
-            type='number'
-            placeholder="座机电话">座机电话</InputItem>
+            maxLength="50"
+            placeholder="街道、门牌号等">详细地址</InputItem>
         <Item>
           <Button onClick={this.onSubmit} type='primary'>保存</Button>
         </Item>

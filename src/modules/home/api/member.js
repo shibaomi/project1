@@ -135,3 +135,11 @@ export function updatePaymentPass({ newpassword }) {
     newpassword
   });
 }
+
+// 修改密码--验证验证码
+export function bindMobile({ mobile ,code}) {
+  return fetch.post('/memberapi/bindMobile', {
+    mobile,
+    code
+  });
+}

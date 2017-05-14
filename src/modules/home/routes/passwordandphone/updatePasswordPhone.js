@@ -3,13 +3,13 @@ import { withRouter , Link} from 'react-router'
 import { List, InputItem, Button, Toast } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import { common } from 'common';
-import * as api from '../api/login';
-import './reg.less';
+import * as api from '../../api/member';
+import './updatePwd.less';
 
 
 const Item = List.Item;
 
-class ForgetPasswordPhone extends Component {
+class UpdatePasswordPhone extends Component {
   timout = null
   code = null
   state = {
@@ -28,6 +28,7 @@ class ForgetPasswordPhone extends Component {
       Toast.info('请输入验证码！');
       return;
     }
+
     api.checkCode({
       bound: getFieldsValue.mobile.replace(/\s/g, ""),
       boundcode:getFieldsValue.code,
@@ -43,7 +44,7 @@ class ForgetPasswordPhone extends Component {
       // 注册成功提示
       Toast.success(result.msg);
       // 跳转设置密码
-      window.location.href = 'login.html#/forgetPassword';
+      window.location.href = 'home.html#/updatePassword';
     });
   }
 
@@ -90,10 +91,14 @@ class ForgetPasswordPhone extends Component {
     return (<form className='wx-reg'>
       <List>
         <InputItem
-          {...getFieldProps('mobile') }
+          {...getFieldProps('mobile',{
+            initialValue: localStorage.getItem('phone')
+          }) }
           clear
           type="phone"
-           placeholder="手机号码">
+          disabled
+
+          placeholder="手机号码">
           <div style={{ backgroundImage: 'url(../../../assets/img/phone.bmp)', backgroundSize: 'cover', height: '0.4rem', width: '0.35rem' }} />
         </InputItem>
         <InputItem
@@ -111,4 +116,4 @@ class ForgetPasswordPhone extends Component {
   }
 }
 
-export default createForm()(ForgetPasswordPhone);
+export default createForm()(UpdatePasswordPhone);

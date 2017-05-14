@@ -9,7 +9,7 @@ import './updatePwd.less';
 
 const Item = List.Item;
 
-class UpdatePasswordPhone extends Component {
+class UpdatePhone2 extends Component {
   timout = null
   code = null
   state = {
@@ -19,7 +19,7 @@ class UpdatePasswordPhone extends Component {
 
   onSubmit = () => {
     const getFieldsValue = this.props.form.getFieldsValue();
-    if (!getFieldsValue.mobile || getFieldsValue.mobile == ''||getFieldsValue.mobile.length<11) {
+    if (!getFieldsValue.mobile || getFieldsValue.mobile == ''||getFieldsValue.mobile.replace(/\s/g, "").length!=11) {
       Toast.info('请输入11位手机号！');
       return;
     }
@@ -29,11 +29,9 @@ class UpdatePasswordPhone extends Component {
       return;
     }
 
-    api.checkCode({
-      bound: getFieldsValue.mobile,
-      boundcode:getFieldsValue.code,
-      pattern: '11'
-
+    api.bindMobile({
+      mobile: getFieldsValue.mobile.replace(/\s/g, ""),
+      code:getFieldsValue.code
     }).then(result => {
       // 注册处理
       if (result.result == 0) {
@@ -44,7 +42,7 @@ class UpdatePasswordPhone extends Component {
       // 注册成功提示
       Toast.success(result.msg);
       // 跳转设置密码
-      window.location.href = 'home.html#/updatePassword';
+      window.location.href = 'home.html#/';
     });
   }
 
@@ -68,11 +66,11 @@ class UpdatePasswordPhone extends Component {
     }
     const getFieldsValue = this.props.form.getFieldsValue();
     console.log(getFieldsValue);
-    if (!getFieldsValue.mobile || getFieldsValue.mobile == ''||getFieldsValue.mobile.length<11) {
+    if (!getFieldsValue.mobile || getFieldsValue.mobile == ''||getFieldsValue.mobile.replace(/\s/g, "").length!=11) {
       Toast.info('请先输入11手机号！');
       return;
     }
-    api.findCode({ mobile: getFieldsValue.mobile }).then(result => {
+    api.findCode({ mobile: getFieldsValue.mobile.replace(/\s/g, "") }).then(result => {
       if (result.result == 0) {
         Toast.fail(result.msg);
         return;
@@ -91,14 +89,10 @@ class UpdatePasswordPhone extends Component {
     return (<form className='wx-reg'>
       <List>
         <InputItem
-          {...getFieldProps('mobile',{
-            initialValue: localStorage.getItem('phone')
-          }) }
+          {...getFieldProps('mobile') }
           clear
           type="phone"
-          disabled
-
-          placeholder="手机号码">
+          placeholder="请输入新绑定手机号码">
           <div style={{ backgroundImage: 'url(../../../assets/img/phone.bmp)', backgroundSize: 'cover', height: '0.4rem', width: '0.35rem' }} />
         </InputItem>
         <InputItem
@@ -109,11 +103,11 @@ class UpdatePasswordPhone extends Component {
             placeholder="请输入验证码" extra={this.state.showCountDown?`${this.state.countDown}秒后重新获取`:'获取验证码'}>
         </InputItem>
         <Item>
-          <Button type="primary" onClick={this.onSubmit}>下一步</Button>
+          <Button type="primary" onClick={this.onSubmit}>提交</Button>
         </Item>
       </List>
     </form>);
   }
 }
 
-export default createForm()(UpdatePasswordPhone);
+export default createForm()(UpdatePhone2);
