@@ -95,7 +95,7 @@ const routesConfig = (<Route path="/" component={App}>
   <Route path='/balance' component={balance} title='可用余额'/>
   <Route path='/lockBalance' component={lockBalance} title='锁定余额' />
   
-  <Route path='/address' component={address} title='地址管理' />
+  <Route path='/address' component={address} title='报告接收人' />
   <Route path='/addressAdd' component={addressAdd} title='添加地址' />
   <Route path='/addressEdit' component={addressEdit} title='编辑地址'/>
   
