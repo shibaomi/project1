@@ -16,13 +16,14 @@ class GoodsList extends Component {
     if (!advPosition) {
       return null;
     }
-
     return <div>
       {
         advPosition.advList[0] &&  <div>
-          <Img src={advPosition.advList[0].resUrl} style={{width:'100%',height:'2rem'}}></Img>
+          <Img src={common.imgtest+advPosition.advList[0].resUrl} style={{width:'100%',height:'2rem'}}
+               onClick={()=>window.location.href = advPosition.advList[0].advUrl}></Img>
         </div>
       }
+
       {
         classCustomList && classCustomList.map(customList => {
           const gridData = customList.classCustomList.map((item) => {
@@ -35,7 +36,7 @@ class GoodsList extends Component {
           return <List key={customList.gcId} renderHeader={() => customList.gcName}>
             <Grid data={gridData}
               onClick={this.onClick}
-              columnNum={3} hasLine={false} />
+              columnNum={3} hasLine={true} />
           </List> 
         })
       }
