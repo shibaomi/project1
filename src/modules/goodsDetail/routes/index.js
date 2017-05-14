@@ -9,7 +9,7 @@ import consultList from './consultList';
 import consultEdit from './consultEdit';
 
 const routesConfig = (<Route path="/" component={App}>
-  <Route path='/:specId' component={goodsDetail} title='商品详情' />
+  <Route path='/:goodsId' component={goodsDetail} title='商品详情' />
   <Route path='multiSpec/:specId' component={mutiSpecGoodsDetail} title='商品详情'/>
   <Route path='evaluteList/:goodsId' component={evaluteList} title='评价' />
   <Route path='consultList/:goodsId' component={consultList} title='购买咨询'/>
