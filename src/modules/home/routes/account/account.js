@@ -154,13 +154,13 @@ class Account extends Component {
     const maxDate = moment().utcOffset(8);
     return <div className="wx-account">
       <List>
-        <Item
-          extra={memberDetail.memberTruename}>当前登录账号</Item>
+        <Item extra= {memberDetail.memberTruename}
+          >当前登录账号</Item>
         <Item style={{paddingRight:'10px'}} extra={memberDetail.memberEmail}>邮箱</Item>
         <Item arrow="horizontal" onClick={()=>this.props.router.push('/updatePhone1')} extra={memberDetail.memberName}>修改绑定手机号</Item>
         <Item arrow="horizontal" onClick={()=>this.props.router.push('/updatePasswordPhone')}>修改登录密码</Item>
         <Item arrow="horizontal" onClick={()=>this.props.router.push('/address')}>收货地址管理</Item>
-        <Item arrow="horizontal" onClick={()=>this.props.router.push('/invoice')}>发票信息管理</Item>
+        <Item arrow="horizontal" onClick={()=>this.props.router.push('/invoice?name=yangtao')}>发票信息管理</Item>
       </List>
       <WhiteSpace></WhiteSpace>
       <WingBlank>
