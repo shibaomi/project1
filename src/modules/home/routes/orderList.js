@@ -58,6 +58,7 @@ class OrderList extends Component {
       this.setState({
         isLoading: false
       });
+      debugger
       if (result.result == 1) {
         const data = result.data || [];
         const pageSize = 10;
@@ -144,15 +145,26 @@ class OrderList extends Component {
       <div style={{
         paddingTop:'2px'
       }}>
-        <SegmentedControl
-          className='orderlist-header'  
-          tintColor={'#ff0000'}
-          style={{height:'0.7rem'}}
-          onChange={(e) => this.onChange(e.nativeEvent.selectedSegmentIndex)}
-          selectedIndex={selectedIndex}
-          values={['全部订单', '待付款', '待收货', '待评价']} style={{
-            height:'0.8rem'
-          }}/>
+        {/*<SegmentedControl*/}
+          {/*className='orderlist-header'  */}
+          {/*tintColor={'#ff0000'}*/}
+          {/*onChange={(e) => this.onChange(e.nativeEvent.selectedSegmentIndex)}*/}
+          {/*selectedIndex={selectedIndex}*/}
+          {/*values={['全部订单', '待付款', '待收货', '待评价']} style={{*/}
+            {/*height:'0.8rem'*/}
+          {/*}}/>*/}
+
+        <Tabs defaultActiveKey="0" animated={false} onChange={this.onChange}>
+          <TabPane tab="全部订单" key="0">
+          </TabPane>
+          <TabPane tab="待付款" key="1">
+          </TabPane>
+          <TabPane tab="待收货" key="2">
+          </TabPane>
+          <TabPane tab="待评价" key="3">
+          </TabPane>
+        </Tabs>
+
       <div className="wx-orderlist">
       
         <div className='orderlist-body'>
