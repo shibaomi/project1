@@ -42,6 +42,7 @@ class GoodsClass extends Component {
     classList.scrollTop = 0;
 
     goodsClassApi.getGoodsClass({ advid: gcAdvid, pId: gcId }).then(result => {
+      debugger
       this.setState({
         goodsList: result.data[0]
       });
@@ -49,7 +50,8 @@ class GoodsClass extends Component {
   }
 
   onGoodsClassClick = (item) => {
-    let url = `home.html#/search/gcIdSearch/${item.gcId}`
+    //let url = `home.html#/search/gcIdSearch/${item.gcName}`
+    let url = `home.html#/search/keywordSearch/${item}`
     window.location.href = url;
   }
 

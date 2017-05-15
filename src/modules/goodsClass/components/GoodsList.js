@@ -33,11 +33,14 @@ class GoodsList extends Component {
               ...item
             }
           });
-          return <List key={customList.gcId} renderHeader={() => customList.gcName}>
-            <Grid data={gridData}
-              onClick={this.onClick}
-              columnNum={3} hasLine={true} />
-          </List> 
+          {/*<List key={customList.gcId} renderHeader={() => customList.gcName}>*/}
+            {/*<Grid data={gridData}*/}
+                  {/*onClick={this.onClick}*/}
+                  {/*columnNum={3} hasLine={true} />*/}
+          {/*</List>*/}
+          return <div onClick={() =>this.onClick(customList.gcName)}>
+            {customList.gcName}
+          </div>
         })
       }
     </div>

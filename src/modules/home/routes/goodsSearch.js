@@ -17,7 +17,7 @@ import { common } from 'common';
 import { Img } from 'commonComponent';
 import GoodsSearchSpecFilter from '../components/GoodsSearchSpecFilter';
 import Immutable from 'immutable';
-
+import * as Common from '../../../common/common';
 import * as goodsApi from '../api/goods';
 
 import './goodsSearch.less';
@@ -58,6 +58,7 @@ class GoodsSearch extends Component {
       })
     });
     console.log(specValueIds);
+    debugger
     goodsApi.goodslist({
       sortField: sortField,
       sortOrder: this.state.sortOrder,
@@ -70,6 +71,7 @@ class GoodsSearch extends Component {
       minimumPrice: this.state.minimumPrice,
       specFilter: specValueIds.join(',')
     }).then(result => {
+      debugger
       if (result.result == 1) {
         this.setState({
           dataSource: this.ds.cloneWithRows(result.data)
@@ -190,7 +192,7 @@ class GoodsSearch extends Component {
 		}
     return <Flex style={{borderBottom:'1px solid #000'}} onClick={() => common.gotoGoodsDetail({specId:dataItem.specId})}>
       <Flex.Item style={{flex:1,paddingLeft:'16px'}}>
-        <Img src={dataItem.goodsImage==undefined||dataItem.goodsImage==''?<IconClass url={'./assets/img/img_default.png'}></IconClass>:dataItem.goodsImage} style={{width:'1.5rem',height:'1.5rem'}}/>
+        <Img src={dataItem.goodsImage==undefined||dataItem.goodsImage==''?<IconClass url={'./assets/img/img_default.png'}></IconClass>:(Common.imgtest+dataItem.goodsImage)} style={{width:'1.5rem',height:'1.5rem'}}/>
       </Flex.Item>
       <Flex.Item style={{flex:3}}>
         <div style={{width:'100%',height:'100%'}}>
@@ -220,7 +222,7 @@ class GoodsSearch extends Component {
 			textAlign: 'center',paddingBottom:'20px',margin:'0.2rem 0'}} direction='column' onClick={() => onClick(dataItem)}       
 			> 
     <Flex.Item>
-      <Img src={dataItem.goodsImage} style={{width:'3rem',height:'3rem' }} />
+      <Img src={Common.imgtest + dataItem.goodsImage} style={{width:'3rem',height:'3rem' }} />
     </Flex.Item>
     <Flex.Item style={{width:'97%',margin:'0'}}>
       <div style={{fontSize: '.24rem',
