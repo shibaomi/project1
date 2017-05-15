@@ -137,7 +137,7 @@ class Address extends Component {
       </div>
 
       <div className='wx-addresslist-bar'>
-        <Button type='primary' onClick={this.gotoAdd}>新增地址</Button>
+        <Button className = 'btn' type='primary' onClick={this.gotoAdd}>新增地址</Button>
       </div>
     </div>
   }
