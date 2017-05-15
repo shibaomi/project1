@@ -38,14 +38,14 @@ class Invoice extends Component {
     // 提交地址
     const fieldsValue = this.props.form.getFieldsValue()
     // check ,明细必须输入抬头
-    if (this.state.invoiceHeader == 2&&fieldsValue.invoiceHeaderStr=='') {
+    if (this.state.invoiceHeader == 2&&(fieldsValue.invoiceHeaderStr==undefined||fieldsValue.invoiceHeaderStr=='')) {
       Toast.fail('请输入发票抬头');
       return;
     }
     if(this.state.invoiceHeader == 1){
       fieldsValue.invoiceHeaderStr='个人';
     }
-    
+
     orderApi.addInvoice({
       invTitle: fieldsValue.invoiceHeaderStr,
       invContent: fieldsValue.invoiceContent,
