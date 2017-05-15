@@ -16,7 +16,7 @@ import {
 import { Img } from 'commonComponent';
 import * as orderApi from '../../api/order';
 import { common } from 'common';
-
+import './invoice.less'
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -97,27 +97,47 @@ class Invoice extends Component {
   }
 
   render() {
-    return <div>
-      <List renderHeader='发票类型' inline style={{backgroundColor:'#fff',border:'0PX solid #ddd'}}>
-        <Button className="btn" icon="check" size="small" style={{width:'35%',float:'left',marginLeft:'0.3rem',marginRight:'0.5rem'}}>普通发票</Button>
-        <Button className="btn" icon="check" size="small" style={{width:'35%'}}>增值税发票</Button>
+    return <div className='wx-invoice'>
+      <List renderHeader= {() =><div style={{backgroundColor:'#fff',border:'0PX solid #ddd',}}>发票类型</div>} inline>
+        <Flex style={{ marginBottom: '0.16rem', textAlign:'center',paddingBottom: '0.2rem'}}>
+          <Flex.Item style = {{padding:'0rem 0.2rem 0rem 0.3rem'}}>
+          <Button type="ghost" inline  style={{ marginRight: '0.08rem' }} icon="check" size="small">普通发票</Button>
+          </Flex.Item>
+          <Flex.Item style = {{padding:'0rem 0.3rem 0rem 0.2rem'}}>
+          <Button inline  type="ghost" icon="check" size="small" style={{marginRight: '0.08rem'}}>增值税发票</Button>
+          </Flex.Item>
+        </Flex>
       </List>
-      <List renderHeader='发票抬头' inline>
-        <CheckboxItem checked={this.state.invContent==1} onChange={() => this.onChangeContent(1)} >个人</CheckboxItem>
-        <CheckboxItem checked={this.state.invContent==2} onChange={() => this.onChangeContent(2)}>公司</CheckboxItem>
+      <List renderHeader= {() =><div style={{backgroundColor:'#fff',border:'0PX solid #ddd',}}>发票抬头</div>} inline>
+        <Flex style={{ marginBottom: '0.16rem', textAlign:'center',paddingBottom: '0.2rem'}}>
+          <Flex.Item style = {{padding:'0rem 0.1rem 0rem 0.3rem'}}>
+            <CheckboxItem checked={this.state.invContent==1} onChange={() => this.onChangeContent(1)} >个人</CheckboxItem>
+          </Flex.Item>
+          <Flex.Item style = {{padding:'0rem 0.3rem 0rem 0.1rem'}}>
+            <CheckboxItem checked={this.state.invContent==2} onChange={() => this.onChangeContent(2)}>公司</CheckboxItem>
+          </Flex.Item>
+        </Flex>
       </List>
-      <List renderHeader='发票内容' >
-        <CheckboxItem checked={this.state.invContent==1} onChange={() => this.onChangeContent(1)}>不开发票</CheckboxItem>
-        <CheckboxItem checked={this.state.invContent==2} onChange={() => this.onChangeContent(2)}>明细</CheckboxItem>
+      <List renderHeader= {() =><div style={{backgroundColor:'#fff',border:'0PX solid #ddd',}}>发票内容</div>} inline>
+        <Flex style={{ marginBottom: '0.16rem', textAlign:'center',paddingBottom: '0.2rem'}}>
+          <Flex.Item style = {{padding:'0rem 0.1rem 0rem 0.3rem'}}>
+            <CheckboxItem checked={this.state.invContent==1} onChange={() => this.onChangeContent(1)} >不开发票</CheckboxItem>
+          </Flex.Item>
+          <Flex.Item style = {{padding:'0rem 0.3rem 0rem 0.1rem'}}>
+            <CheckboxItem checked={this.state.invContent==2} onChange={() => this.onChangeContent(2)}>明细</CheckboxItem>
+          </Flex.Item>
+        </Flex>
       </List>
-      <List renderHeader={() => '发票信息'}>
+      <List renderHeader= {() =><div style={{backgroundColor:'#fff',border:'0PX solid #ddd',}}>发票信息</div>}>
         <TextareaItem
             title="111"
             autoHeight
             rows={3}
         />
       </List>
-      <Button type='primary' onClick={this.onClick}>确定</Button>
+      <div className='wx-invoicelist-bar'>
+        <Button className = 'btn' type='primary' onClick={this.onClick}>确定</Button>
+      </div>
     </div>
   }
 }
