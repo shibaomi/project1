@@ -3,6 +3,7 @@ import { Img } from 'commonComponent';
 import { common } from 'common';
 import * as orderApi from '../api/order';
 import { withRouter } from 'react-router'
+import * as Common from '../../../common/common';
 import {
   WhiteSpace,
   WingBlank,
@@ -127,24 +128,43 @@ class OrderItem extends Component {
       case 60:
         orderStatus = '待发货'
         break;
+      case 80:
+        orderStatus = '已完成'
+        break;
       default:
         break;
     }
     return <div className='orderitem'>
       <WhiteSpace></WhiteSpace>
       <WingBlank>
-        <Flex justify='between'>
-          <div>{dataItem.storeName}</div>
+        <Flex justify='between' style = {{borderBottom:'1px solid #ddd'}}>
+          <div  style ={{width:'0.5rem'}}><Img src='../../../assets/img/store.png' /></div>
+          <div style ={{fontSize:'0.2rem', color:'#333'}}>{dataItem.storeName}</div>
           <div className="paystaus">{orderStatus}</div>
         </Flex>
         {
           dataItem.orderGoodsList.map(goods => {
             return<div style={{borderBottom:'1px solid gray'}}>
               <Flex key={goods.specId} onClick={()=>this.gotoOrderDetail(goods) }>
-                <Img src={goods.goodsImage} style={{ width: '1.5rem' }} />
-                <div style={{marginLeft:'0.2rem'}}>
-                  <p>{goods.goodsName}</p>
-                  <p dangerouslySetInnerHTML={{ __html: goods.specInfo }}></p>
+                <Img src={Common.imgtest  + goods.goodsImage} style={{ width: '1.3rem' }} />
+                <div style={{marginLeft:'0.2rem',height:'2rem', width:'100%'}}>
+                  <div style={{height:'0.5rem', lineHeight:'0.5rem'}}>{goods.goodsName}</div>
+                  {/*<div dangerouslySetInnerHTML={{ __html: goods.specInfo }}></div>*/}
+                  <Flex.Item>
+                    <Flex style = {{height:'0.5rem', lineHeight:'0.5rem',marginLeft:'-0.16rem'}}>
+                      <div style={{width:'1rem', border:'1px solid #1786CD', borderRadius:'0.1rem', textAlign:'center', color:'#1786CD'}}>
+                        { goods.packageName}
+                      </div>
+                      <Flex.Item>{'X'+goods.goodsNum}</Flex.Item>
+                      <div>报告查询</div>
+                    </Flex>
+                  </Flex.Item>
+                  <Flex.Item>
+                    <Flex style = {{height:'0.5rem', lineHeight:'0.5rem',marginLeft:'-0.16rem', marginTop:'0.2rem'}}>
+                      <Flex.Item>总价:<span style={{color:'red'}}>¥{goods.goodsPrice}</span></Flex.Item>
+                      <div style={{width:'1.5rme'}}>{'下单时间:' + goods.goodsPayPrice}</div>
+                    </Flex>
+                  </Flex.Item>
                 </div>
               </Flex>
             </div>
