@@ -25,17 +25,17 @@ class Home extends Component {
   }
 
 
-    MyComponent(data) {
-        return <div dangerouslySetInnerHTML={{__html: data}} />;
-    }
+    // MyComponent(data) {
+    //     return <div dangerouslySetInnerHTML={{__html: data}} />;
+    // }
   componentWillMount() {
     Toast.loading();
     queryIndexData().then(result => {
       Toast.hide();
         let data = result.data[0];
-        for(let i = 0;i<data.storeList.length;i++){
-            data.storeList[i].description = this.MyComponent(data.storeList[i].description);
-        }
+        // for(let i = 0;i<data.storeList.length;i++){
+        //     data.storeList[i].description = this.MyComponent(data.storeList[i].description);
+        // }
       this.setState({
         advList: data.advPosition.advList,
         //activityBeenList: data.storeList,
