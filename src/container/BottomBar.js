@@ -34,6 +34,8 @@ class BottomBar extends React.Component {
       window.location.href = 'cart.html';
     } else if (type == 'my') {
       window.location.href = 'home.html#/orderList/0';
+    }else if(type == 'account'){
+      window.location.href = 'home.html#/account';
     }
   }
 
@@ -94,6 +96,19 @@ class BottomBar extends React.Component {
           title="订单中心"
           key="订单中心"
           onPress={()=>this.changeTab('my')}
+        >
+        </TabBar.Item>
+        <TabBar.Item
+            icon={
+              <IconClass url={'./assets/img/my.png'}></IconClass>
+            }
+            selectedIcon={
+              <IconClass url={'./assets/img/my-selected.png'}></IconClass>
+            }
+            selected={this.state.selectedTab === 'account'}
+            title="我的"
+            key="我的"
+            onPress={()=>this.changeTab('account')}
         >
         </TabBar.Item>
       </TabBar>
