@@ -34,7 +34,7 @@ class Invoice extends Component {
   }
 	componentDidMount() {
 
-	  alert(this.props.location.query.name);
+	  alert(this.myMessage.name);
 		console.log(this.props.params);
 		this.setState({
 			invTitle:this.props.params.invContent==1?'':this.props.params.invoiceShow,
