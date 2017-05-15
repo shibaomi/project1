@@ -14,10 +14,10 @@ export function orderlist({
 }
 
 export function orderdetail({
-  orderid
+  orderId
 }) {
   return fetch.get('/orderapi/orderdetail', {
-    orderid
+    orderId
   });
 }
 

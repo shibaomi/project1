@@ -12,7 +12,7 @@ import { Img } from 'commonComponent';
 import { common } from 'common';
 import * as orderApi from '../api/order';
 import './orderDetail.less'
-
+import * as Common from '../../../common/common';
 class OrderDetail extends Component {
 
   constructor(props) {
@@ -23,10 +23,11 @@ class OrderDetail extends Component {
   }
 
   componentDidMount() {
-    const orderid = this.props.params.id;
+    const orderId = this.props.params.id;
     orderApi.orderdetail({
-      orderid
+      orderId
     }).then(result => {
+      debugger
       if (result.result == 1) {
         const data = result.data[0]
         this.setState({
@@ -96,7 +97,7 @@ class OrderDetail extends Component {
                               specId:goods.specId
                           })
                       }}>
-                        <Img src={goods.goodsImage}
+                        <Img src={Common.imgtest + goods.goodsImage}
                              style={{ width: '1.5rem', height: '1.5rem' }} />
                         <div>
                           <p>{goods.goodsName}</p>
