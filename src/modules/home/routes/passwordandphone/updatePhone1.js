@@ -10,6 +10,12 @@ import './updatePwd.less';
 const Item = List.Item;
 
 class UpdatePhone1 extends Component {
+
+  constructor(props) {
+    super(props);
+    this.paramlist = props.location.query ? props.location.query:null;
+  }
+
   timout = null
   code = null
   state = {
@@ -19,7 +25,7 @@ class UpdatePhone1 extends Component {
 
   onSubmit = () => {
     const getFieldsValue = this.props.form.getFieldsValue();
-    if (!getFieldsValue.mobile || getFieldsValue.mobile == ''||getFieldsValue.mobile.replace(/\s/g, "").length!=11) {
+    if (!this.paramlist.phone || this.paramlist.phone == ''||this.paramlist.phone.replace(/\s/g, "").length!=11) {
       Toast.info('请输入11位手机号！');
       return;
     }
@@ -29,10 +35,8 @@ class UpdatePhone1 extends Component {
       return;
     }
 
-    window.location.href = 'home.html#/updatePhone2';
-    return;
     api.checkCode({
-      bound: getFieldsValue.mobile.replace(/\s/g, ""),
+      bound: this.paramlist.phone.replace(/\s/g, ""),
       boundcode:getFieldsValue.code,
       pattern: '11'
 
@@ -70,11 +74,11 @@ class UpdatePhone1 extends Component {
     }
     const getFieldsValue = this.props.form.getFieldsValue();
     console.log(getFieldsValue);
-    if (!getFieldsValue.mobile || getFieldsValue.mobile == ''||getFieldsValue.mobile.replace(/\s/g, "").length!=11) {
+    if (!this.paramlist.phone || this.paramlist.phone == ''||this.paramlist.phone.replace(/\s/g, "").length!=11) {
       Toast.info('请先输入11手机号！');
       return;
     }
-    api.findCode({ mobile: getFieldsValue.mobile.replace(/\s/g, "") }).then(result => {
+    api.findCode({ mobile: this.paramlist.phone.replace(/\s/g, "") }).then(result => {
       if (result.result == 0) {
         Toast.fail(result.msg);
         return;
@@ -94,7 +98,7 @@ class UpdatePhone1 extends Component {
       <List>
         <InputItem
           {...getFieldProps('mobile',{
-            initialValue: localStorage.getItem('phone')
+            initialValue: common.phoneDesensitization(this.paramlist.phone)
           }) }
           clear
           type="phone"

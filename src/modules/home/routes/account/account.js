@@ -156,8 +156,8 @@ class Account extends Component {
       <List>
         <Item extra={memberDetail.memberTruename}>当前登录账号</Item>
         <Item extra={memberDetail.memberEmail}>邮箱</Item>
-        <Item arrow="horizontal" onClick={()=>this.props.router.push('/updatePhone1?mobile='+memberDetail.memberMobile)} extra={memberDetail.memberMobile}>修改绑定手机号</Item>
-        <Item arrow="horizontal" onClick={()=>this.props.router.push('/updatePasswordPhone')}>修改登录密码</Item>
+        <Item arrow="horizontal" onClick={()=>this.props.router.push('/updatePhone1?phone='+memberDetail.memberMobile)} extra={common.phoneDesensitization(memberDetail.memberMobile)}>修改绑定手机号</Item>
+        <Item arrow="horizontal" onClick={()=>this.props.router.push('/updatePasswordPhone?phone='+memberDetail.memberMobile)}>修改登录密码</Item>
         <Item arrow="horizontal" onClick={()=>this.props.router.push('/address')}>收货地址管理</Item>
         <Item arrow="horizontal" onClick={()=>this.props.router.push('/invoice')}>发票信息管理</Item>
       </List>

@@ -74,14 +74,15 @@ class Address extends Component {
   }
 
   setDefault = (address) => {
-    addressApi.updateAddressDef(address.addressId).then(result => {
+
+  }
+  onChange = (addressId) => {
+    addressApi.updateAddressDef(addressId).then(result => {
       if (result.result == 1) {
         this.initAddressList();
+        Toast.success(result.msg);
       }
     })
-  }
-  onChange = (val) => {
-    console.log(val);
   }
   render() {
     const { addressList } = this.state;
@@ -93,7 +94,7 @@ class Address extends Component {
                     <Item multipleLine style = {{padding:'0.2rem 0.3rem 0rem 0.3rem', border:'none'}}>
                       <Flex>
                         <div>
-                          <Checkbox key={address.memberId} onChange={() => this.onChange(address.addressId)}>
+                          <Checkbox checked={address.isDefault==1} key={address.memberId} onChange={() => this.onChange(address.addressId)}>
                           </Checkbox>
                         </div>
                         <Flex.Item>
