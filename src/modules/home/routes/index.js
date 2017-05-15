@@ -70,7 +70,7 @@ const routesConfig = (<Route path="/" component={App}>
   <Route path='/coupon(/:couponIsUser)' component={coupon} title='我的优惠券' />
 
   <Route path='/my' component={my} title='我的' showBottomBar={true} selectedTab='my'/>
-  <Route path='/orderList/(:type)' component={orderList} title='订单列表'/>
+  <Route path='/orderList/(:type)' showBottomBar={true} component={orderList} title='订单列表'/>
   <Route path='/orderDetail/(:id)' component={orderDetail} title='订单详情'/>
 
   <Route path='/afterSale' component={afterSale} title='售后列表' />
@@ -84,7 +84,7 @@ const routesConfig = (<Route path="/" component={App}>
   <Route path='/commentList' component={commentList} title='评价晒单' />
   <Route path='/comment' component={comment} title='评价晒单'/>
   
-  <Route path='/account' component={account} title='账户管理' />
+  <Route path='/account' showBottomBar={true} component={account} title='账户管理' />
   <Route path='/accountSafe' component={accountSafe} title='账户安全'/>
   <Route path='/recharge' component={recharge} title='余额充值' />
   <Route path='/updateNickName' component={updateNickName} title='账户管理'/>
