@@ -25,6 +25,7 @@ const CheckboxItem = Checkbox.CheckboxItem;
 class Invoice extends Component {
   constructor(props) {
     super(props);
+    this.myMessage = props.location.query ? props.location.query:null;
     this.state = {
       invState: 1,
       invTitle: '',
@@ -32,7 +33,9 @@ class Invoice extends Component {
     }
   }
 	componentDidMount() {
-		console.log(this.props.params)
+
+	  alert(this.props.location.query.name);
+		console.log(this.props.params);
 		this.setState({
 			invTitle:this.props.params.invContent==1?'':this.props.params.invoiceShow,
 			invContent:this.props.params.invContent
