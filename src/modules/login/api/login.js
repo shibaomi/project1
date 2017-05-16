@@ -9,6 +9,7 @@ export function login({ username, password, captcha }) {
   });
 }
 
+//不需要登录的获取验证码
 export function verifyCode({ mobile }) {
   return fetch.get('/floor/api/verifyCode', {
     mobile

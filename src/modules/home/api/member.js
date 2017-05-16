@@ -110,6 +110,13 @@ export function findCode({
   });
 }
 
+//不需要登录的获取验证码
+export function verifyCode({ mobile }) {
+  return fetch.get('/floor/api/verifyCode', {
+    mobile
+  });
+}
+
 // 修改密码--验证验证码
 export function checkCode({ bound ,boundcode,pattern}) {
   return fetch.post('/memberapi/checkCode', {

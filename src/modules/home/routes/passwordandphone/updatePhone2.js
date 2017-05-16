@@ -70,7 +70,7 @@ class UpdatePhone2 extends Component {
       Toast.info('请先输入11手机号！');
       return;
     }
-    api.findCode({ mobile: getFieldsValue.mobile.replace(/\s/g, "") }).then(result => {
+    api.verifyCode({ mobile: getFieldsValue.mobile.replace(/\s/g, "") }).then(result => {
       if (result.result == 0) {
         Toast.fail(result.msg);
         return;
