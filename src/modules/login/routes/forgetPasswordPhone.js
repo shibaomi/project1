@@ -12,10 +12,17 @@ const Item = List.Item;
 class ForgetPasswordPhone extends Component {
   timout = null
   code = null
-  state = {
-    countDown: 60,
-    showCountDown: false
+  constructor(props){
+    super(props);
+    this.state = {
+      countDown: 60,
+      showCountDown: false,
+      memberId:'',
+    }
+    this.user = 0;
   }
+
+
 
   onSubmit = () => {
     const getFieldsValue = this.props.form.getFieldsValue();
@@ -28,23 +35,27 @@ class ForgetPasswordPhone extends Component {
       Toast.info('请输入验证码！');
       return;
     }
-    api.checkCode({
-      bound: getFieldsValue.mobile.replace(/\s/g, ""),
-      boundcode:getFieldsValue.code,
-      pattern: '11'
-
-    }).then(result => {
-      // 注册处理
-      if (result.result == 0) {
-        Toast.fail(result.msg);
-        return;
-      }
-
-      // 注册成功提示
-      Toast.success(result.msg);
-      // 跳转设置密码
-      window.location.href = 'login.html#/forgetPassword';
-    });
+    if(this.user == 1){
+      Toast.info('您的账户不存在！')
+      return;
+    }
+    // api.checkCode({
+    //   bound: getFieldsValue.mobile.replace(/\s/g, ""),
+    //   boundcode:getFieldsValue.code,
+    //   pattern: '11'
+    //
+    // }).then(result => {
+    //   // 注册处理
+    //   if (result.result == 0) {
+    //     Toast.fail(result.msg);
+    //     return;
+    //   }
+    //
+    //   // 注册成功提示
+    //   Toast.success(result.msg);
+    //   // 跳转设置密码
+      window.location.href = 'login.html#/forgetPassword?code='+getFieldsValue.code+'&memberId='+this.state.memberId;
+    //});
   }
 
   countDown = () => {
@@ -71,15 +82,24 @@ class ForgetPasswordPhone extends Component {
       Toast.info('请先输入11手机号！');
       return;
     }
-    api.findCode({ mobile: getFieldsValue.mobile.replace(/\s/g, "") }).then(result => {
+    api.verifyCode({ mobile: getFieldsValue.mobile.replace(/\s/g, "") }).then(result => {
       if (result.result == 0) {
         Toast.fail(result.msg);
         return;
       }
-      this.code = result.data.verifyCode
+      if(result.data == undefined){
+        // this.setState({
+        //   user: 1,
+        // });
+        this.user = 1;
+        Toast.info('您的账户不存在！')
+        return;
+      }
+      //this.code = result.data.verifyCode
       this.setState({
         showCountDown: true,
-        countDown: 60
+        countDown: 60,
+        memberId:result.data.memberId,
       })
       this.countDown();
     });

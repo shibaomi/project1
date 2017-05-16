@@ -30,7 +30,7 @@ class Login extends Component {
             Toast.success('登录成功');
             // 登录成功保存 token
             localStorage.setItem('token', result.data[0].token);
-            window.location.href = this.callBack || 'home.html';
+            window.location.href = 'home.html';//this.callBack ||
           } else {
             Toast.fail(result.msg, 1);
           }

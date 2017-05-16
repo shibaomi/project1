@@ -10,7 +10,7 @@ export function login({ username, password, captcha }) {
 }
 
 export function verifyCode({ mobile }) {
-  return fetch.get('/memberapi/findCode', {
+  return fetch.get('/floor/api/verifyCode', {
     mobile
   });
 }
@@ -42,11 +42,27 @@ export function findCode({ mobile }) {
 
 // 重置密码
 export function updatePassword({
+    code,
     newpassword,
     password
 }) {
   return fetch.post('/memberapi/updatePassword', {
+    code,
     newpassword,
+    password
+  });
+}
+
+// 忘记密码
+export function forgetPassword({
+    code,
+    memberId,
+    password
+}) {
+  localStorage.removeItem('token');
+  return fetch.post('/floor/api/forgotPassword', {
+    code,
+    memberId,
     password
   });
 }

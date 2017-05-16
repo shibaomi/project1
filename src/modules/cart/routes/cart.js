@@ -69,6 +69,7 @@ class Cart extends Component {
     Toast.loading();
     cartApi.cartList().then(result => {
       Toast.hide();
+      debugger
       if (result.result == 1) {
         this.setState({
           isInit: true,
@@ -78,6 +79,7 @@ class Cart extends Component {
     })
 
     goodsApi.relGoodsRecommedlist().then(result => {
+      debugger
       if (result.result != 1) {
         Toast.error(result.msg);
         return;
@@ -91,6 +93,7 @@ class Cart extends Component {
 
   refreshCartList = () => {
     cartApi.cartList().then(result => {
+      debugger
       if (result.result == 1) {
         const cartList = result.data || [];
         this.setState({

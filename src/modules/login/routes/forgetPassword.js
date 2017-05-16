@@ -9,9 +9,12 @@ import './reg.less';
 const Item = List.Item;
 
 class ForgetPassword extends Component {
-  code = null
-  memberId = null
 
+  constructor(props){
+    super(props);
+    this.code = props.location.query.code;
+    this.memberId = props.location.query.memberId;
+  }
   onSubmit = () => {
     const getFieldsValue = this.props.form.getFieldsValue();
 
@@ -29,8 +32,10 @@ class ForgetPassword extends Component {
       return;
     }
     
-    api.updatePassword({
-      newpassword: getFieldsValue.password,
+    api.forgetPassword({
+      code:this.code,
+      memberId:this.memberId,
+      //newpassword: getFieldsValue.password,
       password: getFieldsValue.password2
     }).then(result => {
       // 修改密码处理
