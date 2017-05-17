@@ -83,10 +83,10 @@ class Invoice extends Component {
       <List renderHeader= {() =><div style={{backgroundColor:'#fff',border:'0PX solid #ddd',}}>发票类型</div>} inline>
         <Flex style={{ marginBottom: '0.16rem', textAlign:'center',paddingBottom: '0.2rem'}}>
           <Flex.Item style = {{padding:'0rem 0.2rem 0rem 0.3rem'}}>
-          <Button type={this.state.invoiceType==1?"ghost":""} inline  style={{ marginRight: '0.08rem' }} icon={this.state.invoiceType==1?"check":""} onClick={() => this.onChangeInvoiceType(1)} size="small">普通发票</Button>
+          <Button type={this.state.invoiceType==1?"ghost":""} inline  style={this.state.invoiceType==1?{ marginRight: '0.08rem' }:{}} icon={this.state.invoiceType==1?"check":""} onClick={() => this.onChangeInvoiceType(1)} size="small">普通发票</Button>
           </Flex.Item>
           <Flex.Item style = {{padding:'0rem 0.3rem 0rem 0.2rem'}}>
-          <Button inline  type={this.state.invoiceType==2?"ghost":""} size="small" style={{marginRight: '0.08rem'}} icon={this.state.invoiceType==2?"check":""} onClick={() => this.onChangeInvoiceType(2)}>增值税发票</Button>
+          <Button inline  type={this.state.invoiceType==2?"ghost":""} size="small" style={this.state.invoiceType==1?{ marginRight: '0.08rem' }:{}} icon={this.state.invoiceType==2?"check":""} onClick={() => this.onChangeInvoiceType(2)}>增值税发票</Button>
           </Flex.Item>
         </Flex>
       </List>
@@ -98,6 +98,7 @@ class Invoice extends Component {
           <Flex.Item style = {{padding:'0rem 0.3rem 0rem 0.1rem'}}>
             <CheckboxItem checked={this.state.invoiceHeader==2} onChange={() => this.onChangeInvoiceHeader(2)}>公司</CheckboxItem>
           </Flex.Item>
+          <div style={{width: '2rem', position: 'absolute',right: '0.2rem',zIndex: '100'}}>
           {this.state.invoiceHeader==2&& <InputItem
             {...getFieldProps('invoiceHeaderStr')}
             clear
@@ -105,7 +106,7 @@ class Invoice extends Component {
             maxLength="100"
             />
           }
-
+          </div>
         </Flex>
       </List>
       <List renderHeader= {() =><div style={{backgroundColor:'#fff',border:'0PX solid #ddd',}}>发票内容</div>} inline>

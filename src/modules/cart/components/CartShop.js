@@ -16,7 +16,7 @@ import { Img } from 'commonComponent';
 import RecommendGoods from 'commonComponent/RecommendGoods';
 import * as cartApi from '../api/cart';
 import { common } from 'common';
-
+import * as Common from '../../../common/common';
 import './CartShop.less';
 const Item = List.Item;
 const AgreeItem = Checkbox.AgreeItem;
@@ -74,14 +74,30 @@ class CartShop extends Component {
   renderHeader = () => {
     const { data } = this.props;
     return <Flex>
+      <Img src='../../../assets/img/store.png' style={{ height: '0.5rem', width: '0.5rem' }} />{data.storeName}
+      {/*<Icon type='right' />*/}
+      {/*<Flex.Item style={{ textAlign: 'right' }}>*/}
+        {/*<Button size='small' inline onClick={()=>this.getCoupon(data)}>领券</Button>*/}
+        {/*<Button size='small' inline onClick={()=>this.delShopCart(data)}>删除</Button>*/}
+      {/*</Flex.Item>*/}
+    </Flex>
+  }
+
+  renderFooter = () => {
+    const { data } = this.props;
+    return <Flex>
       <Checkbox checked={data.checked}
-        onChange={(e)=>this.checkShop(data,e)}
-      ></Checkbox>&nbsp;{data.storeName}
-      <Icon type='right' />
-      <Flex.Item style={{ textAlign: 'right' }}>
-        <Button size='small' inline onClick={()=>this.getCoupon(data)}>领券</Button>
-        <Button size='small' inline onClick={()=>this.delShopCart(data)}>删除</Button>
-      </Flex.Item>
+                onChange={(e)=>this.checkShop(data,e)}
+      ></Checkbox>
+      {'总计:'+data.goodsTotalPrice+'元'}
+      {/*<Icon type='right' />*/}
+      {/*<Flex.Item style={{ textAlign: 'right' }}>*/}
+      {/*<Button size='small' inline onClick={()=>this.getCoupon(data)}>领券</Button>*/}
+      {/*<Button size='small' inline onClick={()=>this.delShopCart(data)}>删除</Button>*/}
+      {/*</Flex.Item>*/}
+     <div style = {{height:'100%'}}>
+       去结算
+     </div>
     </Flex>
   }
 
@@ -94,16 +110,17 @@ class CartShop extends Component {
   render() {
     const { data } = this.props;
     const gotoGoodsDetail = this.gotoGoodsDetail;
-    return <List renderHeader={this.renderHeader}>
+    return <div id='cartshop'>
+    <List renderHeader={this.renderHeader} renderFooter = {this.renderFooter()}>
       {
         data.list.map((goods,index) => {
           return <Item key={index}>
-            <Flex>
+            <Flex style = {{paddingLeft:'0.2rem'}}>
               <Checkbox checked={goods.checked} onChange={e => this.checkGoods(data,goods,e)}></Checkbox>
-              <Img src={goods.goodsImages} style={{ height: '1.5rem', width: '1.5rem' }} />
+              <Img src={Common.imgtest + goods.goodsImages} style={{ height: '1.5rem', width: '1.5rem' }} />
               <Flex.Item>
                 <div className='text-overflow-hidden' onClick={()=>gotoGoodsDetail(goods)}>{goods.goodsName}</div>
-                <p className='text-overflow-hidden' onClick={()=>gotoGoodsDetail(goods)} style={{ fontSize: '.24rem',color:'#bbb' }}
+                <p className='text-overflow-hidden' onClick={()=>gotoGoodsDetail(goods)} style={{ fontSize: '.20rem',color:'#bbb' }}
                   dangerouslySetInnerHTML={{ __html: goods.specInfo }}>
                 </p>
                 <Flex justify='between'>
@@ -119,6 +136,7 @@ class CartShop extends Component {
         })
       }  
     </List>
+    </div>
   }
 }
 
