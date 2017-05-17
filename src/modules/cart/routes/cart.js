@@ -336,9 +336,9 @@ class Cart extends Component {
             </div>
         }
       
-        <div>
-          <RecommendGoods data={this.state.relGoodsRecommedlist}></RecommendGoods>
-        </div>
+        {/*<div>*/}
+          {/*<RecommendGoods data={this.state.relGoodsRecommedlist}></RecommendGoods>*/}
+        {/*</div>*/}
       </div>  
       
       <div className='wx-cart-list-bar'>
