@@ -144,9 +144,9 @@ export function updatePaymentPass({ newpassword }) {
 }
 
 // 修改密码--验证验证码
-export function bindMobile({ mobile ,code}) {
+export function bindMobile({ mobile }) {
   return fetch.post('/memberapi/bindMobile', {
     mobile,
-    code
+    //code
   });
 }

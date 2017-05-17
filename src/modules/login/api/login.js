@@ -56,13 +56,11 @@ export function updatePassword({
 
 // 忘记密码
 export function forgetPassword({
-    code,
     memberId,
     password
 }) {
   localStorage.removeItem('token');
   return fetch.post('/floor/api/forgotPassword', {
-    code,
     memberId,
     password
   });

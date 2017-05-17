@@ -83,7 +83,7 @@ class UpdatePhone1 extends Component {
         Toast.fail(result.msg);
         return;
       }
-      this.code = result.data.verifyCode
+      //this.code = result.data.verifyCode
       this.setState({
         showCountDown: true,
         countDown: 60

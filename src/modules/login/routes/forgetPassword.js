@@ -12,7 +12,6 @@ class ForgetPassword extends Component {
 
   constructor(props){
     super(props);
-    this.code = props.location.query.code;
     this.memberId = props.location.query.memberId;
   }
   onSubmit = () => {
@@ -33,9 +32,7 @@ class ForgetPassword extends Component {
     }
     
     api.forgetPassword({
-      code:this.code,
       memberId:this.memberId,
-      //newpassword: getFieldsValue.password,
       password: getFieldsValue.password2
     }).then(result => {
       // 修改密码处理

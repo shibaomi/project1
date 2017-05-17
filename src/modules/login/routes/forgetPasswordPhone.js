@@ -18,6 +18,7 @@ class ForgetPasswordPhone extends Component {
       countDown: 60,
       showCountDown: false,
       memberId:'',
+      code:''
     }
     this.user = 0;
   }
@@ -39,6 +40,10 @@ class ForgetPasswordPhone extends Component {
       Toast.info('您的账户不存在！')
       return;
     }
+    if (Number(getFieldsValue.code) !== this.state.code) {
+      Toast.info('请输入正确的验证码！');
+      return;
+    }
     // api.checkCode({
     //   bound: getFieldsValue.mobile.replace(/\s/g, ""),
     //   boundcode:getFieldsValue.code,
@@ -54,7 +59,7 @@ class ForgetPasswordPhone extends Component {
     //   // 注册成功提示
     //   Toast.success(result.msg);
     //   // 跳转设置密码
-      window.location.href = 'login.html#/forgetPassword?code='+getFieldsValue.code+'&memberId='+this.state.memberId;
+      window.location.href = 'login.html#/forgetPassword?memberId='+this.state.memberId;
     //});
   }
 
@@ -100,6 +105,7 @@ class ForgetPasswordPhone extends Component {
         showCountDown: true,
         countDown: 60,
         memberId:result.data.memberId,
+        code:result.data.code,
       })
       this.countDown();
     });

@@ -14,7 +14,8 @@ class UpdatePhone2 extends Component {
   code = null
   state = {
     countDown: 60,
-    showCountDown: false
+    showCountDown: false,
+    code:'',
   }
 
   onSubmit = () => {
@@ -29,9 +30,14 @@ class UpdatePhone2 extends Component {
       return;
     }
 
+    if (Number(getFieldsValue.code) !== this.state.code) {
+      Toast.info('请输入正确的验证码！');
+      return;
+    }
+
     api.bindMobile({
       mobile: getFieldsValue.mobile.replace(/\s/g, ""),
-      code:getFieldsValue.code
+      //code:getFieldsValue.code
     }).then(result => {
       // 注册处理
       if (result.result == 0) {
@@ -75,10 +81,11 @@ class UpdatePhone2 extends Component {
         Toast.fail(result.msg);
         return;
       }
-      this.code = result.data.verifyCode
+      //this.code = result.data.
       this.setState({
         showCountDown: true,
-        countDown: 60
+        countDown: 60,
+        code:result.data.code,
       })
       this.countDown();
     });
