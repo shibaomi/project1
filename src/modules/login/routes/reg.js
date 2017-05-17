@@ -13,7 +13,8 @@ class Reg extends Component {
   code = null
   state = {
     countDown: 60,
-    showCountDown: false
+    showCountDown: false,
+    code:'',
   }
 
   onSubmit = () => {
@@ -42,11 +43,16 @@ class Reg extends Component {
       return;
     }
 
+    if (Number(getFieldsValue.code) !== this.state.code) {
+      Toast.info('请输入正确的验证码！');
+      return;
+    }
+
     api.register({
       mobile: getFieldsValue.mobile.replace(/\s/g, ""),
       name: getFieldsValue.mobile.replace(/\s/g, ""),
       password: getFieldsValue.password,
-      code:getFieldsValue.code
+      //code:getFieldsValue.code
     }).then(result => {
       // 注册处理
       if (result.result == 0) {
@@ -85,15 +91,16 @@ class Reg extends Component {
       Toast.info('请先输入11手机号！');
       return;
     }
-    api.findCode({ mobile: getFieldsValue.mobile.replace(/\s/g, "") }).then(result => {
+    api.verifyCode({ mobile: getFieldsValue.mobile.replace(/\s/g, "") }).then(result => {
       if (result.result == 0) {
         Toast.fail(result.msg);
         return;
       }
-      this.code = result.data.verifyCode
+      //this.code = result.data.verifyCode
       this.setState({
         showCountDown: true,
-        countDown: 60
+        countDown: 60,
+        code:result.data.code
       })
       this.countDown();
     });

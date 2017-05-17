@@ -60,7 +60,7 @@ class Account extends Component {
         text: '确定',
         onPress: () => {
           common.removeToken();
-          this.props.router.push('/my');
+          this.props.router.push('./home');
         }
       },
     ]);

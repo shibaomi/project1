@@ -16,12 +16,12 @@ export function verifyCode({ mobile }) {
   });
 }
 
-export function register({ name, password, mobile,code }) {
+export function register({ name, password, mobile }) {
   return fetch.get('/memberapi/register', {
     name,
     password,
     mobile,
-    code
+    //code
   });
 }
 
