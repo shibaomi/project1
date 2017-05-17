@@ -17,7 +17,7 @@ import { common } from 'common';
 import moment from 'moment';
 import * as memberApi from '../../api/member';
 
-import './ustomerService.less';
+import './customerService.less';
 
 const Item = List.Item;
 
