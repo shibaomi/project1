@@ -27,38 +27,12 @@ class Attention extends Component {
     this.state = {
       goodsList: [],
       storeList: [],
-      recommendGoodsList: [],
       type: props.params.type
     }
   }
 
   componentDidMount() {
     this.onChangeTab(this.state.type);
-  }
-
-  cancelAttention = (item) => {
-    const alertInstance = Modal.alert('提示', '是否取消关注', [
-      { text: '取消' },
-      {
-        text: '确定',
-        onPress: () => {
-          let params = {
-            favType: this.state.type,
-          }
-          // 商品
-          if (this.state.type == 1) {
-            params.goodsId = item.goods.goodsId;
-          } else {
-            params.storeId = item.store.storeId;
-          }
-          storeApi.storecollection(params).then(result => {
-            Toast.info(result.msg);
-            // 刷新页面
-            this.onChangeTab(this.state.type);
-          });
-        }
-      }
-    ]);
   }
 
   onChangeTab = (value) => {
@@ -83,13 +57,6 @@ class Attention extends Component {
         }
       }
     })
-    if (value == 1) {
-      memberApi.centRecommendList().then(result => {
-        this.setState({
-          recommendGoodsList: result.data
-        })
-      })
-    }
   }
 
   onClick = (el) => {
@@ -107,7 +74,6 @@ class Attention extends Component {
     const {
       goodsList,
       storeList,
-      recommendGoodsList,
       type
     } = this.state;
     return (
@@ -120,27 +86,25 @@ class Attention extends Component {
                   <Flex>
                     <Flex.Item
                       onClick={()=>this.onClick(item)}
-                      style={{ flex: 1 }}><Img src={item.goods.goodsImage} style={{ width: '100%', height: '100%' }} /></Flex.Item>
-                    <Flex.Item style={{flex:3}}>
+                      style={{ flex: 1 }}><Img src={common.imgtest+item.goods.goodsImage} style={{ width: '100%', height: '100%' }} /></Flex.Item>
+                    <Flex.Item style={{flex:4}}>
                       <div
                         onClick={()=>this.onClick(item)}
                         className='text-overflow-hidden'>{item.goods.goodsName}</div>
-                      <WhiteSpace size="lg" />
                       <Flex justify="between">
                         <div style={{color:'red'}}>￥{item.goods.goodsPrice}</div>
-                        <div style={{ textAlign: 'right',marginRight:'20px'}}>
-                          <Button type='primary' size='small' inline onClick={()=>this.cancelAttention(item)}>取消关注</Button>
-                        </div>
+                      </Flex>
+                      <Flex justify="between">
+                        <div className='text-overflow-hidden'>成交量： {item.goods.salenum}&nbsp;&nbsp;&nbsp;&nbsp;{item.goods.evaluate}人评价</div>
+                      </Flex>
+                      <Flex justify="between">
+                        <div className='text-overflow-hidden'>{item.goods.storeName}</div>
                       </Flex>
                     </Flex.Item>
                   </Flex> 
                 </List.Item>)
               }
             </List>
-            {
-              recommendGoodsList.length > 0 &&    
-                  <RecommendGoods data={recommendGoodsList}></RecommendGoods>    
-            }    
           </TabPane>
           <TabPane tab="关注的店铺" key="2">
             <List>
@@ -151,18 +115,15 @@ class Attention extends Component {
                       onClick={() => { 
                         this.gotoStore(item)
                       }}
-                      style={{ flex: 1 }}><Img src={item.store.storeLogo} style={{ width: '2rem', height: '2rem',borderBottom: '1px solid #ddd'}} /></Flex.Item>
-                    <Flex.Item style={{flex:2}}>
-                      <div
+                      style={{ flex: 1 }}><Img src={common.imgtest+item.store.storeLogo} style={{ width: '2rem', height: '2rem',borderBottom: '1px solid #ddd'}} /></Flex.Item>
+                    <Flex.Item style={{flex:2,top: '0.3rem', left:'30%', right:'5%',position:'absolute'}}>
+                      <div style={{fontSize:'0.25rem',whiteSpace: 'initial',wordWrap:'break-word'}}
                         onClick={() => { 
                           this.gotoStore(item)
                         }}
                         className='text-overflow-hidden'>{item.store.storeName}</div>
-                      <Flex justify="between">
+                      <Flex justify="between" style={{paddingTop:'0.2rem'}}>
                         <div style={{color:'gray'}}>关注人数 {item.store.storeCollect}</div>
-                        <div style={{ textAlign: 'right',marginRight:'20px' }}>
-                          <Button type='primary' size='small' inline onClick={()=>this.cancelAttention(item)}>取消关注</Button>
-                        </div>
                       </Flex>
                     </Flex.Item>
                   </Flex> 
