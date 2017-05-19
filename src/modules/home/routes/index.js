@@ -49,6 +49,8 @@ import address from './address/address';
 import addressAdd from './address/addressAdd';
 import addressEdit from './address/addressEdit';
 
+import customerService from './customerService/CustomerService';
+
 import login from '../../login/routes/login';
 
 const routesConfig = (<Route path="/" component={App}>
@@ -103,7 +105,7 @@ const routesConfig = (<Route path="/" component={App}>
   <Route path='/updatePhone1' component={updatePhone1} title='修改绑定手机'/>
   <Route path='/updatePhone2' component={updatePhone2} title='修改绑定手机'/>
   <Route path='/invoice' component={invoice} title='发票信息'/>
-
+  <Route path='/customerService' component={customerService} title='客户服务'/>
   <Route path='/login' component={login} title='登录'/>
 </Route>)
 

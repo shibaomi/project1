@@ -20,11 +20,6 @@ import * as memberApi from '../../api/member';
 import './account.less';
 
 const Item = List.Item;
-const sexs = {
-  '1': '男',
-  '2': '女',
-  '3': '默认',
-}
 
 class Account extends Component {
   constructor(props) {
@@ -60,7 +55,6 @@ class Account extends Component {
         text: '确定',
         onPress: () => {
           common.removeToken();
-          //this.props.router.push('/home');
           window.location.href = 'home.html';
         }
       },
@@ -71,88 +65,11 @@ class Account extends Component {
     this.props.router.push('/address')
   }
 
-  changeIcon = () => {
-    this.showActionSheet();
-  }
-
-  onChangeBirthday = (date) => {
-    const dateStr = date.format('YYYY-MM-DD');
-    memberApi.updateMemberInfo({
-      birthday: dateStr
-    }).then(r => {
-      Toast.info(r.msg, 1)
-      this.getMember();
-    })
-  }
-
-  showSexSheet = () => {
-    const BUTTONS = ['男', '女', '默认', '取消'];
-    ActionSheet.showActionSheetWithOptions({
-        options: BUTTONS,
-        cancelButtonIndex: BUTTONS.length - 1,
-        maskClosable: true,
-      },
-      (buttonIndex) => {
-        if (buttonIndex == 3) {
-          return;
-        }
-        memberApi.updateMemberInfo({
-          sex: buttonIndex + 1
-        }).then(result => {
-          Toast.info(result.msg, 1)
-          this.getMember();
-        })
-      });
-  }
-
-  showActionSheet = () => {
-    const BUTTONS = ['上传头像', '取消'];
-    ActionSheet.showActionSheetWithOptions({
-        options: BUTTONS,
-        cancelButtonIndex: BUTTONS.length - 1,
-        maskClosable: true,
-      },
-      (buttonIndex) => {
-        if (buttonIndex == 0) {
-          console.log(this.refs.head);
-          this.refs.head.click();
-        }
-      });
-  }
-
-  changeFile = (e) => {
-
-    const files = this.refs.head.files[0];
-    memberApi.filesUpload({
-      images: files
-    }).then(result => {
-      if (result.result == 1) {
-        const imgUrl = result.data;
-        memberApi.updateMemberInfo({
-          imgUrl
-        }).then(r => {
-          Toast.info(r.msg, 1)
-          this.getMember();
-        })
-      }
-    });
-  }
-
   render() {
     const { memberDetail } = this.state;
     if (!memberDetail) {
       return null;
     }
-
-    const userIcon = <Img onClick={() => {
-        this.props.router.push('/account')
-        }}
-        style={{ width: '1rem', height: '1rem' }} src={memberDetail.memberAvatar}></Img>
-
-    const memberBirthday = memberDetail.memberBirthdaystr && moment(memberDetail.memberBirthdaystr).utcOffset(8);
-    const { getFieldProps } = this.props.form;
-
-    const maxDate = moment().utcOffset(8);
     return <div className="wx-account">
       <List>
         <Item extra={memberDetail.memberTruename}>当前登录账号</Item>
@@ -162,17 +79,15 @@ class Account extends Component {
         <Item arrow="horizontal" onClick={()=>this.props.router.push('/address')}>收货地址管理</Item>
         <Item arrow="horizontal" onClick={()=>this.props.router.push('/invoice')}>发票信息管理</Item>
       </List>
-      <div style={{height:'0.2rem',width:'100%',backgroundColor:'#F3F3F3'}}></div>
+      <div style={{borderBottom: '10PX solid #ddd'}}></div>
       <List>
         <Item arrow="horizontal" onClick={()=>this.props.router.push('/attention/1')}>我的收藏</Item>
-        <Item arrow="horizontal" onClick={()=>this.props.router.push('/invoice')}>常见问题</Item>
+        <Item arrow="horizontal" onClick={()=>this.props.router.push('/customerService')}>客户服务</Item>
       </List>
       <WhiteSpace></WhiteSpace>
       <WingBlank>
         <Button type='primary' onClick={this.logout}>退出登录</Button>
       </WingBlank>
-      <input type="file" ref="head" name="image" style={{ display: 'none' }}
-        accept="image/*" onChange={(e) => this.changeFile(e)} />
     </div>
   }
 }
