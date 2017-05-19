@@ -27,7 +27,7 @@ class OrderDetail extends Component {
     orderApi.orderdetail({
       orderId
     }).then(result => {
-      debugger
+      //debugger
       if (result.result == 1) {
         const data = result.data[0]
         this.setState({

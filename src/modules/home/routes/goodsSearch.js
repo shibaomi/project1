@@ -58,7 +58,7 @@ class GoodsSearch extends Component {
       })
     });
     console.log(specValueIds);
-    debugger
+    //debugger
     goodsApi.goodslist({
       sortField: sortField,
       sortOrder: this.state.sortOrder,
@@ -71,7 +71,7 @@ class GoodsSearch extends Component {
       minimumPrice: this.state.minimumPrice,
       specFilter: specValueIds.join(',')
     }).then(result => {
-      debugger
+      //debugger
       if (result.result == 1) {
         this.setState({
           dataSource: this.ds.cloneWithRows(result.data)

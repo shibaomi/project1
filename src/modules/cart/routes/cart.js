@@ -71,7 +71,7 @@ class Cart extends Component {
     Toast.loading();
     cartApi.cartList().then(result => {
       Toast.hide();
-      debugger
+      //debugger
       if (result.result == 1) {
         this.setState({
           isInit: true,
@@ -83,7 +83,7 @@ class Cart extends Component {
     })
 
     goodsApi.relGoodsRecommedlist().then(result => {//推荐暂时不需要
-      debugger
+      //debugger
       if (result.result != 1) {
         Toast.error(result.msg);
         return;
@@ -97,7 +97,7 @@ class Cart extends Component {
 
   refreshCartList = () => {//列表刷新
     cartApi.cartList().then(result => {
-      debugger
+      //debugger
       if (result.result == 1) {
         const cartList = result.data || [];
         this.setState({

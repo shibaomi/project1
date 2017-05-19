@@ -86,7 +86,7 @@ const routesConfig = (<Route path="/" component={App}>
   <Route path='/commentList' component={commentList} title='评价晒单' />
   <Route path='/comment' component={comment} title='评价晒单'/>
   
-  <Route path='/account' showBottomBar={true} component={account} title='账户管理' />
+  <Route path='/account' showBottomBar={true} component={account} title='账户管理' selectedTab='account' />
   <Route path='/accountSafe' component={accountSafe} title='账户安全'/>
   <Route path='/recharge' component={recharge} title='余额充值' />
   <Route path='/updateNickName' component={updateNickName} title='账户管理'/>

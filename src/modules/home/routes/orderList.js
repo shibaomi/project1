@@ -58,7 +58,7 @@ class OrderList extends Component {
       this.setState({
         isLoading: false
       });
-      debugger
+      //debugger
       if (result.result == 1) {
         const data = result.data || [];
         const pageSize = 10;
