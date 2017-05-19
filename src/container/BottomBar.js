@@ -50,10 +50,10 @@ class BottomBar extends React.Component {
           title="首页"
           key="首页"
           icon={
-            <IconClass url={'./assets/img/home.png'}></IconClass>
+            <IconClass url={'./assets/img/shouye-02.png'}></IconClass>
           }
           selectedIcon={
-            <IconClass url={'./assets/img/home-selected.png'}></IconClass>
+            <IconClass url={'./assets/img/shouye-01.png'}></IconClass>
           }
           selected={this.state.selectedTab === 'home'}
           onPress={()=>this.changeTab('home')}
@@ -61,10 +61,10 @@ class BottomBar extends React.Component {
         </TabBar.Item>
         <TabBar.Item
           icon={
-            <IconClass url={'./assets/img/goodsClass.png'}></IconClass>
+            <IconClass url={'./assets/img/fenlei-02.png'}></IconClass>
           }
           selectedIcon={
-            <IconClass url={'./assets/img/goodsClass-selected.png'}></IconClass>
+            <IconClass url={'./assets/img/fenlei-01.png'}></IconClass>
           }
           selected={this.state.selectedTab === 'goodsClass'}
           title="分类"
@@ -74,10 +74,10 @@ class BottomBar extends React.Component {
         </TabBar.Item>
         <TabBar.Item
           icon={
-            <IconClass url={'./assets/img/cart.png'}></IconClass>
+            <IconClass url={'./assets/img/gouwuche-02.png'}></IconClass>
           }
           selectedIcon={
-            <IconClass url={'./assets/img/cart-selected.png'}></IconClass>
+            <IconClass url={'./assets/img/gouwuche-01.png'}></IconClass>
           }
           selected={this.state.selectedTab === 'cart'}
           title="购物车"
@@ -87,10 +87,10 @@ class BottomBar extends React.Component {
         </TabBar.Item>
         <TabBar.Item
           icon={
-            <IconClass url={'./assets/img/my.png'}></IconClass>
+            <IconClass url={'./assets/img/dingdanzhongxin-02.png'}></IconClass>
           }
           selectedIcon={
-            <IconClass url={'./assets/img/my-selected.png'}></IconClass>
+            <IconClass url={'./assets/img/dingdanzhongxin-01.png'}></IconClass>
           }
           selected={this.state.selectedTab === 'my'}
           title="订单中心"

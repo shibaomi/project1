@@ -10,7 +10,7 @@ import * as loginApi from '../api/login';
 import './login.less';
 
 const Item = List.Item;
-
+let url, codeTime;
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -20,6 +20,11 @@ class Login extends Component {
         this.callBack = this.props.location.query.callBack;
       }
     }
+    //this.url = '';
+    this.state = {
+      show:0
+    }
+    codeTime = new Date();
   }
 
   onSubmit = () => {
@@ -38,6 +43,10 @@ class Login extends Component {
       }
     });
   }
+  refreshcode = () => {
+    this.setState({show:this.state.show++});
+    codeTime = new Date();
+  }
   validateusername = (rule, value, callback) => {
     if (value && value.length > 4) {
       callback();
@@ -45,10 +54,12 @@ class Login extends Component {
       callback(new Error('用户名至少4个字符'));
     }
   }
-
+componentWillMount(){
+  //this.url = getFullUrl('loginapi/generateImage');
+}
   render() {
     const { getFieldProps, getFieldError } = this.props.form;
-
+    url = getFullUrl('loginapi/generateImage?data=' + codeTime);
     return (<form id = 'loginForm'>
       <List
         renderFooter={() => getFieldError('username') && getFieldError('username').join(',')}
@@ -86,7 +97,7 @@ class Login extends Component {
                     placeholder="请输入验证码"
                 />
               </Flex.Item>
-              <div style = {{width:'1rem'}}><img style = {{width:'1rem'}} src={getFullUrl('loginapi/generateImage')}/></div>
+              <div onClick={this.refreshcode} style = {{width:'1rem'}}><img style = {{width:'1rem'}} src={url}/></div>
             </Flex>
           </Item>
         </List>

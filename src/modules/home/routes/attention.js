@@ -13,6 +13,7 @@ import {
 import { common } from 'common';
 import * as memberApi from '../api/member';
 import * as storeApi from '../api/store';
+import * as Common from '../../../common/common';
 
 import { Img } from 'commonComponent';
 import RecommendGoods from 'commonComponent/RecommendGoods';
@@ -120,7 +121,7 @@ class Attention extends Component {
                   <Flex>
                     <Flex.Item
                       onClick={()=>this.onClick(item)}
-                      style={{ flex: 1 }}><Img src={item.goods.goodsImage} style={{ width: '100%', height: '100%' }} /></Flex.Item>
+                      style={{ flex: 1 }}><Img src={Common.imgtest + item.goods.goodsImage} style={{ width: '100%', height: '100%' }} /></Flex.Item>
                     <Flex.Item style={{flex:3}}>
                       <div
                         onClick={()=>this.onClick(item)}
@@ -137,10 +138,10 @@ class Attention extends Component {
                 </List.Item>)
               }
             </List>
-            {
-              recommendGoodsList.length > 0 &&    
-                  <RecommendGoods data={recommendGoodsList}></RecommendGoods>    
-            }    
+            {/*{*/}
+              {/*recommendGoodsList.length > 0 &&    */}
+                  {/*<RecommendGoods data={recommendGoodsList}></RecommendGoods>    */}
+            {/*}    */}
           </TabPane>
           <TabPane tab="关注的店铺" key="2">
             <List>
@@ -151,7 +152,7 @@ class Attention extends Component {
                       onClick={() => { 
                         this.gotoStore(item)
                       }}
-                      style={{ flex: 1 }}><Img src={item.store.storeLogo} style={{ width: '2rem', height: '2rem',borderBottom: '1px solid #ddd'}} /></Flex.Item>
+                      style={{ flex: 1 }}><Img src={Common.imgtest + item.store.storeLogo} style={{ width: '2rem', height: '2rem',borderBottom: '1px solid #ddd'}} /></Flex.Item>
                     <Flex.Item style={{flex:2}}>
                       <div
                         onClick={() => { 

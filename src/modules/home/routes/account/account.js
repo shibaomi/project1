@@ -60,7 +60,8 @@ class Account extends Component {
         text: '确定',
         onPress: () => {
           common.removeToken();
-          this.props.router.push('/home');
+          //this.props.router.push('/home');
+          window.location.href = 'home.html';
         }
       },
     ]);
@@ -160,6 +161,11 @@ class Account extends Component {
         <Item arrow="horizontal" onClick={()=>this.props.router.push('/updatePasswordPhone?phone='+memberDetail.memberMobile)}>修改登录密码</Item>
         <Item arrow="horizontal" onClick={()=>this.props.router.push('/address')}>收货地址管理</Item>
         <Item arrow="horizontal" onClick={()=>this.props.router.push('/invoice')}>发票信息管理</Item>
+      </List>
+      <div style={{height:'0.2rem',width:'100%',backgroundColor:'#F3F3F3'}}></div>
+      <List>
+        <Item arrow="horizontal" onClick={()=>this.props.router.push('/attention/1')}>我的收藏</Item>
+        <Item arrow="horizontal" onClick={()=>this.props.router.push('/invoice')}>常见问题</Item>
       </List>
       <WhiteSpace></WhiteSpace>
       <WingBlank>

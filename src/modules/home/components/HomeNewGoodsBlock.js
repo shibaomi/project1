@@ -70,9 +70,9 @@ constructor(props){
             <Flex.Item>
               <List>
                 <List.Item style={{fontSize:'.22rem',height:'0.3rem',width:'4rem'}}>{store.storeName}</List.Item>
-                <List.Item wrap >
-                  <div dangerouslySetInnerHTML={{ __html: store.description }}></div>
-                </List.Item>
+                {/*<List.Item wrap >*/}
+                  {/*<p dangerouslySetInnerHTML={{ __html: store.description }}></p>*/}
+                {/*</List.Item>*/}
               </List>
             </Flex.Item>
 

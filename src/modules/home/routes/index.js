@@ -64,7 +64,7 @@ const routesConfig = (<Route path="/" component={App}>
   <Route path='/gotoSearch' component={gotoSearch} showTitle={false}/>
   <Route path='/search/:searchType(/:keyword)' component={goodsSearch} title='商品搜索' />
   
-  <Route path='/attention(/:type)' component={attention} title='我的关注' />
+  <Route path='/attention(/:type)' component={attention} title='我的收藏' />
   <Route path='/viewRecord(/:type)' component={viewRecord} title='浏览记录' />
   <Route path='/myIntegral' component={myIntegral} title='我的积分' />
   <Route path='/coupon(/:couponIsUser)' component={coupon} title='我的优惠券' />
@@ -88,6 +88,7 @@ const routesConfig = (<Route path="/" component={App}>
   <Route path='/accountSafe' component={accountSafe} title='账户安全'/>
   <Route path='/recharge' component={recharge} title='余额充值' />
   <Route path='/updateNickName' component={updateNickName} title='账户管理'/>
+  {/*<Route path='/attention' component={attention} title='我的收藏'/>*/}
 
   <Route path='/createPayword' component={createPayword} title='设置支付密码'/>
 

@@ -73,7 +73,6 @@ export function post(requestUrl, params) {
   const baseParams = {
     timestamp: new Date().getTime()
   }
-
   let url = getFullUrl(requestUrl);
   const token = localStorage.getItem('token');
   params = {

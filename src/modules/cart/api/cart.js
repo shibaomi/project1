@@ -22,7 +22,15 @@ export function updateCartCount({
   });
 }
 
-
+export function updateReportCount({
+    reportCount,
+    packageId
+}) {
+  return fetch.post('/cartapi/updateReportCount', {
+    reportCount,
+    packageId
+  });
+}
 // count	3
 // timestamp	1490844450799
 // sign	YAtBlC2KYPvWX1sDXslzCPWuXoKXJmdHx0Pd43/OUXninGQfHkx03QWNCkS4I0wBVYctQ/X9B1WBg6ogwXKqTRcBLQX1qB6SYREbpI/X75CYWYDT1Gebo9HF/dPF83oKSDBRH+CH31R55IygU70R7fz4NZC5+txgjocM+4yRT4M=
