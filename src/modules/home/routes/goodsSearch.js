@@ -190,7 +190,7 @@ class GoodsSearch extends Component {
 		  }}
 		  />
 		}
-    return <Flex style={{borderBottom:'1px solid #000'}} onClick={() => common.gotoGoodsDetail({goodsId:dataItem.goodsId})}>
+    return <Flex style={{borderBottom:'1PX solid #ddd',paddingTop:'20px',paddingBottom:'20px'}} onClick={() => common.gotoGoodsDetail({goodsId:dataItem.goodsId})}>
       <Flex.Item style={{flex:1,paddingLeft:'16px'}}>
         <Img src={dataItem.goodsImage==undefined||dataItem.goodsImage==''?<IconClass url={'./assets/img/img_default.png'}></IconClass>:(Common.imgtest+dataItem.goodsImage)} style={{width:'1.5rem',height:'1.5rem'}}/>
       </Flex.Item>
@@ -199,17 +199,15 @@ class GoodsSearch extends Component {
           <div style={{paddingRight:'20px'}}>
             {dataItem.goodsName}
           </div>
-          <WhiteSpace></WhiteSpace>
-          <div style={{color:'red'}}>
+          <div style={{color:'red',paddingTop:'10px'}}>
             {`¥${dataItem.goodsPrice}`}
           </div>
-          <Flex>
-            <Flex.Item style={{color:'red'}}>{dataItem.storeName}</Flex.Item>
-            <Flex.Item style={{flex:0}}></Flex.Item>
-            <Flex.Item className="rsale" style={{marginLeft:'1rem'}}>
-              评论{dataItem.commentnum}条 销量 {dataItem.salenum}
-            </Flex.Item>
-          </Flex>
+          <div style={{color:'#888',paddingTop:'10px',fontSize:'0.21rem'}}>
+            成交量：{dataItem.salenum}&nbsp;&nbsp;&nbsp;&nbsp;{dataItem.commentnum}人评论
+          </div>
+          <div style={{color:'#888',paddingTop:'10px',fontSize:'0.21rem'}}>
+            {dataItem.storeName}
+          </div>
         </div>  
       </Flex.Item>
     </Flex>
