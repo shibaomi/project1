@@ -38,7 +38,7 @@ class GoodsList extends Component {
                   {/*onClick={this.onClick}*/}
                   {/*columnNum={3} hasLine={true} />*/}
           {/*</List>*/}
-          return <div onClick={() =>this.onClick(customList.gcName)}>
+          return <div onClick={() =>this.onClick(customList.gcName)} style={{height:'0.6rem',lineHeight:'0.6rem',textAlign:'center',backgroundColor: '#fff'}}>
             {customList.gcName}
           </div>
         })
