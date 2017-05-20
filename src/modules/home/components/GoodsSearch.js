@@ -52,7 +52,7 @@ class GoodsSearch extends Component {
   }
 
   renderItem = (dataItem) => {
-    return <Flex onClick={() => common.gotoGoodsDetail({specId:dataItem.specId})}>
+    return <Flex onClick={() => common.gotoGoodsDetail({goodsId:dataItem.goodsId})}>
       <Flex.Item style={{flex:1,paddingLeft:'16px'}}>
         <Img src={dataItem.goodsImage} style={{width:'100%'}}/>
       </Flex.Item>

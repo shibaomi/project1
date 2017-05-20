@@ -18,7 +18,7 @@ class HomeNewGoodsBlock extends React.PureComponent {
 
   onClick = (el, index) => {
     // console.log(el);
-    common.gotoGoodsDetail({ specId: el.specId });
+    common.gotoGoodsDetail({ goodsId: el.goodsId });
   }
 constructor(props){
   super(props);

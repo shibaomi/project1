@@ -42,7 +42,7 @@ class StoreNewGoods extends Component {
   }
 
   onClick = (dataItem) => {
-    common.gotoGoodsDetail({ specId: dataItem.specId })
+    common.gotoGoodsDetail({ goodsId: dataItem.goodsId })
   }
 
   renderItem = (dataItem) => {

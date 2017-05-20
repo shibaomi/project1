@@ -247,7 +247,7 @@ class StoreGoods extends Component {
   }
 
   renderItem = (dataItem) => {
-    return <Flex style={{borderBottom:'1px solid #000'}} onClick={() => common.gotoGoodsDetail({specId:dataItem.specId})}>
+    return <Flex style={{borderBottom:'1px solid #000'}} onClick={() => common.gotoGoodsDetail({goodsId:dataItem.goodsId})}>
       <Flex.Item style={{flex:1,paddingLeft:'16px'}}>
         <Img src={dataItem.goodsImage} style={{width:'1.5rem',height:'1.5rem'}}/>
       </Flex.Item>

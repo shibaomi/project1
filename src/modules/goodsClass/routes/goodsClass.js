@@ -42,7 +42,6 @@ class GoodsClass extends Component {
     classList.scrollTop = 0;
 
     goodsClassApi.getGoodsClass({ advid: gcAdvid, pId: gcId }).then(result => {
-      //debugger
       this.setState({
         goodsList: result.data[0]
       });
