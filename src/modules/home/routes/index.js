@@ -50,6 +50,9 @@ import addressAdd from './address/addressAdd';
 import addressEdit from './address/addressEdit';
 
 import customerService from './customerService/CustomerService';
+import orderQuestion from './customerService/OrderQuestion';
+import commonQuestion from './customerService/CommonQuestion';
+import saleQuestion from './customerService/SaleQuestion';
 
 import login from '../../login/routes/login';
 
@@ -106,6 +109,10 @@ const routesConfig = (<Route path="/" component={App}>
   <Route path='/updatePhone2' component={updatePhone2} title='修改绑定手机'/>
   <Route path='/invoice' component={invoice} title='发票信息'/>
   <Route path='/customerService' component={customerService} title='客户服务'/>
+  <Route path='/orderQuestion' component={orderQuestion} title='订单问题'/>
+  <Route path='/saleQuestion' component={saleQuestion} title='售后问题'/>
+  <Route path='/commonQuestion' component={commonQuestion} title='常见问题'/>
+
   <Route path='/login' component={login} title='登录'/>
 </Route>)
 
