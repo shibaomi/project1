@@ -103,7 +103,12 @@ class Attention extends Component {
                     </Flex.Item>
                   </Flex> 
                 </List.Item>)
-              }
+              }{
+              (!goodsList||goodsList.length == 0 )&&
+              <div style={{  paddingTop: '0.7rem',textAlign:'center',fontSize:'0.24rem',paddingBottom:'0.7rem'}}>
+                <span style={{fontSize: '28px',color:'gray'}}>您的收藏为空</span>
+              </div>
+            }
             </List>
           </TabPane>
           <TabPane tab="关注的店铺" key="2">
@@ -128,6 +133,12 @@ class Attention extends Component {
                     </Flex.Item>
                   </Flex> 
                 </List.Item>)
+              }
+              {
+                (!storeList||storeList.length == 0) &&
+                <div style={{ paddingTop: '0.7rem',textAlign:'center',fontSize:'0.24rem',paddingBottom:'0.7rem' }}>
+                  <span style={{fontSize: '28px',color:'gray'}}>您的收藏为空</span>
+                </div>
               }
             </List>
           </TabPane>
