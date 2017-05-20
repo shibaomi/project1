@@ -60,7 +60,7 @@ class Attention extends Component {
   }
 
   onClick = (el) => {
-    common.gotoGoodsDetail({ specId: el.goods.specId });
+    common.gotoGoodsDetail({ goodsId: el.goods.goodsId });
   }
 
   gotoStore = (item) => {

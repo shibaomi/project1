@@ -13,7 +13,7 @@ class Shop extends Component {
 
   gotoGoodsDetail = (item) => {
     common.gotoGoodsDetail({
-      specId: item.specId
+      goodsId: item.goodsId
     });
   }
 

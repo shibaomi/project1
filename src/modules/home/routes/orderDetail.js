@@ -94,7 +94,7 @@ class OrderDetail extends Component {
                   orderDetail.orderGoodsList.map(goods => {
                       return <Flex key={goods.specId} onClick={() => {
                           common.gotoGoodsDetail({
-                              specId:goods.specId
+                            goodsId:goods.goodsId
                           })
                       }}>
                         <Img src={Common.imgtest + goods.goodsImage}
