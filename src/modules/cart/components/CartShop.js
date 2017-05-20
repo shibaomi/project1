@@ -122,7 +122,7 @@ class CartShop extends Component {
 
   gotoGoodsDetail = (goods) => {
     common.gotoGoodsDetail({
-      specId: goods.specId
+      goodsId: goods.goodsId
     });
   }
 
