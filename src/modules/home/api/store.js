@@ -9,7 +9,7 @@ export function storeBrowseSaveOrUpdate({ storeId }) {
 
 // 店铺首页信息
 export function storedetail({ storeId }) {
-  return fetch.get('/storeapi/storedetail', {
+  return fetch.post('/storeapi/storedetail', {
     storeId
   });
 }

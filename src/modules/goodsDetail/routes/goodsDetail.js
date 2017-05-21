@@ -25,6 +25,7 @@ import { Map } from 'immutable'
 import * as goodsDetailApi from '../api/goodsDetail';
 import * as cartApi from '../api/cart';
 import * as storeApi from '../api/store';
+import * as Common from '../../../common/common';
 
 import './goodsDetail.less';
 
@@ -37,7 +38,8 @@ class GoodsDetail extends Component {
       cartNum: 0,
       isFav: 0,
       modal1: false,
-      imgurl:''
+      imgurl:'',
+      showButtom:0,
     }
     // 获取URL参数
     // if (this.props.location.query) {
@@ -83,11 +85,12 @@ class GoodsDetail extends Component {
         Toast.error(result.msg);
         return;
       }
+      debugger
       const goodsDetailInfo = Map(result.data[0]);
       // alert(JSON.stringify(goodsDetailInfo));
       this.setState({
         goodsDetailInfo,
-        isFav: goodsDetailInfo.isFav
+        isFav: goodsDetailInfo.get('isFav')
       });
 
       const node = this.refs.detailScroll;
@@ -147,22 +150,24 @@ class GoodsDetail extends Component {
   /**
    * 点击获取规格
    */
-  getSpec = (e) => {
-    // document.style = 
+  getSpec = (e,value,index) => {
+    // document.style =
+
     e.preventDefault();
     e.nativeEvent.stopImmediatePropagation();
     e.stopPropagation();
-    const goodsDetailInfo = this.state.goodsDetailInfo.toJS();
+    //const goodsDetailInfo = this.state.goodsDetailInfo.toJS();
     Popup.show(
       <GoodsSpec
         addCart={this.addCart}  
         gotoBuy={this.gotoBuy}
-        buyCount={this.state.buyCount}  
+        buyCount={this.state.buyCount}
         onChangeSpec={this.onChangeSpec}
         onChangeBuyNum={this.onChangeBuyNum}
-        goodsDetailInfo={goodsDetailInfo}
+        shopGoodsPackageList={value}
         onClose={() => Popup.hide()} />, { animationType: 'slide-up' }
     );
+    this.setState({showButtom:index});
   }
 
   onChangeBuyNum = (num) => {
@@ -290,14 +295,15 @@ class GoodsDetail extends Component {
 
     // 获取规格组合名
     // 判断是否有规格参数
-    const vals_xg=goodsDetailInfo.goodsSpec.specGoodsSpec || ''
+    const vals_xg=goodsDetailInfo.shopGoodsPackageList || ''
 
     //规格参数用变量 vals_xg  代替
     const vals = Object.keys(vals_xg).map(function(key) {
       return vals_xg[key];
     });
 
-    const selectedSpecGoodsSpec = vals.join(' ');
+    //const selectedSpecGoodsSpec = vals.join(' '); onClick={this.showModal('modal1',item)}
+    const selectedSpecGoodsSpec = vals;
     return (
       <div className='wx-goods-detail'>
         <div ref='detailScroll' className='fix-scroll hastitle hasbottom' style={{
@@ -305,54 +311,64 @@ class GoodsDetail extends Component {
         <Carousel autoplay={false} infinite={false} dots={true} selectedIndex={1}>
           {
             goodsDetailInfo.goodsCallyList.map((item,index) => (
-                <Img key={index} src={item} onClick={this.showModal('modal1',item)} />
+                <Img key={index} src={Common.imgtest + item} />
             ))
           }          
         </Carousel>
-         <Modal title="商品详情"
-	          visible={this.state.modal1}
-	          transparent
-	          maskClosable={true}
-	          onClose={this.onClose('modal1')}
-	          style={{width:'8rem',height:'10rem'}}
-	        >
-						<Img className='imgDe' onClick={()=>this.Close()} src={this.state.imgurl} style={{width:'8rem',height:'8rem'}}/>
-	        </Modal>
+         {/*<Modal title="商品详情"*/}
+	          {/*visible={this.state.modal1}*/}
+	          {/*transparent*/}
+	          {/*maskClosable={true}*/}
+	          {/*onClose={this.onClose('modal1')}*/}
+	          {/*style={{width:'8rem',height:'10rem'}}*/}
+	        {/*>*/}
+						{/*<Img className='imgDe' onClick={()=>this.Close()} src={this.state.imgurl} style={{width:'8rem',height:'8rem'}}/>*/}
+	        {/*</Modal>*/}
 	      
-        <Flex className='wx-goods-detail-info' direction='column' align='start' >
-            <WingBlank>
-              <Flex.Item>{goodsDetailInfo.goodsName}</Flex.Item>
-            </WingBlank>
-            <WingBlank>
-              <p style={{color:'red',fontSize:'.24rem'}}>
-                {goodsDetailInfo.goodsSubtitle}
-              </p>  
-              <p style={{color:'red',fontSize:'.24rem'}}>{`¥${goodsDetailInfo.goodsSpec.specGoodsPrice}`}</p>
-            </WingBlank>  
+        <Flex className='wx-goods-detail-info' align='center' style = {{height:'1rem',borderTop:'1px solid #ddd',padding:'0rem 0.3rem',}}>
+          <Flex.Item>{goodsDetailInfo.goodsName}</Flex.Item>
+          <div style={{width:'1rem',fontSize:'0.22rem',height:'0.7rem',lineHeight:'0.7rem',paddingLeft:'0.1rem',borderLeft:'1px solid #ddd'}}>
+            <img style={{width:'0.3rem',height:'0.3rem',marginLeft:'0.35rem'}} src='../../../assets/img/shoucang-02.png'/>
+            <div style={{  height: '0.3rem',marginTop: '-0.45rem',width: '1rem',textAlign: 'center',}}>收藏</div>
+          </div>
+            {/*<WingBlank>*/}
+              {/*<p style={{color:'red',fontSize:'.24rem'}}>*/}
+                {/*{goodsDetailInfo.goodsSubtitle}*/}
+              {/*</p>  */}
+              {/*<p style={{color:'red',fontSize:'.24rem'}}>{`¥${goodsDetailInfo.goodsStorePrice}`}</p>*/}
+            {/*</WingBlank>  */}
         </Flex>
+          <div style={{height:'0.2rem',width:'100%',backgroundColor:'#F3F3F3'}}></div>
 				{goodsDetailInfo.goodsShow==0?<div style={{height:'1rem',background:'#ddd',lineHeight:'1rem',textAlign:'center',fontSize:'0.5rem'}}>商品已经下架啦~</div>:<div>  
         <List>  
-          <List.Item arrow="horizontal" onClick={this.getCoupon}>
-            领券猛戳这里
-          </List.Item>
-          <List.Item arrow="horizontal" onClick={this.getSpec}>
-            已选：{selectedSpecGoodsSpec}
-          </List.Item>
+          {/*<List.Item arrow="horizontal" onClick={this.getCoupon}>*/}
+            {/*领券猛戳这里*/}
+          {/*</List.Item>*/}
           <List.Item>
-            地区：{goodsDetailInfo.cityName}
+            <Flex wrap="wrap" justify="between">
+            {/*已选：{selectedSpecGoodsSpec}*/}
+            {selectedSpecGoodsSpec.map((value,index) =>{
+              return <Button key = {index}  onClick={(e) => this.getSpec(e,value,index)} type="ghost" inline size="small" style={this.state.showButtom == index?{margin: '0.08rem',}:{ margin: '0.08rem',color:'#BCBCBC',borderColor:'#BCBCBC' }}>{value.packageName} | {value.packageAmount}</Button>
+            })
+            }
+            </Flex>
           </List.Item>
-          <List.Item>
-            运费：{goodsDetailInfo.goodsTransfeeCharge==1?'卖家承担运费':goodsDetailInfo.goodsTransfeeCharge==2?'免运费':'买卖家承担运费'}
-          </List.Item>
+          {/*<List.Item>*/}
+            {/*地区：{goodsDetailInfo.cityName}*/}
+          {/*</List.Item>*/}
+          {/*<List.Item>*/}
+            {/*运费：{goodsDetailInfo.goodsTransfeeCharge==1?'卖家承担运费':goodsDetailInfo.goodsTransfeeCharge==2?'免运费':'买卖家承担运费'}*/}
+          {/*</List.Item>*/}
         </List>
-        <EvaluateGoodsList
-          gotoEvaluateList={this.gotoEvaluateList}
-          gotoConsultation={this.gotoConsultation}
-          goodsDetailInfo={goodsDetailInfo}></EvaluateGoodsList>
-        <WhiteSpace></WhiteSpace>
+        <div style={{height:'0.2rem',width:'100%',backgroundColor:'#F3F3F3'}}></div>
+        {/*<EvaluateGoodsList*/}
+          {/*gotoEvaluateList={this.gotoEvaluateList}*/}
+          {/*gotoConsultation={this.gotoConsultation}*/}
+          {/*goodsDetailInfo={goodsDetailInfo}></EvaluateGoodsList>*/}
         <StoreInfo goodsDetailInfo={goodsDetailInfo}></StoreInfo>
-        <WhiteSpace></WhiteSpace>
-        <GoodsList goodsDetailInfo={goodsDetailInfo}></GoodsList>
+        {/*<WhiteSpace></WhiteSpace>*/}
+        {/*<GoodsList goodsDetailInfo={goodsDetailInfo}></GoodsList>*/}
+        <div style={{height:'0.2rem',width:'100%',backgroundColor:'#F3F3F3'}}></div>
         <GoodsMoreInfo goodsDetailInfo={goodsDetailInfo}></GoodsMoreInfo>
         </div>}
         </div>

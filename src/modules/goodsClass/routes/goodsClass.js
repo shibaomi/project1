@@ -40,8 +40,8 @@ class GoodsClass extends Component {
     // 设置滚动条
     const classList = this.refs.classList
     classList.scrollTop = 0;
-
-    goodsClassApi.getGoodsClass({ advid: gcAdvid, pId: gcId }).then(result => {
+    let advid = gcAdvid || '';
+    goodsClassApi.getGoodsClass({ advid: advid, pId: gcId }).then(result => {
       this.setState({
         goodsList: result.data[0]
       });

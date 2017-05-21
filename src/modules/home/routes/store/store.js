@@ -36,16 +36,16 @@ class Store extends Component {
         const data = result.data;
         this.setState({
           goodsList: data.goodsList,
-          store: data.store[0]
+          store: data
         })
       }
     });
 
-    if (common.isLogin()) {
-      storeApi.storeBrowseSaveOrUpdate({
-        storeId: this.props.params.storeId
-      });
-    }
+    // if (common.isLogin()) {
+    //   storeApi.storeBrowseSaveOrUpdate({
+    //     storeId: this.props.params.storeId
+    //   });
+    // }
   }
 
   onClick = (dataItem) => {

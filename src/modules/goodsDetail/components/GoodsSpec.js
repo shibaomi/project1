@@ -33,18 +33,41 @@ class GoodsSpec extends React.PureComponent {
     super();
     // console.log('props', props);
     this.state = {
-      goodsSpecValueAll: props.goodsDetailInfo.goodsSpecValueAll,
-      goodsSpec: props.goodsDetailInfo.goodsSpec,
-      specName: props.goodsDetailInfo.specName,
-      goodsId: props.goodsDetailInfo.goodsId,
-      goodsName: props.goodsDetailInfo.goodsName,
-      goodsImage: props.goodsDetailInfo.goodsImage,
-      buyCount: props.buyCount
+      //goodsSpecValueAll: props.goodsDetailInfo.goodsSpecValueAll,
+      goodsId: props.shopGoodsPackageList.goodsId,
+      storeId: props.shopGoodsPackageList.storeId,
+      shopGoodsPackageList:props.shopGoodsPackageList,
+      specInfo:'',
+      // goodsId: props.goodsDetailInfo.goodsId,
+      // goodsName: props.goodsDetailInfo.goodsName,
+      // goodsImage: props.goodsDetailInfo.goodsImage,
+      // buyCount: props.buyCount
     }
   }
-
+  componentDidMount(){
+    goodsDetailApi.packageProgram({
+      goodsId: this.state.goodsId,
+      storeId:this.state.storeId,
+    }).then(result => {
+      if (result.result == 1) {
+        this.setState({specInfo:result.data});
+        //const data = result.data[0]
+        // 更新组件相关数据
+        // this.setState({
+        //   goodsSpec: {
+        //     ...this.state.goodsSpec,
+        //     specGoodsPrice: data.price,
+        //     specGoodsStorage: data.num,
+        //     goodsSpecId: data.specId
+        //   }
+        // })
+        // // 同步状态到外部页面
+        // this.props.onChangeSpec(currentSpecs, data);
+      }
+    })
+  }
   renderHeader = () => {
-    const { goodsImage, goodsSpec, goodsName } = this.state;
+    const { shopGoodsPackageList } = this.state;
     return <div>
       <div style={{ position: 'relative' }}>
         <span
@@ -55,14 +78,10 @@ class GoodsSpec extends React.PureComponent {
           <Icon type="cross" />
         </span>
       </div>
-      <Flex style={{ height: '200px' }}>  
+      <Flex style={{ height: '50px' }}>
         <Flex.Item style={{flex:1}}>
-          <Img src={goodsImage} style={{height:'200px'}}></Img>
-        </Flex.Item>  
-        <Flex.Item style={{flex:2}}>
-          <div style={{color:'red'}}>{`¥${goodsSpec.specGoodsPrice}`}</div>
-          <div>{goodsName}</div>
-        </Flex.Item> 
+          <div style={{color:'#1786CD'}}>{shopGoodsPackageList.packageName}</div>
+          </Flex.Item>
       </Flex>
     </div>
   }
@@ -72,7 +91,8 @@ class GoodsSpec extends React.PureComponent {
     // 当前选择的所有规则
     let currentSpecs = goodsSpec.specGoodsSpec;
     // 删除当前规则组的所有子选项
-    const goodsSpecValueGroup = goodsSpecValueAll[spec.spId];
+    //const goodsSpecValueGroup = goodsSpecValueAll[spec.spId];
+    const goodsSpecValueGroup = [];
     // 只有1个规则项，不做处理
     if (goodsSpecValueGroup.length == 1) {
       // console.log(this.refs[`specGroup-${spec.spId}`]);
@@ -126,54 +146,64 @@ class GoodsSpec extends React.PureComponent {
 
   render() {
     // 获取规格属性
-    const {
-      goodsSpecValueAll, // 所有的规格属性
-      goodsSpec, // 当前选择的规格值  
-      specName,
-      goodsName,
-      goodsImage,
-    } = this.state;
+    // const {
+    //   goodsSpecValueAll, // 所有的规格属性
+    //   goodsSpec, // 当前选择的规格值
+    //   specName,
+    //   goodsName,
+    //   goodsImage,
+    // } = this.state;
     // 当前选中的规格
-    const { specGoodsSpec } = goodsSpec;
+    //const { specGoodsSpec } = goodsSpec;
 
-    return <div style={{ marginBottom: '1.1rem'}}>
+    return <div id = 'goodsSpec'>
       <List renderHeader={() => (this.renderHeader())}>
-        {
-          Object.keys(goodsSpecValueAll).map(key => {
-            const values = goodsSpecValueAll[key]
-            console.log(values)
-            const selected = values.filter(value => {
-              return Object.keys(specGoodsSpec).includes(value.spValueId)
-            }).map(value => value.spValueId);
-            
-            return <List.Item key={key}>
-              <Flex direction='column' align='start'>
-                <Flex.Item>{specName[key]}</Flex.Item>
-                <Flex.Item>
-                  <SpecGroup ref={`specGroup-${key}`} specGoodsSpec={specGoodsSpec}
-                    selectedValue={selected}  
-                    values={values} onChangeSpec={this.onChangeSpec}></SpecGroup>
-                </Flex.Item>  
-              </Flex>
+        {this.state.specInfo && this.state.specInfo.map((value, index) =>{
+          return <List.Item key={index}  style={{ color:'#1786CD'}}>
+            <div  style = {{color:'#333'}}>
+              {value.specName}
+            </div>
+            <div style = {{color:'red'}}>
+              {'¥'+value.specGoodsPrice}
+            </div>
             </List.Item>
-          })  
-        }  
-        <List.Item extra={
-          <Stepper ref='stepper'
-            style={{ width: '50%', minWidth: '2rem' }}
-            showNumber min={0}
-            max={parseInt(goodsSpec.specGoodsStorage)}
-            size="small"
-            onChange={this.onChangeNum}
-            value={this.state.buyCount} />
-          }>数量</List.Item>
-        <List.Item>库存:{goodsSpec.specGoodsStorage}</List.Item>
+        })}
+        {/*{*/}
+          {/*Object.keys(goodsSpecValueAll).map(key => {*/}
+            {/*const values = goodsSpecValueAll[key]*/}
+            {/*console.log(values)*/}
+            {/*const selected = values.filter(value => {*/}
+              {/*return Object.keys(specGoodsSpec).includes(value.spValueId)*/}
+            {/*}).map(value => value.spValueId);*/}
+            {/**/}
+            {/*return <List.Item key={key}>*/}
+              {/*<Flex direction='column' align='start'>*/}
+                {/*<Flex.Item>{specName[key]}</Flex.Item>*/}
+                {/*<Flex.Item>*/}
+                  {/*<SpecGroup ref={`specGroup-${key}`} specGoodsSpec={specGoodsSpec}*/}
+                    {/*selectedValue={selected}  */}
+                    {/*values={values} onChangeSpec={this.onChangeSpec}></SpecGroup>*/}
+                {/*</Flex.Item>  */}
+              {/*</Flex>*/}
+            {/*</List.Item>*/}
+          {/*})  */}
+        {/*}  */}
+        {/*<List.Item extra={*/}
+          {/*<Stepper ref='stepper'*/}
+            {/*style={{ width: '50%', minWidth: '2rem' }}*/}
+            {/*showNumber min={0}*/}
+            {/*max={parseInt(goodsSpec.specGoodsStorage)}*/}
+            {/*size="small"*/}
+            {/*onChange={this.onChangeNum}*/}
+            {/*value={this.state.buyCount} />*/}
+          {/*}>数量</List.Item>*/}
+        {/*<List.Item>库存:{goodsSpec.specGoodsStorage}</List.Item>*/}
         
       </List>
-      <CartBar
-        gotoBuy={this.gotoBuy}
-        addCart={this.addCart}
-      ></CartBar>
+      {/*<CartBar*/}
+        {/*gotoBuy={this.gotoBuy}*/}
+        {/*addCart={this.addCart}*/}
+      {/*></CartBar>*/}
     </div>
   }
 }

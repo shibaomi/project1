@@ -23,7 +23,7 @@ export default function({ goodsDetailInfo }) {
   }
 
   return <Tabs animated={false} defaultActiveKey="1" swipeable={false} activeTextColor="#E43F47">
-    <TabPane tab="商品介绍" key="1">
+    <TabPane tab="商品详情" key="1">
       {
         goodsBody && goodsBody.length > 0 && goodsBody.map((item,index) => {
           if (item.type == 'image') {
@@ -32,10 +32,10 @@ export default function({ goodsDetailInfo }) {
         })
       }
     </TabPane>
-    <TabPane tab="规格参数" key="2" style={{overflowX:'hidden'}}>
+    <TabPane tab="商品评价" key="2" style={{overflowX:'hidden'}}>
       <div dangerouslySetInnerHTML={{ __html: goodsDetailInfo.goodsProperty }}></div>
     </TabPane>
-    <TabPane tab="包装售后" key="3">
+    <TabPane tab="购买咨询" key="3">
       <div style={{minHeight:'200px'}}>
         {goodsDetailInfo.afterSale}
       </div>

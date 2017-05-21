@@ -12,6 +12,10 @@ export function goodsdetail({ goodsId }) {
   return fetch.post('goods/api/goodsdetail', { goodsId });
 }
 
+export function packageProgram({ goodsId, storeId }) {
+  return fetch.post('goods/api/packageProgram', { goodsId, storeId  });
+}
+
 export function goodsInfo({ specId }) {
   return fetch.get('goods/api/goodsInfo', { specId });
 }

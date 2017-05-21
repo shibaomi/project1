@@ -34,7 +34,7 @@ class StoreDetail extends Component {
         const data = result.data;
         this.setState({
           goodsList: data.goodsList,
-          store: data.store[0]
+          store: data
         })
       }
     });
