@@ -48,6 +48,7 @@ import createPayword from './account/createPayword';
 import address from './address/address';
 import addressAdd from './address/addressAdd';
 import addressEdit from './address/addressEdit';
+import procedure from './procedure';
 
 import customerService from './customerService/CustomerService';
 import orderQuestion from './customerService/OrderQuestion';
@@ -88,12 +89,14 @@ const routesConfig = (<Route path="/" component={App}>
 
   <Route path='/commentList' component={commentList} title='评价晒单' />
   <Route path='/comment' component={comment} title='评价晒单'/>
-  
+
+  <Route path='/procedure' component={procedure} title='流程信息'/>
   <Route path='/account' showBottomBar={true} component={account} title='账户管理' selectedTab='account' />
   <Route path='/accountSafe' component={accountSafe} title='账户安全'/>
   <Route path='/recharge' component={recharge} title='余额充值' />
   <Route path='/updateNickName' component={updateNickName} title='账户管理'/>
   {/*<Route path='/attention' component={attention} title='我的收藏'/>*/}
+
 
   <Route path='/createPayword' component={createPayword} title='设置支付密码'/>
 

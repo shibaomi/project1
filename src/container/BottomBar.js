@@ -100,10 +100,10 @@ class BottomBar extends React.Component {
         </TabBar.Item>
         <TabBar.Item
             icon={
-              <IconClass url={'./assets/img/my.png'}></IconClass>
+              <IconClass url={'./assets/img/me-01.png'}></IconClass>
             }
             selectedIcon={
-              <IconClass url={'./assets/img/my-selected.png'}></IconClass>
+              <IconClass url={'./assets/img/me-02.png'}></IconClass>
             }
             selected={this.state.selectedTab === 'account'}
             title="我的"

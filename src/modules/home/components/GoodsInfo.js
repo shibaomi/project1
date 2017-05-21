@@ -21,12 +21,15 @@ export function ImgGoodsInfo({ dataItem, columnNum }) {
     <Flex.Item>
       <Img src={Common.imgtest + dataItem.goodsImage} style={{width:'100%',height:'100%' }} />
     </Flex.Item>
-    <Flex.Item style={{width:'100%'}}>
-      <div style={styles} className='text-overflow-hidden'>{dataItem.goodsName}</div> 
-    </Flex.Item>
-    <Flex.Item>
-      <div style={{fontSize:'.24rem',color:'red'}}>{`¥${dataItem.goodsPrice}`}</div>
-    </Flex.Item>
+    {/*// <div style={{height:'0.5rem'}}>*/}
+    {/*//   <Img src={Common.imgtest + dataItem.goodsImage} style={{width:'100%',height:'100%' }} />*/}
+    {/*// </div>*/}
+    {/*// <Flex.Item style={{width:'100%'}}>*/}
+    {/*//   <div style={styles} className='text-overflow-hidden'>{dataItem.goodsName}</div> */}
+    {/*// </Flex.Item>*/}
+    {/*<Flex.Item>*/}
+      {/*<div style={{fontSize:'.24rem',color:'red'}}>{`¥${dataItem.goodsPrice}`}</div>*/}
+    {/*</Flex.Item>*/}
   </Flex>
 }
 

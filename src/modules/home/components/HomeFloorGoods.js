@@ -19,10 +19,10 @@ class HomeFloorGoods extends React.PureComponent {
   renderHeader = (data) => {
     return <Flex justify='between'>
       <div><IconClass url={'./assets/img/clothingIcon.png'}></IconClass><div style={{display:'inline-block',float:'right',marginTop:'0.10rem'}}>{data.floorName}</div></div>
-      <Flex onClick={() => {
-          this.props.router.push(`/search/gcIdSearch/${data.gcId}`)
-      }}
-       >更多<Icon type='right' size='xs'></Icon></Flex>
+      {/*<Flex onClick={() => {*/}
+          {/*this.props.router.push(`/search/gcIdSearch/${data.gcId}`)*/}
+      {/*}}*/}
+       {/*>更多<Icon type='right' size='xs'></Icon></Flex>*/}
     </Flex>
   }
 
@@ -32,14 +32,14 @@ class HomeFloorGoods extends React.PureComponent {
     let sencondBlock = null;
 
     if (data.floorType == '2*8') {
-      firstBlock = <Grid data={data.goodsList.slice(0,2)} columnNum={2} hasLine={false}
+      firstBlock = <Grid data={data.goodsList.slice(0,2)} columnNum={2} hasLine={true}
         onClick={this.onClick}
           renderItem={(dataItem,index)=>(
           <ImgGoodsInfo dataItem={dataItem} columnNum={2}></ImgGoodsInfo>
           )}>
       </Grid>
 
-      sencondBlock = <Grid data={data.goodsList.slice(2,10)} columnNum={4} hasLine={false}
+      sencondBlock = <Grid data={data.goodsList.slice(2,10)} columnNum={4} hasLine={true}
         onClick={this.onClick}
           renderItem={(dataItem,index)=>(
             <ImgGoodsInfo dataItem={dataItem} columnNum={4}></ImgGoodsInfo>
@@ -53,7 +53,7 @@ class HomeFloorGoods extends React.PureComponent {
           )}>
       </Grid>
     } else {
-      firstBlock = <Grid data={data.goodsList.slice(0,4)} columnNum={2} hasLine={false}
+      firstBlock = <Grid data={data.goodsList.slice(0,4)} columnNum={2} hasLine={true}
         onClick={this.onClick}
           renderItem={(dataItem,index)=>(
             <ImgGoodsInfo dataItem={dataItem} columnNum={2}></ImgGoodsInfo>
