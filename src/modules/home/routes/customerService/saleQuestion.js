@@ -21,31 +21,42 @@ import './customerService.less';
 
 const Item = List.Item;
 class SaleQuestion extends Component {
-  render() {
-    return <div className="wx-account">
-      <div style={{color:'#777',backgroundColor:'#fff',padding:'0.3rem'}}>
-      <div style={{marginBottom:'0.2rem'}}>
-        一、如何下单
-      </div>
-      <div style={{color:'#777'}}>
-        1、用手机选择购物商品后，在订单信息确认里面选择在线支付，然后选择相同的银行卡即可。
-      </div>
-      <div style={{color:'#777'}}>
-        2、用手机选择购物商品后，在订单信息确认里面选择在线支付，然后选择相同的银行卡即可。
-      </div>
-    </div>
-    <div style={{color:'#777',backgroundColor:'#fff',padding:'0.3rem'}}>
-      <div style={{marginBottom:'0.2rem'}}>
-        二、如何下单
-      </div>
-      <div style={{color:'#777'}}>
-        1、用手机选择购物商品后，在订单信息确认里面选择在线支付，然后选择相同的银行卡即可。
-      </div>
-      <div style={{color:'#777'}}>
-        2、用手机选择购物商品后，在订单信息确认里面选择在线支付，然后选择相同的银行卡即可。
-      </div>
-    </div>
+  constructor(props) {
+    super(props);
+    this.state = {
+    questions:[]
+  }
+  }
 
+  componentDidMount() {
+    memberApi.question({
+      type: 2
+    }).then(result => {
+      if (result.result == 1) {
+        this.setState({
+          questions: result.data
+        })
+      }else{
+        Toast.fail(result.msg);
+      }
+    })
+  }
+  render() {
+  const {
+      questions
+  } = this.state;
+    return <div className="wx-account">
+      {
+        questions && questions.map((item, index) =>
+            <div style={{color:'#777',backgroundColor:'#fff',padding:'0.15rem'}}>
+              <div style={{paddingBottom:'0.2rem'}}>
+                {item.articleTitle}
+              </div>
+              <div dangerouslySetInnerHTML={{ __html: item.articleContent }} style={{color:'#777'}}>
+              </div>
+            </div>
+        )
+      }
     </div>
   }
 }

@@ -150,3 +150,10 @@ export function bindMobile({ mobile }) {
     //code
   });
 }
+
+// 问题查询
+export function question({ type }) {
+  return fetch.post('/questionApi/question', {
+    type
+  });
+}

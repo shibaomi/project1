@@ -134,7 +134,7 @@ class Cart extends Component {
 
   updateCart = (store, checkedGoods, num) => {
     cartApi.updateCartCount({
-      cartId: checkedGoods.cartId,
+      packageId: checkedGoods.packageId,
       count: num
     }).then(result => {
       if (result.result == 1) {
@@ -153,13 +153,12 @@ class Cart extends Component {
     }).then(result => {
       if (result.result == 1) { //更新报告接口成功处理算价钱
         // 修改商品数量
-        //checkedGoods.report = num;
+        checkedGoods.report = num;
         // 选中商品
-        //this.checkGoods(store, checkedGoods, true);
+        this.checkGoods(store, checkedGoods, true);
       }
     });
   }
-
 
   delCart = (goods) => {
     cartApi.deleteCart({ cartId: goods.cartId }).then(result => {

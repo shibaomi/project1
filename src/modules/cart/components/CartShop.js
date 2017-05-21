@@ -94,12 +94,20 @@ class CartShop extends Component {
   renderFooter = () => {
     const { data, goodsNum, goodsTotalPrice } = this.props;
     let price = 0;
+    let reportPrice=0;
     goodsTotalPrice.map(pricedata => {
       if(pricedata.storeId == data.storeId){
         price = pricedata.num;
+        if(price>0){
+          reportPrice=0;
+          data.list.map(reportData =>{
+            reportPrice+=reportData.reportPrice*reportData.report;
+          })
+        }
       }
       if(pricedata.storeId == '' || pricedata.storeId == null){
         price = 0;
+        reportPrice=0;
       }
     })
     return <Flex>
@@ -107,7 +115,7 @@ class CartShop extends Component {
                 onChange={(e)=>this.checkShop(data,e)}
       >全选</Checkbox>
       <Flex.Item style = {{textAlign:'right',paddingRight:'0.1rem'}}>
-      {'总计:¥'+ price +'元'}
+      {'总计:¥'+ (Number(price)+Number(reportPrice))+'元'}
       </Flex.Item>
       {/*<Icon type='right' />*/}
       {/*<Flex.Item style={{ textAlign: 'right' }}>*/}
@@ -145,7 +153,7 @@ class CartShop extends Component {
                 <Flex justify='between'>
                   <div onClick={()=>gotoGoodsDetail(goods)}>{`￥${goods.goodsPrice}`}</div>
                   <div>
-                    <Stepper showNumber min={1} value={goods.goodsNum} onChange={(val)=>this.updateCart(data,goods,val)} />
+                    <Stepper showNumber min={1} value={goods.goodsNum} onChange={(val)=>this.updateCart(data,goods,val)} useTouch={false}/>
                     {/*<Button style={{float:'right'}} size='small' inline onClick={() => this.delCart(goods)}>删除</Button>*/}
                   </div>
                 </Flex>
@@ -157,11 +165,10 @@ class CartShop extends Component {
                 <Flex justify='between'>
                   <div>每套报告需要副本数量<span style={{color:'#e93220'}}>¥{goods.reportPrice}</span>份</div>
                   <div>
-                    <Stepper showNumber min={0} value={goods.report} onChange={(val)=>this.updateReport(data,goods,val)} />
+                    <Stepper showNumber min={0} value={goods.report} onChange={(val)=>this.updateReport(data,goods,val)} useTouch={false}/>
                     {/*<Button style={{float:'right'}} size='small' inline onClick={() => this.delCart(goods)}>删除</Button>*/}
                   </div>
                 </Flex>
-
               </Flex.Item>
             </Flex>
           </Item>

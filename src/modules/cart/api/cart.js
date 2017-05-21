@@ -13,14 +13,15 @@ export function deleteCart({
 }
 
 export function updateCartCount({
-  cartId,
-  count
+    packageId,
+    count
 }) {
   return fetch.get('/cartapi/updateCartCount', {
-    cartId,
+    packageId,
     count
   });
 }
+
 
 export function updateReportCount({
     reportCount,
