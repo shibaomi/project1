@@ -85,7 +85,6 @@ class GoodsDetail extends Component {
         Toast.error(result.msg);
         return;
       }
-      debugger
       const goodsDetailInfo = Map(result.data[0]);
       // alert(JSON.stringify(goodsDetailInfo));
       this.setState({
@@ -311,7 +310,7 @@ class GoodsDetail extends Component {
         <Carousel autoplay={false} infinite={false} dots={true} selectedIndex={1}>
           {
             goodsDetailInfo.goodsCallyList.map((item,index) => (
-                <Img key={index} src={Common.imgtest + item} />
+                <Img key={index} src={Common.imgtest + item}/>
             ))
           }          
         </Carousel>
@@ -348,7 +347,7 @@ class GoodsDetail extends Component {
             <Flex wrap="wrap" justify="between">
             {/*已选：{selectedSpecGoodsSpec}*/}
             {selectedSpecGoodsSpec.map((value,index) =>{
-              return <Button key = {index}  onClick={(e) => this.getSpec(e,value,index)} type="ghost" inline size="small" style={this.state.showButtom == index?{margin: '0.08rem',}:{ margin: '0.08rem',color:'#BCBCBC',borderColor:'#BCBCBC' }}>{value.packageName} | {value.packageAmount}</Button>
+              return <Button key = {index}  onClick={(e) => this.getSpec(e,value,index)} type="ghost" inline size="small" style={this.state.showButtom == index?{margin: '0.08rem',}:{ margin: '0.08rem',color:'#BCBCBC',borderColor:'#BCBCBC' }}>{value.packageName} | ¥{value.packageAmount}</Button>
             })
             }
             </Flex>
