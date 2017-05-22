@@ -19,6 +19,7 @@ import GoodsSearchSpecFilter from '../components/GoodsSearchSpecFilter';
 import Immutable from 'immutable';
 import * as Common from '../../../common/common';
 import * as goodsApi from '../api/goods';
+import * as storeApi from '../api/store';
 
 import './goodsSearch.less';
 
@@ -59,35 +60,60 @@ class GoodsSearch extends Component {
     });
     console.log(specValueIds);
     //debugger
-    goodsApi.goodslist({
-      sortField: sortField,
-      sortOrder: this.state.sortOrder,
-      keyword: this.props.params.keyword,
-      pageSize: 20,
-      pageNo: 1,
-      // 'keywordSearch'
-      searchType: this.props.params.searchType,
-      maximumPrice: this.state.maximumPrice,
-      minimumPrice: this.state.minimumPrice,
-      specFilter: specValueIds.join(',')
-    }).then(result => {
-      //debugger
-      if (result.result == 1) {
-        this.setState({
-          dataSource: this.ds.cloneWithRows(result.data)
-        })
-      }
-    })
+    if(this.props.goodsType == 'storeList'){
+      const {store} = this.props;
+      storeApi.storegoods({
+        pageSize: 20,
+        pageNo: 1,
+        storeId:store.storeId,
+        goodsType:store.goodsType,
+        sortField:'salenum,goodsStorePrice',
+        orderBy:'desc,asc',
+      }).then(result => {
+        //debugger
+        if (result.result == 1) {
+          this.setState({
+            dataSource: this.ds.cloneWithRows(result.data)
+          })
+        }
+      })
+    }else{
+      goodsApi.goodslist({
+        sortField: sortField,
+        sortOrder: this.state.sortOrder,
+        keyword: this.props.params.keyword,
+        pageSize: 20,
+        pageNo: 1,
+        // 'keywordSearch'
+        searchType: this.props.params.searchType,
+        maximumPrice: this.state.maximumPrice,
+        minimumPrice: this.state.minimumPrice,
+        specFilter: specValueIds.join(',')
+      }).then(result => {
+        //debugger
+        if (result.result == 1) {
+          this.setState({
+            dataSource: this.ds.cloneWithRows(result.data)
+          })
+        }
+      })
+    }
+
   }
 
   componentWillMount() {
-
+    // if(this.props.goodsType == 'storeList'){
+    //   this.setState({
+    //     layoutType:  2
+    //   })
+    // }
        this.context.initAction({
          title: '切换',
          action: () => {
-           this.setState({
-             layoutType: this.state.layoutType == 1 ? 2 : 1
-           })
+             this.setState({
+               layoutType: this.state.layoutType == 1 ? 2 : 1
+             })
+
            this.refreshList();
          }
        });

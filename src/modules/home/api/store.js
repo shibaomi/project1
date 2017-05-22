@@ -27,6 +27,7 @@ export function storecollection({
   });
 }
 
+
 // 店铺商品
 // http://testbbc.leimingtech.com/storeapi/storegoods
 // order	desc
@@ -42,19 +43,17 @@ export function storegoods({
   pageNo,
   pageSize,
   storeId,
-  goodsName,
   goodsType,
-  order,
-  orderField
+  sortField,
+  orderBy
 }) {
   return fetch.get('/storeapi/storegoods', {
+    pageNo,
     pageSize,
     storeId,
-    pageNo,
-    goodsName,
     goodsType,
-    order,
-	  orderField
+    sortField,
+    orderBy
   });
 }
 
