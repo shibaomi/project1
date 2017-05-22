@@ -5,6 +5,7 @@ let config = require('./webpack.common.config')
 var proxyInterface = ['/floor/api',
   '/goods/',
   '/memberapi/',
+  '/questionApi/',
   '/storeapi',
   '/loginapi',
   '/cartapi',
@@ -27,6 +28,7 @@ proxyInterface.forEach(function(item) {
     //target: 'http://testbbc.leimingtech.com',
     target: 'http://222.128.107.235:8989/leimingtech-front',
     //target: 'http://222.128.107.239:8999/front',
+    // target: 'http://222.128.107.235:8999/front',
     changeOrigin: true,
     logLevel: 'debug'
   };

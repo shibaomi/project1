@@ -89,7 +89,7 @@ class Address extends Component {
     return <div className='wx-addresslist fix-scroll hastitle'>
       <div style={{marginBottom:'0.84rem'}}>
           {
-              addressList.map(address => {
+            addressList&&addressList.map(address => {
                   return <List key={address.addressId}>
                     <Item multipleLine style = {{padding:'0.2rem 0.3rem 0rem 0.3rem', border:'none'}}>
                       <Flex>

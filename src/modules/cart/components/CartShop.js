@@ -23,6 +23,7 @@ const AgreeItem = Checkbox.AgreeItem;
 
 class CartShop extends Component {
   constructor(props) {
+    localStorage.removeItem("selectCarts");
     super(props);
     this.state = {
       show:0,
@@ -58,6 +59,24 @@ class CartShop extends Component {
         }
       },
     ]);
+  }
+
+  gotoBuy = () => {
+    let selectCarts = [];
+    let cardIds=[];
+    const { data } = this.props;
+    data.list.forEach(goods => {
+      if (goods.checked) {
+        selectCarts.push(goods);
+        cardIds.push(goods.cartId);
+      }
+    })
+    if (selectCarts.length == 0) {
+      Toast.info('请先选择商品', 1)
+      return;
+    }
+    localStorage.setItem("selectCarts",JSON.stringify(selectCarts));
+    window.location.href = `order.html#/order/`+cardIds.join(',');
   }
 
   // 更新购物车数量
@@ -101,7 +120,9 @@ class CartShop extends Component {
         if(price>0){
           reportPrice=0;
           data.list.map(reportData =>{
-            reportPrice+=reportData.reportPrice*reportData.report;
+            if(reportData.checked){
+              reportPrice+=reportData.reportPrice*reportData.report;
+            }
           })
         }
       }
@@ -122,7 +143,8 @@ class CartShop extends Component {
       {/*<Button size='small' inline onClick={()=>this.getCoupon(data)}>领券</Button>*/}
       {/*<Button size='small' inline onClick={()=>this.delShopCart(data)}>删除</Button>*/}
       {/*</Flex.Item>*/}
-     <div style = {{height:'100%',backgroundColor:'#e93220', color:'#fff',width:'1.5rem', textAlign:'center'}}>
+     <div style = {{height:'100%',backgroundColor:'#e93220', color:'#fff',width:'1.5rem', textAlign:'center'}}
+          onClick={this.gotoBuy}>
        去结算
      </div>
     </Flex>

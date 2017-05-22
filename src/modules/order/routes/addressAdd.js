@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router'
-import { connect } from 'react-redux'
 import {
   Modal,
   Toast,
@@ -25,47 +24,36 @@ const district = addressApi.getAreaData();
 class AddressAdd extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      sty: false,
-      sty1: false
-    }
-  }
-
-  componentDidMount() {
-
+    this.state={sty:false}
   }
 
   onPickerChange = (value) => {
     console.log(value);
   }
+  onBlur=()=>{
+    this.setState({
+      sty:false
+    })
+  }
+  onFocus=()=>{
+    this.setState({
+      sty:true
+    })
+  }
 
   onSubmit = () => {
-    // console.log(this.refs.areaInfo);
-
-
     // 提交地址
     const fieldsValue = this.props.form.getFieldsValue()
     // check
     if (!fieldsValue.trueName || fieldsValue.trueName == '') {
-      Toast.info('收货人姓名不能为空');
+      Toast.info('请输入收货人姓名');
       return;
     }
-    console.log(fieldsValue.mobPhone.length)
-    if (!fieldsValue.mobPhone || fieldsValue.mobPhone.trim() == '') {
-      Toast.info('手机号不能为空');
-      return;
-    } else if (fieldsValue.mobPhone.length != 13 || fieldsValue.mobPhone[0] == 0) {
-      Toast.info('请输入正确的手机号');
+    if (!fieldsValue.mobPhone || fieldsValue.mobPhone.trim() == ''||fieldsValue.mobPhone.replace(/\s/g, "").length<11) {
+      Toast.info('请输入11位手机号');
       return;
     }
-    if (!fieldsValue.zipCode || fieldsValue.zipCode == '') {
-      Toast.info('邮政编码不能为空');
-      return;
-    } else if (String(fieldsValue.zipCode).length != 6 || String(fieldsValue.zipCode)[0] == 0) {
-      Toast.info('请输入正确的邮政编码');
-      return;
-    }
-    console.log(fieldsValue);
+    
     if (!fieldsValue.areaInfo || fieldsValue.areaInfo.length == 0) {
       Toast.info('请选择所在地区');
       return;
@@ -74,16 +62,7 @@ class AddressAdd extends Component {
       Toast.info('详细地址不能为空');
       return;
     }
-    if (9 < fieldsValue.telPhone.length || fieldsValue.telPhone.length < 7) {
-      Toast.info('请输入正确的座机号码');
-      return;
-    }
-    console.log(fieldsValue.telPhone)
-
-    if (fieldsValue.telPhone.length != 7) {
-      Toast.info('座机电话格式不正确');
-      return;
-    }
+    fieldsValue.mobPhone=fieldsValue.mobPhone.replace(/\s/g, "");
     const provinceId = fieldsValue.areaInfo[0];
     const cityId = fieldsValue.areaInfo[1];
     const areaId = fieldsValue.areaInfo[2];
@@ -101,32 +80,12 @@ class AddressAdd extends Component {
       areaInfo: currentAreaName
     }).then(result => {
       if (result.result == 1) {
-        this.props.router.push('/address')
+        this.props.router.replace('/address')
       } else {
         Toast.info(result.msg);
       }
     })
 
-  }
-  onBlur = () => {
-    this.setState({
-      sty: false
-    })
-  }
-  onFocus = () => {
-    this.setState({
-      sty: true
-    })
-  }
-  onBlur1 = () => {
-    this.setState({
-      sty1: false
-    })
-  }
-  onFocus1 = () => {
-    this.setState({
-      sty1: true
-    })
   }
   render() {
     const { getFieldProps } = this.props.form;
@@ -136,6 +95,7 @@ class AddressAdd extends Component {
             {...getFieldProps('trueName')}
             clear
             placeholder="请输入收货人"
+            maxLength="50"
           >收货人</InputItem>
         <InputItem
             {...getFieldProps('mobPhone')}
@@ -143,11 +103,6 @@ class AddressAdd extends Component {
             type='phone'
             placeholder="请输入手机号"
         >手机号</InputItem>
-        <InputItem
-            {...getFieldProps('zipCode')}
-            clear
-            type='number'
-            placeholder="请输入邮政编码">邮政编码</InputItem>
         <Picker   
           data={district}
           title="选择地区"
@@ -159,12 +114,9 @@ class AddressAdd extends Component {
         <InputItem style={this.state.sty1==true?{position:'absolute',top:'10%',borderRadius:'30px',zIndex:'99999',width:'91%',padding:'0.2rem 0.3rem',border:'1px solid #000',borderBottom:'2px solid #000',background:'rgb(235, 235, 239)'}:{}}
             {...getFieldProps('address')}
             clear
-            placeholder="详细地址">详细地址</InputItem>
-        <InputItem style={this.state.sty==true?{position:'absolute',top:'15%',borderRadius:'30px',zIndex:'99999',width:'91%',padding:'0.2rem 0.3rem',border:'1px solid #000',borderBottom:'2px solid #000',background:'rgb(235, 235, 239)'}:{}}
-            {...getFieldProps('telPhone')}
-            clear
-            type='number'
-            placeholder="座机电话">座机电话</InputItem>
+            onFocus={this.onFocus1}
+             onBlur={this.onBlur1}
+            placeholder="街道、门牌号等">详细地址</InputItem>
         <Item>
           <Button onClick={this.onSubmit} type='primary'>保存</Button>
         </Item>
@@ -173,12 +125,6 @@ class AddressAdd extends Component {
   }
 }
 
-function mapStateToProps({ order }) {
-  return { order };
-}
-
 export default withRouter(
-  connect(mapStateToProps)(
-    createForm()(AddressAdd)
-  )
+  createForm()(AddressAdd)
 );

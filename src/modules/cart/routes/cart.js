@@ -114,24 +114,6 @@ class Cart extends Component {
     common.gotoLoginAndBack();
   }
 
-  gotoBuy = () => {
-    let cartId = [];
-    this.state.cartList.forEach(shop => {
-      shop.list.forEach(goods => {
-        if (goods.checked) {
-          cartId.push(goods.cartId);
-        }
-      })
-    })
-    if (cartId.length == 0) {
-      Toast.info('请先选择商品', 1)
-      return;
-    }
-    common.gotoOrder({
-      cartId: cartId.join(',')
-    });
-  }
-
   updateCart = (store, checkedGoods, num) => {
     cartApi.updateCartCount({
       packageId: checkedGoods.packageId,
