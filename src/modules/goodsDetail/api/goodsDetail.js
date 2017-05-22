@@ -45,7 +45,7 @@ export function goodsEvaluteList({
   gevalScore,
   gevalImg
 }) {
-  return fetch.get('/goods/api/goodsEvaluteList', {
+  return fetch.post('/goods/api/goodsEvaluteList', {
     goodsId,
     gevalScore,
     gevalImg
@@ -57,7 +57,7 @@ export function goodsConsultList({
   goodsId,
   pageNo
 }) {
-  return fetch.get('/goods/api/goodsConsultList', {
+  return fetch.post('/goods/api/goodsConsultList', {
     goodsId,
     pageNo
   });
