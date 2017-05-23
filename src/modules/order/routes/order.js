@@ -10,6 +10,7 @@ import {
     Button,
     List,
     Switch,
+    Checkbox,
     Popup
 } from 'antd-mobile';
 import { Img } from 'commonComponent';
@@ -23,6 +24,8 @@ import * as addressApi from '../api/address';
 const prompt = Modal.prompt;
 const Item = List.Item;
 const Brief = Item.Brief;
+const CheckboxItem = Checkbox.CheckboxItem;
+const AgreeItem = Checkbox.AgreeItem;
 
 import './order.less';
 
@@ -31,7 +34,9 @@ class Order extends Component {
     super(props);
     this.state={
       selectCarts:[],
-      selectedAddress:''
+      selectedAddress:'',
+      invoiceContentStr:'',
+      selectPayTypeClick:1
     };
   }
 
@@ -125,46 +130,33 @@ class Order extends Component {
     }
   }
 
-  // 选择支付方式
-  selectPayType = (type) => {
-    this.props.dispatch({
-      type: 'selectPayType',
-      payload: type
+  onSelectPayTypeClick = (type) => {
+    this.setState({
+      selectPayTypeClick:type
     });
-    Popup.hide();
-  }
-
-  onSelectPayTypeClick = () => {
-    Popup.show(<div>
-      <List renderHeader={() => '选择支付方式'}>
-        <Item><Button type='primary' onClick={() => this.selectPayType(1)}>在线支付</Button></Item>
-        <Item><Button type='primary' onClick={() => this.selectPayType(2)}>货到付款</Button></Item>
-        <Item><Button type='ghost' onClick={()=>Popup.hide()}>取消</Button></Item>
-      </List>
-    </div>, { animationType: 'slide-up' })
   }
 
   onClickSelectedAddress = () => {
     this.props.router.push('/address');
   }
 
-
-  onClickInvoice = (invoiceShow) => {
-    console.log(invoiceShow)
-    let invContent=1
-    if(invoiceShow!='不开发票'){
-      invContent=2
-    }else{
-      invContent=1
-    }
-//  this.props.router.push('/invoice/${invoiceShow,invContent}');
-    this.props.router.push(`/invoice/${invoiceShow}/${invContent}`);
+  onClickAddInvoice = () => {
+    this.props.router.push('/invoice');
   }
 
   componentDidMount() {
     this.setState({
       selectCarts:JSON.parse(localStorage.getItem("selectCarts"))
     });
+    if(localStorage.getItem("invoiceContentStr")){
+      this.setState({
+        invoiceContentStr:localStorage.getItem("invoiceContentStr")
+      });
+    }else{
+      this.setState({
+        invoiceContentStr:'不开发票'
+      });
+    }
     this.initAddressList();
   }
 
@@ -182,7 +174,22 @@ class Order extends Component {
     })
   }
 
+  renderHeader = () => {
+    let storeName='';
+    if(this.state.selectCarts&&this.state.selectCarts.length>0){
+      storeName=this.state.selectCarts[0].storeName;
+    }
+    return <Flex>
+      <Img src='../../../assets/img/store.png' style={{ height: '0.5rem', width: '0.5rem' }} />{storeName}
+    </Flex>
+  }
+
+  agrreProtocol=(e)=>{
+    console.log(e);
+  }
+
   render() {
+    let totalPrice=0;
     return <div className='wx-order'>
       <div className='fix-scroll hastitle' style={{paddingBottom:'1.1rem'}}>
         <List >
@@ -218,69 +225,66 @@ class Order extends Component {
             }
           </Item>
         </List>
+        <List renderHeader={this.renderHeader}>
         {
           this.state.selectCarts&&this.state.selectCarts.map((goods,index) => {
+            totalPrice=Number(totalPrice)+(goods.goodsPrice*goods.goodsNum)+(goods.report*goods.reportPrice);
             return <Item key={index}>
               <Flex style = {{paddingLeft:'0.2rem'}}>
                 <Img src={common.imgtest + goods.goodsImages} style={{ height: '1.5rem', width: '1.5rem', marginLeft:'0.1rem' }} />
                 <Flex.Item>
                   <div className='text-overflow-hidden' >{goods.goodsName}</div>
                   <Flex justify='between'>
-                    <div style={{width: '45%',paddingBottom:'0.1rem'}}>{goods.packageName}</div>
-                    <div >{`x${goods.goodsNum}`}</div>
-                    <div style={{ color:'red',paddingTop:'0.1rem'}}>{`￥${goods.goodsPrice}`}</div>
+                    <div style={{width: '65%',paddingBottom:'0.1rem'}}>{goods.packageName}</div>
+                    <div style={{width: '10%'}}>{`x${goods.goodsNum}`}</div>
+                    <div style={{width: '30%', color:'red',paddingTop:'0.1rem',paddingLeft:'0.1rem'}}>{`￥${goods.goodsPrice}`}</div>
                   </Flex>
                   <Flex justify='between'>
-                    <div >纸质报告正副本</div>
-                    <div >{`x${goods.report}`}</div>
-                    <div style={{ color:'red'}}>{`￥${goods.reportPrice}`}</div>
+                    <div style={{width: '65%'}}>纸质报告正副本</div>
+                    <div style={{width: '10%'}}>{`x${goods.report}`}</div>
+                    <div style={{width: '30%', color:'red',paddingLeft:'0.1rem'}}>{`￥${goods.reportPrice}`}</div>
                   </Flex>
                 </Flex.Item>
               </Flex>
             </Item>
           })
         }
-        }
+        </List>
         <List>
           <Item
-              onClick={this.onSelectPayTypeClick}
               arrow="horizontal"
-              extra={1==1?'在线支付':'货到付款'}
-          >
-            支付方式
-          </Item>
-          <Item
-              extra={<div><Switch checked={1 == 1} /></div>}
-          >余额支付</Item>
-          <Item
-
-          >&nbsp;</Item>
-          <Item
-              arrow="horizontal"
+              onClick={this.onClickAddInvoice}
+              extra={this.state.invoiceContentStr}
           >
             发票信息
           </Item>
+          <Item>
+            <Flex>
+              <Flex.Item>
+                <Flex justify='between'>
+                  <div style={{width: '60%'}}>总价</div>
+                  <div style={{width: '30%', color:'red',textAlign:'right'}}>{`￥${totalPrice}`}</div>
+                </Flex>
+              </Flex.Item>
+            </Flex>
+          </Item>
+          <Item>
+            <CheckboxItem style={{borderBottom:'1PX solid #ddd'}} checked={this.state.selectPayTypeClick==1}  onChange={() => this.onSelectPayTypeClick(1)}>微信支付</CheckboxItem>
+            <CheckboxItem style={{borderBottom:'1PX solid #ddd'}} checked={this.state.selectPayTypeClick==2}  onChange={() => this.onSelectPayTypeClick(2)}>线下定期结算</CheckboxItem>
+            <CheckboxItem style={{borderBottom:'1PX solid #ddd'}} checked={this.state.selectPayTypeClick==3}  onChange={() => this.onSelectPayTypeClick(3)}>线下结算</CheckboxItem>
+          </Item>
+          <Flex>
+            <Flex.Item>
+              <AgreeItem data-seed="logId" onChange={(e) => this.agrreProtocol(e)}>
+                我已阅读并同意<a onClick={(e) => { e.preventDefault(); }}>《服务声明》</a>
+              </AgreeItem>
+            </Flex.Item>
+          </Flex>
+          <div className='wx-invoicelist-bar'>
+            <Button className = 'btn' type='primary' onClick={this.onClick}>下一步</Button>
+          </div>
         </List>
-        <WhiteSpace></WhiteSpace>
-        <Flex>
-          <Flex.Item style={{flex:2.5,borderRight: '1px solid #ddd'}}>
-            <List className="extrared">
-              <Item >商品总价</Item>
-              <Item >运费</Item>
-              <Item >余额支付</Item>
-              <Item >抵用券</Item>
-              <Item>优惠促销</Item>
-            </List>
-          </Flex.Item>
-          <Flex.Item style={{ flex: 1,background:'#fff'}}>
-            <div>
-              <div style={{height:'1.5rem',textAlign:'center',lineHeight:'2.5rem'}}>共需支付</div>
-              <div style={{color:'red',height:'1.5rem',textAlign:'center',lineHeight:'0.5rem'}}></div>
-            </div>
-          </Flex.Item>
-        </Flex>
       </div>
-      <OrderBar ></OrderBar>
     </div>
   }
 }

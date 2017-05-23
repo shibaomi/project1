@@ -1,0 +1,66 @@
+.wx-invoice{
+  .am-list-header {
+    padding: 0.3rem 0.3rem 0.18rem 0.3rem;
+    font-size: 0.28rem;
+    color: #333;
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+  }
+  .am-list-body:after {
+    display: block;
+    position: absolute;
+    content: '';
+    width: 100%;
+    border-bottom: none;
+  }
+  .am-list-body {
+    position: relative;
+    background-color: #fff;
+    border-top: none;
+  }
+
+  .am-button-ghost{
+    color: #1786CD;
+    background-color: transparent;
+    border: 1PX solid #1786CD;
+  }
+  .am-list-body div:not(:last-child) .am-list-line:after {
+    display: block;
+    position: absolute;
+    content: '';
+    left: 0;
+    bottom: 0;
+    right: auto;
+    top: auto;
+    width: 100%;
+    border-bottom: none;
+  }
+  .wx-invoicelist-bar {
+    box-sizing: border-box; // height: 1.1rem;
+    position: fixed;
+    width: 100%;
+    transition: bottom 0.2s;
+    z-index: 100;
+    text-align: center;
+    margin-top: 0.3rem;
+    .btn {
+      width:80%;
+      margin:0 auto;
+    }
+  }
+  .am-list-item .am-input-control input {
+    color: #000;
+    font-size: 0.2rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    line-height: 1;
+    box-sizing: border-box;
+  }
+}
