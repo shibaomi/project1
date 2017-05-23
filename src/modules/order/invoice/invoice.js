@@ -97,6 +97,7 @@ class Invoice extends Component {
       if (result.result == 1) {
         Toast.success(result.msg);
         localStorage.setItem("invoiceContentStr",invoiceContentStr);
+        localStorage.setItem("invId",result.data[0].invId);
         this.props.router.goBack();
       } else {
         Toast.fail(result.msg);

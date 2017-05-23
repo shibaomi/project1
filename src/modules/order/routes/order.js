@@ -36,98 +36,26 @@ class Order extends Component {
       selectCarts:[],
       selectedAddress:'',
       invoiceContentStr:'',
-      selectPayTypeClick:1
+      selectPayTypeClick:1,
+      nextStep:true,
+      packageIds:[],
+      cartIds:[]
     };
   }
 
   submitOrder = () => {
+    let orderInfo={};
     // 提交订单
-    const {
-        selectedAddress,
-        paytype,
-        isPd,
-        freight,
-        couponId,
-        invoice,
-        priceData,
-        cartId
-    } = this.props.order;
-    orderApi.saveorder({
-      cartIds: cartId,
-      addressId: selectedAddress.addressId,
-      paytype,
-      freight,
-      couponId,
-      invoiceId: invoice ? invoice.id : null,
-      isPd,
-      activityIds: null
-    }).then(result => {
-      if (result.result == 1) {
-        // 货到付款，成功后跳转到货到付款提示页面
-        if (paytype == 2) {
-          Toast.success(result.msg, 1, () => {
-            window.location.href = 'home.html#/orderList/0';
-          });
-        } else {
-          // 余额数大于 订单支付额
-          // console.log(priceData);
-          if (parseFloat(priceData.totalPrice) == 0) {
-            console.log('支付成功，跳转到成功页面');
-            this.props.router.replace('/paySuccess/' + result.data[0].paySn);
-          } else {
-            // 跳转到收银台
-            window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx5779f16d36f07efb&redirect_uri=http://testbbc.leimingtech.com/dist/order.html#/cashier/'+result.data[0].paySn+'/'+priceData.totalPrice+'&response_type=code&scope=snsapi_base&state=123#wechat_redirect'
-            this.props.router.replace(`/cashier/${result.data[0].paySn}/${priceData.totalPrice}`);
-          }
-        }
-      } else {
-        Toast.fail(result.msg);
-      }
-    });
-  }
-
-  onSubmitOrder = () => {
-
-    // 提交订单
-    const {
-        selectedAddress,
-        paytype,
-        isPd,
-        freight,
-        couponId,
-        invoiceId,
-        priceData,
-    } = this.props.order;
-    // 验证数据
-    if (!selectedAddress) {
-      Modal.fail('请先选择收货地址');
+    if(!this.state.selectedAddress||this.state.selectedAddress==''){
+      Toast.fail('请先选择收货地址');
       return;
     }
-
-    // 如果使用余额支付，弹出密码输入框，，否则跳到
-    if (isPd == 1 && paytype == 1) {
-      prompt(
-          '请输入支付密码',
-          '', [{ text: '取消' }, {
-            text: '提交',
-            onPress: passwd => {
-              orderApi.chkPasswd({ passwd }).then(result => {
-                if (result.result == 1) {
-                  // 密码正确，继续提交订单
-                  this.submitOrder();
-                } else {
-                  Toast.fail(result.msg);
-                }
-              })
-            }
-          }],
-          'secure-text',
-      )
-
-    } else {
-      // 在线支持 提交订单
-      this.submitOrder();
-    }
+    orderInfo.invoiceId=localStorage.getItem("invId");
+    orderInfo.addressId=this.state.selectedAddress.addressId;
+    orderInfo.paytype=this.state.selectPayTypeClick;
+    orderInfo.cartIds=this.state.cartIds;
+    orderInfo.packageIds=this.state.packageIds;
+    console.log(JSON.stringify(orderInfo));
   }
 
   onSelectPayTypeClick = (type) => {
@@ -185,7 +113,19 @@ class Order extends Component {
   }
 
   agrreProtocol=(e)=>{
-    console.log(e);
+    if(e.target.checked){
+      this.setState({
+        nextStep:false
+      })
+      this.setState({
+        cartIds:[],
+        packageIds:[]
+      })
+    }else{
+      this.setState({
+        nextStep:true
+      })
+    }
   }
 
   render() {
@@ -229,6 +169,8 @@ class Order extends Component {
         {
           this.state.selectCarts&&this.state.selectCarts.map((goods,index) => {
             totalPrice=Number(totalPrice)+(goods.goodsPrice*goods.goodsNum)+(goods.report*goods.reportPrice);
+            this.state.packageIds.push(goods.packageId);
+            this.state.cartIds.push(goods.cartId);
             return <Item key={index}>
               <Flex style = {{paddingLeft:'0.2rem'}}>
                 <Img src={common.imgtest + goods.goodsImages} style={{ height: '1.5rem', width: '1.5rem', marginLeft:'0.1rem' }} />
@@ -270,8 +212,8 @@ class Order extends Component {
           </Item>
           <Item>
             <CheckboxItem style={{borderBottom:'1PX solid #ddd'}} checked={this.state.selectPayTypeClick==1}  onChange={() => this.onSelectPayTypeClick(1)}>微信支付</CheckboxItem>
-            <CheckboxItem style={{borderBottom:'1PX solid #ddd'}} checked={this.state.selectPayTypeClick==2}  onChange={() => this.onSelectPayTypeClick(2)}>线下定期结算</CheckboxItem>
-            <CheckboxItem style={{borderBottom:'1PX solid #ddd'}} checked={this.state.selectPayTypeClick==3}  onChange={() => this.onSelectPayTypeClick(3)}>线下结算</CheckboxItem>
+            <CheckboxItem style={{borderBottom:'1PX solid #ddd'}} checked={this.state.selectPayTypeClick==2}  onChange={() => this.onSelectPayTypeClick(3)}>线下定期结算</CheckboxItem>
+            <CheckboxItem style={{borderBottom:'1PX solid #ddd'}} checked={this.state.selectPayTypeClick==3}  onChange={() => this.onSelectPayTypeClick(2)}>线下结算</CheckboxItem>
           </Item>
           <Flex>
             <Flex.Item>
@@ -281,7 +223,7 @@ class Order extends Component {
             </Flex.Item>
           </Flex>
           <div className='wx-invoicelist-bar'>
-            <Button className = 'btn' type='primary' onClick={this.onClick}>下一步</Button>
+            <Button className = 'btn' type='primary' disabled={this.state.nextStep} onClick={this.submitOrder}>下一步</Button>
           </div>
         </List>
       </div>
