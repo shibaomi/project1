@@ -122,12 +122,12 @@ export default class GoodsMoreInfo extends Component{
       <TabPane tab="商品详情" key="1">
       <div dangerouslySetInnerHTML={{ __html: this.state.goodsDetailInfo.goodsBody }}></div>
       </TabPane>
-      <TabPane tab="商品评价" key="2" style={{overflowX:'hidden',marginBottom:'0.6rem'}}>
+      <TabPane tab="商品评价" key="2" style={{overflowX:'hidden',marginBottom:'0.6rem',paddingTop:'0.2rem',textAlign:'center'}}>
       {/*<div dangerouslySetInnerHTML={{ __html: goodsDetailInfo.goodsProperty }}></div>*/}
       {this.state.goodsEvaluteList}
       </TabPane>
       <TabPane tab="购买咨询" key="3">
-      <div style={{minHeight:'200px',marginBottom:'0.6rem'}}>
+      <div style={{minHeight:'200px',marginBottom:'0.6rem',paddingTop:'0.2rem',textAlign:'center'}}>
       {this.state.goodsConsultList}
       </div>
       </TabPane>

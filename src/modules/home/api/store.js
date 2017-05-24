@@ -13,6 +13,12 @@ export function storedetail({ storeId }) {
     storeId
   });
 }
+// 店铺名称
+export function getStoreName({ storeId }) {
+  return fetch.post('/storeapi/storeName', {
+    storeId
+  });
+}
 
 // 关注店铺/商品
 export function storecollection({

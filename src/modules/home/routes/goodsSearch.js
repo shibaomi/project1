@@ -44,6 +44,9 @@ class GoodsSearch extends Component {
       minimumPrice: '',
       layoutType: 1
     }
+    if(this.props.goodsType == 'storeList' || this.props.goodsType == 'commentList'){
+      this.state.layoutType =2;
+    }
   }
   componentWillUnmount() {
     this.context.clearAction();
@@ -67,8 +70,26 @@ class GoodsSearch extends Component {
         pageNo: 1,
         storeId:store.storeId,
         goodsType:store.goodsType,
-        sortField:'salenum,goodsStorePrice',
-        orderBy:'desc,asc',
+        sortField:'',
+        orderBy:'',
+      }).then(result => {
+        //debugger
+        if (result.result == 1) {
+          this.setState({
+            dataSource: this.ds.cloneWithRows(result.data)
+          })
+        }
+      })
+    }else if(this.props.goodsType == 'commentList'){
+      const {store} = this.props;
+      storeApi.storegoods({
+        pageSize: 20,
+        pageNo: 1,
+        storeId:store.storeId,
+        goodsType:store.goodsType,
+        sortField:'',
+        orderBy:'',
+        recommend:'1'
       }).then(result => {
         //debugger
         if (result.result == 1) {
@@ -92,6 +113,7 @@ class GoodsSearch extends Component {
       }).then(result => {
         //debugger
         if (result.result == 1) {
+          debugger
           this.setState({
             dataSource: this.ds.cloneWithRows(result.data)
           })
@@ -102,21 +124,21 @@ class GoodsSearch extends Component {
   }
 
   componentWillMount() {
-    // if(this.props.goodsType == 'storeList'){
-    //   this.setState({
-    //     layoutType:  2
-    //   })
-    // }
-       this.context.initAction({
-         title: '切换',
-         action: () => {
-             this.setState({
-               layoutType: this.state.layoutType == 1 ? 2 : 1
-             })
+    if(this.props.goodsType == 'storeList' || this.props.goodsType == 'commentList'){
 
-           this.refreshList();
-         }
-       });
+    }else{
+      this.context.initAction({
+        title: '切换',
+        action: () => {
+          this.setState({
+            layoutType: this.state.layoutType == 1 ? 2 : 1
+          })
+
+          this.refreshList();
+        }
+      });
+    }
+
     // 查询列表
     this.refreshList();
 
@@ -243,7 +265,7 @@ class GoodsSearch extends Component {
     	width:'50%',
     	float:'left',
       color: 'gray',
-			textAlign: 'center',paddingBottom:'20px',margin:'0.2rem 0'}} direction='column' onClick={() => onClick(dataItem)}       
+			textAlign: 'center',paddingBottom:'20px',margin:'0.2rem 0'}} direction='column' onClick={() => common.gotoGoodsDetail({goodsId:dataItem.goodsId})}
 			> 
     <Flex.Item>
       <Img src={Common.imgtest + dataItem.goodsImage} style={{width:'3rem',height:'3rem' }} />
@@ -339,7 +361,13 @@ class GoodsSearch extends Component {
             </div>
           </Flex.Item>
           <Flex.Item onClick={()=>this.changeOrder('comment')}>
-            评论<img style={{width:'.2rem',height:'.2rem'}} src={`./assets/img/list_saixuan.png`} />
+            {
+              sortField == 'comment' ? <span style={{color:'red'}}>评论</span>:'评论'
+            }
+            <div className="wx-goods-search-order">
+              <Icon className={goodsStorePriceUpClass} type="up"/>
+              <Icon className={goodsStorePriceDownClass} type="down" />
+            </div>
           </Flex.Item>
         </Flex>
         <div className='fix-scroll' style={{paddingTop:'1.9rem'}}>

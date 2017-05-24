@@ -85,6 +85,7 @@ class GoodsDetail extends Component {
         Toast.error(result.msg);
         return;
       }
+      localStorage.setItem('storename',result.data[0].storeName);
       const goodsDetailInfo = Map(result.data[0]);
       // alert(JSON.stringify(goodsDetailInfo));
       this.setState({

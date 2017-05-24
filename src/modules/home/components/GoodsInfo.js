@@ -15,7 +15,7 @@ export function ImgGoodsInfo({ dataItem, columnNum }) {
       paddingLeft:'20px',
       paddingRight:'20px',
   }
-  return <div style={{ margin: '0.16rem',  textAlign: 'center' }}>
+  return <div onClick={()=>onClick(dataItem)} style={{ margin: '0.16rem',  textAlign: 'center' }}>
   <img src={Common.imgtest + dataItem.goodsImage} style={{ width: '80%', height:'80%' }} alt="icon" />
 </div>
 }

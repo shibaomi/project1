@@ -41,6 +41,7 @@ class GoodsSpec extends React.PureComponent {
       shopGoodsPackageList:props.shopGoodsPackageList,
       specInfo:'',
       selectAll:[],
+      show:0
       // goodsId: props.goodsDetailInfo.goodsId,
       // goodsName: props.goodsDetailInfo.goodsName,
       // goodsImage: props.goodsDetailInfo.goodsImage,
@@ -70,15 +71,46 @@ class GoodsSpec extends React.PureComponent {
     })
   }
   setSelectAllFlag = (e) => {
+    let data = [];
     if(e.target.checked){
-      this.state.selectAll.map((value, index) =>{
+      this.state.specInfo.map((value, index) =>{
         this.state.selectAll[index]=true;
+        data.push(value.goodsSpecId);
+        localStorage.setItem('specIds',data);
+        console.log(localStorage.getItem('specIds'));
       })
     }else{
-      this.state.selectAll.map((value, index) =>{
+      this.state.specInfo.map((value, index) =>{
         this.state.selectAll[index]=false;
+        localStorage.setItem('specIds',data);
+        console.log(localStorage.getItem('specIds'));
       })
     }
+    this.setState({show:this.state.show++});
+  }
+  setSelectOne= (e,index) => {
+    let main = index;
+    let data = localStorage.setItem('specIds',data);
+    if(e.target.checked){
+      this.state.specInfo.map((value, index) =>{
+        if(main == index){
+          this.state.selectAll[index]=true;
+          data.push(value.goodsSpecId);
+          localStorage.setItem('specIds',data);
+        }
+
+      })
+    }else{
+      this.state.specInfo.map((value, index) =>{
+        if(main == index){
+          this.state.selectAll[index]=false;
+          data.remove(value.goodsSpecId);
+          localStorage.setItem('specIds',data);
+        }
+
+      })
+    }
+    this.setState({show:this.state.show++});
   }
   renderHeader = () => {
     const { shopGoodsPackageList } = this.state;
@@ -193,11 +225,13 @@ class GoodsSpec extends React.PureComponent {
       return <div id = 'goodsSpec'>
         <List renderHeader={() => (this.renderHeader())}>
           {this.state.specInfo && this.state.specInfo.map((value, index) =>{
-            this.state.selectAll[index]=false;
+            if(this.state.selectAll.length == 0){
+              this.state.selectAll[index]=false;
+            }
             return <List.Item key={index}  style={{ color:'#1786CD'}}>
               <Flex>
                 <div>
-                    <Checkbox checked={this.state.selectAll[index]} onChange={e => this.setSelectOne(e,index)}></Checkbox>
+                    <Checkbox checked={self.state.selectAll[index]} onChange={e => self.setSelectOne(e,index)}></Checkbox>
                 </div>
                 <Flex.Item>
                   <div  style = {{color:'#333'}}>

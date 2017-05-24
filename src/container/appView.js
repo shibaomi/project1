@@ -3,7 +3,8 @@ import { common } from 'common';
 import { NavBar, Icon, Flex, WhiteSpace } from 'antd-mobile';
 import BottomBar from './BottomBar';
 import classnames from 'classnames';
-
+import * as Common from '../common/common';
+import * as storeApi from '../modules/home/api/store';
 import './appView.less';
 
 class App extends Component {
@@ -52,6 +53,7 @@ class App extends Component {
 
   componentWillMount() {
 
+
   }
 
   searchClick = () => {
@@ -79,9 +81,12 @@ class App extends Component {
   }
 
   showNavBar = () => {
-    let { title, showTitle, showSearch } = this.props.children.props.route
+    let { title, showTitle, showSearch, from } = this.props.children.props.route
     if (!title) {
       title = '雷铭电商'
+    }
+    if(from == 'store'){
+      title = localStorage.getItem('storename');
     }
 
     if (showTitle == undefined) {

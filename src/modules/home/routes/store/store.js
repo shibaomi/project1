@@ -16,7 +16,7 @@ import { Img } from 'commonComponent';
 import { common } from 'common';
 import * as storeApi from '../../api/store';
 import GoodsList from '../goodsSearch';
-
+import * as Common from '../../../../common/common';
 import './store.less';
 
 const Item = List.Item;
@@ -118,17 +118,16 @@ class Store extends Component {
     const { params, router } = this.props;
     const storeBannerShow = `url(${common.IMAGE_DOMAIN}${store.storeBanner}) no-repeat center center`;
     return <div className='wx-store'>
-      <Tabs animated={false} onChange={(key) => this.callback(key,this.state.goodsDetailInfo)} defaultActiveKey="1" swipeable={false} activeTextColor="#E43F47">
-        <TabPane tab="店铺首页" key="1">
-          <div style={{position:'relative'}}>
-            <GoodsList goodsType = 'storeList' store = {this.state.store}></GoodsList>
-          </div>
+      <Tabs animated={false} defaultActiveKey="1" swipeable={false} activeTextColor="#E43F47">
+        <TabPane tab="店铺首页" key="1" className = 'storeindex'>
+          <div style={{width:'100%',height:'2rem',backgroundImage:'url(' + Common.imgtest + store.storeBanner+')',backgroundSize:'100%',backgroundRepeat:'no-repeat'}}></div>
+            <GoodsList goodsType = 'commentList' store = {this.state.store}></GoodsList>
         </TabPane>
-        <TabPane tab="全部商品" key="2" style={{overflowX:'hidden',marginBottom:'0.6rem'}}>
-
+        <TabPane className = 'all' tab="全部商品" key="2" style={{overflowX:'hidden',marginBottom:'0.6rem'}}>
+          <GoodsList goodsType = 'storeList' store = {this.state.store}></GoodsList>
         </TabPane>
         <TabPane tab="机构介绍" key="3">
-          <div style={{minHeight:'200px'}}>
+          <div dangerouslySetInnerHTML={{ __html: store.description }}>
 
           </div>
         </TabPane>
