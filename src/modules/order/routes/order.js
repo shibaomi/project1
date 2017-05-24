@@ -107,8 +107,8 @@ class Order extends Component {
     if(this.state.selectCarts&&this.state.selectCarts.length>0){
       storeName=this.state.selectCarts[0].storeName;
     }
-    return <Flex>
-      <Img src='../../../assets/img/store.png' style={{ height: '0.5rem', width: '0.5rem' }} />{storeName}
+    return <Flex style={{fontSize: '0.25rem'}}>
+      <Img src='../../../assets/img/store.png' style={{ height: '0.35rem', width: '0.35rem' }} />{storeName}
     </Flex>
   }
 
@@ -145,8 +145,8 @@ class Order extends Component {
                 <div style = {{position:'relative'}}>
                   <div style = {{width:'4.3rem', position:'relative',height:'0.5rem'}}>
                     <div style = {{width:'1rem', position:'absolute',left:'0rem',}}>报告接收人</div>
-                    <div style = {{width:'2rem', position:'absolute',left:'1.5rem',}}>{this.state.selectedAddress.trueName}</div>
-                    <div style = {{width:'1rem', position:'absolute',left:'2.5rem',}}>
+                    <div style = {{width:'2rem', position:'absolute',left:'40%',}}>{this.state.selectedAddress.trueName}</div>
+                    <div style = {{width:'1rem', position:'absolute',left:'75%',}}>
                       {common.phoneDesensitization(this.state.selectedAddress.mobPhone)}
                     </div>
                   </div>
@@ -177,12 +177,12 @@ class Order extends Component {
                 <Flex.Item>
                   <div className='text-overflow-hidden' >{goods.goodsName}</div>
                   <Flex justify='between'>
-                    <div style={{width: '65%',paddingBottom:'0.1rem'}}>{goods.packageName}</div>
+                    <div style={{width: '65%',paddingBottom:'0.14rem',paddingTop:'0.14rem',color: '#bbb'}}>{goods.packageName}</div>
                     <div style={{width: '10%'}}>{`x${goods.goodsNum}`}</div>
-                    <div style={{width: '30%', color:'red',paddingTop:'0.1rem',paddingLeft:'0.1rem'}}>{`￥${goods.goodsPrice}`}</div>
+                    <div style={{width: '30%', color:'red',paddingLeft:'0.1rem'}}>{`￥${goods.goodsPrice}`}</div>
                   </Flex>
                   <Flex justify='between'>
-                    <div style={{width: '65%'}}>纸质报告正副本</div>
+                    <div style={{width: '65%',color: '#bbb'}}>纸质报告正副本</div>
                     <div style={{width: '10%'}}>{`x${goods.report}`}</div>
                     <div style={{width: '30%', color:'red',paddingLeft:'0.1rem'}}>{`￥${goods.reportPrice}`}</div>
                   </Flex>

@@ -132,11 +132,11 @@ class CartShop extends Component {
       }
     })
     return <Flex>
-      <Checkbox checked={data.checked}
+      <Checkbox style={{color:'black'}} checked={data.checked}
                 onChange={(e)=>this.checkShop(data,e)}
       >全选</Checkbox>
-      <Flex.Item style = {{textAlign:'right',paddingRight:'0.1rem'}}>
-      {'总计:¥'+ (Number(price)+Number(reportPrice))+'元'}
+      <Flex.Item style = {{textAlign:'right',paddingRight:'0.1rem',color:'black'}}>
+      {'总计：'}&nbsp;&nbsp;{'¥'+ (Number(price)+Number(reportPrice))}
       </Flex.Item>
       {/*<Icon type='right' />*/}
       {/*<Flex.Item style={{ textAlign: 'right' }}>*/}
@@ -169,11 +169,11 @@ class CartShop extends Component {
               <Img src={Common.imgtest + goods.goodsImages} style={{ height: '1.5rem', width: '1.5rem', marginLeft:'0.1rem' }} />
               <Flex.Item>
                 <div className='text-overflow-hidden' onClick={()=>gotoGoodsDetail(goods)}>{goods.goodsName}</div>
-                <div className='text-overflow-hidden' onClick={()=>gotoGoodsDetail(goods)} style={{ fontSize: '.20rem',color:'#bbb' }}>
+                <div className='text-overflow-hidden' onClick={()=>gotoGoodsDetail(goods)} style={{ fontSize: '.20rem',color:'#bbb',paddingTop:'0.1rem' }}>
                   {goods.packageName}
                 </div>
                 <Flex justify='between'>
-                  <div onClick={()=>gotoGoodsDetail(goods)}>{`￥${goods.goodsPrice}`}</div>
+                  <div onClick={()=>gotoGoodsDetail(goods)} style={{color:'#e93220'}}>{`￥${goods.goodsPrice}`}</div>
                   <div>
                     <Stepper showNumber min={1} value={goods.goodsNum} onChange={(val)=>this.updateCart(data,goods,val)} useTouch={false}/>
                     {/*<Button style={{float:'right'}} size='small' inline onClick={() => this.delCart(goods)}>删除</Button>*/}

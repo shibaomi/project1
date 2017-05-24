@@ -40,6 +40,7 @@ class GoodsSpec extends React.PureComponent {
       storeId: props.shopGoodsPackageList.storeId,
       shopGoodsPackageList:props.shopGoodsPackageList,
       specInfo:'',
+      selectAll:[],
       // goodsId: props.goodsDetailInfo.goodsId,
       // goodsName: props.goodsDetailInfo.goodsName,
       // goodsImage: props.goodsDetailInfo.goodsImage,
@@ -68,6 +69,17 @@ class GoodsSpec extends React.PureComponent {
       }
     })
   }
+  setSelectAllFlag = (e) => {
+    if(e.target.checked){
+      this.state.selectAll.map((value, index) =>{
+        this.state.selectAll[index]=true;
+      })
+    }else{
+      this.state.selectAll.map((value, index) =>{
+        this.state.selectAll[index]=false;
+      })
+    }
+  }
   renderHeader = () => {
     const { shopGoodsPackageList } = this.state;
     if(self.state.shopGoodsPackageList.packageName == '自定义'){
@@ -83,7 +95,7 @@ class GoodsSpec extends React.PureComponent {
         </div>
         <Flex style={{ height: '50px' }}>
           <div>
-            <Checkbox checked={true}
+            <Checkbox onChange={e => this.setSelectAllFlag(e)}
             >全选</Checkbox>
           </div>
         </Flex>
@@ -168,15 +180,24 @@ class GoodsSpec extends React.PureComponent {
     this.props.gotoBuy(this.state.buyCount)
   }
 
+  setSelectOne = (e,index) =>{
+    if(e.target.checked){
+
+    }else{
+      
+    }
+  }
+
   render() {
     if(self.state.shopGoodsPackageList.packageName == '自定义'){
       return <div id = 'goodsSpec'>
         <List renderHeader={() => (this.renderHeader())}>
           {this.state.specInfo && this.state.specInfo.map((value, index) =>{
+            this.state.selectAll[index]=false;
             return <List.Item key={index}  style={{ color:'#1786CD'}}>
               <Flex>
                 <div>
-                    <Checkbox checked={true}></Checkbox>
+                    <Checkbox checked={this.state.selectAll[index]} onChange={e => this.setSelectOne(e,index)}></Checkbox>
                 </div>
                 <Flex.Item>
                   <div  style = {{color:'#333'}}>

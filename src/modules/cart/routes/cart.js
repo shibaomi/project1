@@ -18,7 +18,6 @@ import * as cartApi from '../api/cart';
 import * as storeApi from '../api/store';
 import { common } from 'common';
 import CouponList from 'commonComponent/CouponList';
-import CartTopAction from '../components/CartTopAction';
 
 const AgreeItem = Checkbox.AgreeItem;
 
@@ -29,7 +28,6 @@ class Cart extends Component {
 
   static contextTypes = {
     router: React.PropTypes.object.isRequired,
-    initAction: React.PropTypes.func,
     clearAction: React.PropTypes.func
   }
 
@@ -58,16 +56,7 @@ class Cart extends Component {
     this.context.clearAction();
   }
 
-  initAction = () => {
-    // 绑定头部事件
-    this.context.initAction({
-      title: <CartTopAction status={this.state.editStatus} onChange={this.onChangeEditStatus}></CartTopAction>
-    })
-  }
-
   componentDidMount() {
-    this.initAction();
-
     Toast.loading();
     cartApi.cartList().then(result => {
       Toast.hide();
@@ -104,7 +93,6 @@ class Cart extends Component {
           cartList,
           editStatus: 0
         })
-        this.initAction();
         this.refreshTotalPriceAndCount(cartList);
       }
     })
