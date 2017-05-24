@@ -38,7 +38,16 @@ export function gotoLogin(callBack) {
     window.location.href = 'login.html';
   }
 }
-
+//时间戳转为时间
+export function formatDate(now) {
+  var year=now.getYear();
+  var month=now.getMonth()+1;
+  var date=now.getDate();
+  var hour=now.getHours();
+  var minute=now.getMinutes();
+  var second=now.getSeconds();
+  return "20"+year+"-"+month+"-"+date+" "+hour+":"+minute+":"+second;
+}
 /**
  * 去登录回调
  */

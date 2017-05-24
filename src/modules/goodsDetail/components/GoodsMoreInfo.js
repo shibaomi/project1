@@ -9,6 +9,7 @@ import { Img } from 'commonComponent';
 const TabPane = Tabs.TabPane;
 import * as goodsDetailApi from '../api/goodsDetail';
 import './GoodsMoreInfo.less'
+import * as Common from '../../../common/common';
 /**
  * 商品更多信息
  * @param {*} param0 
@@ -24,6 +25,17 @@ export default class GoodsMoreInfo extends Component{
       goodsConsultList:'',
     }
   }
+  star(value){
+    let data = [];
+    for (let i=0; i<5;  i++){
+      if(i < parseInt(value.gevalScore)){
+        data.push(<img src='../../../assets/img/xingxing-02.png'/>);
+      }else{
+        data.push(<img src='../../../assets/img/xingxing-03.png'/>);
+      }
+    }
+    return data;
+  }
   callback(key,goodsDetailInfo) {
     if(key == '2'){
       goodsDetailApi.goodsEvaluteList({
@@ -33,10 +45,34 @@ export default class GoodsMoreInfo extends Component{
           Toast.fail(result.msg);
           return;
         }
-        debugger
         if(result.data[0].beanList.length == 0){
           this.setState({goodsEvaluteList:'该商品还没有评论信息'});
+        }else{
+          let data = result.data[0].beanList.map((value,index)=>{
+            return <Flex direction='column' style = {{padding:'0.2rem 0.3rem',borderBottom:'1px solid #ddd'}}>
+              <div style={{width:'100%',height:'0.6rem',lineHeight:'0.6rem'}}>
+                <div style={{width:'3rem',height:'0.6rem',lineHeight:'0.6rem',float:'left'}}>
+                  {value.gevalFrommembername}
+                  {
+                    this.star(value)
+                  }
+                  </div>
+                <div style={{marginTop:'-0.6rem',width:'3rem',height:'0.6rem',lineHeight:'0.6rem',float:'right',textAlign:'right'}}>{Common.formatDate(new Date(value.gevalAddTime))}</div>
+              </div>
+              <Flex.Item>
+                <Flex justify="start">
+                  {/*<div style={{width:'0.4rem',height:'0.4rem',lineHeight:'0.4rem'}}>*/}
+                    {/*<img src='../../../assets/img/wen.png'/>*/}
+                  {/*</div>*/}
+                  <Flex.Item>{value.gevalContent}</Flex.Item>
+                </Flex>
+              </Flex.Item>
+
+            </Flex>
+          });
+          this.setState({goodsEvaluteList:data});
         }
+
       });
     }
     if(key == '3'){
