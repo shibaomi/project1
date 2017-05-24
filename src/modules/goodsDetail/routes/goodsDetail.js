@@ -178,7 +178,7 @@ class GoodsDetail extends Component {
   // 收藏
   storecollection = () => {
     common.checkLogin();
-    const goodsSpec = this.state.goodsDetailInfo.get('goodsSpec')
+    const goodsSpec = this.state.goodsDetailInfo.get('goodsId')
     goodsDetailApi.storecollection({
       favType: 1,
       goodsId: goodsSpec.goodsId
@@ -204,7 +204,7 @@ class GoodsDetail extends Component {
   // 加入购物车处理
   addCart = (count) => {
     common.checkLogin();
-    const goodsSpec = this.state.goodsDetailInfo.get('goodsSpec')
+    const goodsSpec = this.state.goodsDetailInfo.get('goodsId')
     cartApi.addCart({
       goodsId: goodsSpec.goodsId,
       count: count || 1,
@@ -228,7 +228,7 @@ class GoodsDetail extends Component {
   // 立即购买
   gotoBuy = (count) => {
     common.checkLogin();
-    const goodsSpec = this.state.goodsDetailInfo.get('goodsSpec')
+    const goodsSpec = this.state.goodsDetailInfo.get('goodsId')
     // 先加购物车
     cartApi.addCart({
       goodsId: goodsSpec.goodsId,
@@ -326,8 +326,8 @@ class GoodsDetail extends Component {
 	      
         <Flex className='wx-goods-detail-info' align='center' style = {{height:'1rem',borderTop:'1px solid #ddd',padding:'0rem 0.3rem',}}>
           <Flex.Item>{goodsDetailInfo.goodsName}</Flex.Item>
-          <div style={{width:'1rem',fontSize:'0.22rem',height:'0.7rem',lineHeight:'0.7rem',paddingLeft:'0.1rem',borderLeft:'1px solid #ddd'}}>
-            <img style={{width:'0.3rem',height:'0.3rem',marginLeft:'0.35rem'}} src='../../../assets/img/shoucang-02.png'/>
+          <div onClick={this.storecollection} style={{width:'1rem',fontSize:'0.22rem',height:'0.7rem',lineHeight:'0.7rem',paddingLeft:'0.1rem',borderLeft:'1px solid #ddd'}}>
+            <img style={{width:'0.3rem',height:'0.3rem',marginLeft:'0.35rem'}} src={this.state.isFav == 1 ?'../../../assets/img/shoucang-01.png':'../../../assets/img/shoucang-02.png'}/>
             <div style={{  height: '0.3rem',marginTop: '-0.45rem',width: '1rem',textAlign: 'center',}}>收藏</div>
           </div>
             {/*<WingBlank>*/}

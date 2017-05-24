@@ -338,8 +338,8 @@ class GoodsSearch extends Component {
               <Icon className={goodsStorePriceDownClass} type="down" />
             </div>
           </Flex.Item>
-          <Flex.Item onClick={()=>this.onClickFilter()}>
-            筛选<img style={{width:'.2rem',height:'.2rem'}} src={`./assets/img/list_saixuan.png`} />
+          <Flex.Item onClick={()=>this.changeOrder('comment')}>
+            评论<img style={{width:'.2rem',height:'.2rem'}} src={`./assets/img/list_saixuan.png`} />
           </Flex.Item>
         </Flex>
         <div className='fix-scroll' style={{paddingTop:'1.9rem'}}>

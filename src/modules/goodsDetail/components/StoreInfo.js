@@ -61,7 +61,7 @@ export default function({ goodsDetailInfo }) {
     {
       storeId != "0" && <Flex>
         <Flex.Item style = {{textAlign:'center'}}>
-          <Button type="ghost" inline size="small" style={{ margin: '0.08rem',color:'#BCBCBC',borderColor:'#BCBCBC',width:'2.5rem' }}>联系客服</Button>
+          <Button type="ghost" inline size="small" style={{ margin: '0.08rem',color:'#BCBCBC',borderColor:'#BCBCBC',width:'2.5rem' }}>收藏店铺</Button>
         </Flex.Item>
         <Flex.Item style = {{textAlign:'center'}}>
           <Button type="ghost" onClick={() => gotoStore(goodsDetailInfo)} inline size="small" style={{ margin: '0.08rem',color:'#BCBCBC',borderColor:'#BCBCBC',width:'2.5rem' }}>进入店铺</Button>

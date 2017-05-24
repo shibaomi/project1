@@ -15,22 +15,9 @@ export function ImgGoodsInfo({ dataItem, columnNum }) {
       paddingLeft:'20px',
       paddingRight:'20px',
   }
-  return <Flex id = 'indexfrisr' direction='column' onClick={() => onClick(dataItem)} style={{
-      textAlign: 'center',paddingBottom:'0px',
-    }}>
-    <Flex.Item>
-      <Img src={Common.imgtest + dataItem.goodsImage} style={{width:'100%',height:'100%' }} />
-    </Flex.Item>
-    {/*// <div style={{height:'0.5rem'}}>*/}
-    {/*//   <Img src={Common.imgtest + dataItem.goodsImage} style={{width:'100%',height:'100%' }} />*/}
-    {/*// </div>*/}
-    {/*// <Flex.Item style={{width:'100%'}}>*/}
-    {/*//   <div style={styles} className='text-overflow-hidden'>{dataItem.goodsName}</div> */}
-    {/*// </Flex.Item>*/}
-    {/*<Flex.Item>*/}
-      {/*<div style={{fontSize:'.24rem',color:'red'}}>{`¥${dataItem.goodsPrice}`}</div>*/}
-    {/*</Flex.Item>*/}
-  </Flex>
+  return <div style={{ margin: '0.16rem',  textAlign: 'center' }}>
+  <img src={Common.imgtest + dataItem.goodsImage} style={{ width: '80%', height:'80%' }} alt="icon" />
+</div>
 }
 
 /**文字在上面，图片在下面的布局 */

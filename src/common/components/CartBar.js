@@ -29,7 +29,7 @@ class CartBar extends React.Component {
 
   render() {
     const { showCollectionCart } = this.props;
-    const filename = this.props.isFav == 1 ? 'b_1_h_2.png' : 'b_1_h_1.png'
+    const filename = this.props.isFav == 1 ? 'shoucang-01.png' : 'shoucang-02.png'
     const isFavUrl = `./assets/img/${filename}`
     return (
       <div className='wx-cartbar'>

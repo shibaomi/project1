@@ -69,8 +69,6 @@ class Home extends Component {
                 </Flex.Item>
                 <div className='indexLoginLabel' onClick={this.onLogin}>登录</div>
             </Flex>
-
-
         </div>
         <HomeCarouselBlock data={this.state.advList}></HomeCarouselBlock>
         <div style={{height:'0.3rem', width:'100%', backgroundColor:'#F3F3F3'}}></div>

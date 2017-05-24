@@ -31,7 +31,7 @@ class HomeFloorGoods extends React.PureComponent {
     let firstBlock = null;
     let sencondBlock = null;
 
-    if (data.floorType == '2*8') {
+    //if (data.floorType == '2*8') {
       firstBlock = <Grid data={data.goodsList.slice(0,2)} columnNum={2} hasLine={true}
         onClick={this.onClick}
           renderItem={(dataItem,index)=>(
@@ -39,34 +39,34 @@ class HomeFloorGoods extends React.PureComponent {
           )}>
       </Grid>
 
-      sencondBlock = <Grid data={data.goodsList.slice(2,10)} columnNum={4} hasLine={true}
+      sencondBlock = <Grid data={data.goodsList.slice(2,6)} columnNum={4} hasLine={true}
         onClick={this.onClick}
           renderItem={(dataItem,index)=>(
             <ImgGoodsInfo dataItem={dataItem} columnNum={4}></ImgGoodsInfo>
           )}>
       </Grid>
-    } else if (data.floorType == '9') {
-      firstBlock = <Grid data={data.goodsList} columnNum={3} hasLine={false}
-        onClick={this.onClick}
-          renderItem={(dataItem,index)=>(
-            <GoodsImgInfo dataItem={dataItem} columnNum={3}></GoodsImgInfo>
-          )}>
-      </Grid>
-    } else {
-      firstBlock = <Grid data={data.goodsList.slice(0,4)} columnNum={2} hasLine={true}
-        onClick={this.onClick}
-          renderItem={(dataItem,index)=>(
-            <ImgGoodsInfo dataItem={dataItem} columnNum={2}></ImgGoodsInfo>
-          )}>
-      </Grid>
-
-      sencondBlock = data.goodsList.length > 4 && <Grid data={data.goodsList.slice(4,10)} columnNum={4} hasLine={false}
-        onClick={this.onClick}
-          renderItem={(dataItem,index)=>(
-            <ImgGoodsInfo dataItem={dataItem} columnNum={4}></ImgGoodsInfo>
-          )}>
-      </Grid>
-    }
+    // } else if (data.floorType == '9') {
+    //   firstBlock = <Grid data={data.goodsList} columnNum={3} hasLine={false}
+    //     onClick={this.onClick}
+    //       renderItem={(dataItem,index)=>(
+    //         <GoodsImgInfo dataItem={dataItem} columnNum={3}></GoodsImgInfo>
+    //       )}>
+    //   </Grid>
+    // } else {
+    //   firstBlock = <Grid data={data.goodsList.slice(0,4)} columnNum={2} hasLine={true}
+    //     onClick={this.onClick}
+    //       renderItem={(dataItem,index)=>(
+    //         <ImgGoodsInfo dataItem={dataItem} columnNum={2}></ImgGoodsInfo>
+    //       )}>
+    //   </Grid>
+    //
+    //   sencondBlock = data.goodsList.length > 4 && <Grid data={data.goodsList.slice(4,10)} columnNum={4} hasLine={false}
+    //     onClick={this.onClick}
+    //       renderItem={(dataItem,index)=>(
+    //         <ImgGoodsInfo dataItem={dataItem} columnNum={4}></ImgGoodsInfo>
+    //       )}>
+    //   </Grid>
+    // }
 
     let advContent = null
     if (data.advPosition && data.advPosition.advList && data.advPosition.advList.length > 0) {

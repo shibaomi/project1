@@ -130,6 +130,7 @@ class OrderItem extends Component {
         break;
       case 80:
         orderStatus = '已完成'
+        showCommentBtn = true;
         break;
       default:
         break;
@@ -137,7 +138,7 @@ class OrderItem extends Component {
     return <div className='orderitem'>
       <WhiteSpace></WhiteSpace>
       <WingBlank>
-        <Flex justify='between' style = {{borderBottom:'1px solid #ddd'}}>
+        <Flex justify='between' style = {{borderBottom:'1px solid #ddd',height:'0.6rem'}}>
           <div  style ={{width:'0.5rem'}}><Img src='../../../assets/img/store.png' /></div>
           <div style ={{fontSize:'0.2rem', color:'#333'}}>{dataItem.storeName}</div>
           <div className="paystaus">{orderStatus}</div>
@@ -171,9 +172,9 @@ class OrderItem extends Component {
           })
         }
         <WhiteSpace></WhiteSpace>
-        <Flex justify='between'>
-        <div>订单总额: {`￥${dataItem.goodsAmount}`}</div>
-        </Flex>
+        {/*<Flex justify='between'>*/}
+        {/*<div>订单总额: {`￥${dataItem.goodsAmount}`}</div>*/}
+        {/*</Flex>*/}
         <Flex justify='end'>
           <div>
             {
