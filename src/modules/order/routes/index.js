@@ -12,6 +12,7 @@ import cashier from './cashier';
 import cashierList from './cashierList';
 import payConfirm from './payConfirm';
 import paySuccess from './paySuccess';
+import entrustOrder from './EntrustOrder';
 
 
 const routesConfig = (<Route path="/" component={App}>
@@ -25,6 +26,8 @@ const routesConfig = (<Route path="/" component={App}>
   <Route path='/cashierList/:orderCode/:totalPrice' component={cashierList} title='选择支付方式' />
   <Route path='/payConfirm/:orderCode/:totalPrice' component={payConfirm} title='支付确认' />
   <Route path='/paySuccess/:paySn' component={paySuccess} title='订单支付成功' />
+  <Route path='/entrustOrder' component={entrustOrder} title='填写委托单' />
+
 </Route>)
 
 function Routes({ history }) {

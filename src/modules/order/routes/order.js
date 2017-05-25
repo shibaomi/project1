@@ -56,6 +56,8 @@ class Order extends Component {
     orderInfo.cartIds=this.state.cartIds;
     orderInfo.packageIds=this.state.packageIds;
     console.log(JSON.stringify(orderInfo));
+    localStorage.setItem("orderInfo",JSON.stringify(orderInfo));
+    this.props.router.push('/entrustOrder');
   }
 
   onSelectPayTypeClick = (type) => {
